@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Title</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Information about the source</p>
+         </sourceDesc>
+      </fileDesc>
+  </teiHeader>
+  <text>
+      <body>
+         <listApp type="corrections">
+            <!-- ante corr./a.c.: Showing the variant before it was corrected to the lemma. -->
+            <app>
+               <lem xml:id="abc">quidem</lem>
+               <rdgGrp type="anteCorr">                                 <!-- Value of @type helps determine how the entry will be handled, i.e., displaying the uncorrected form. -->
+                  <rdg wit="#N" hand="#N1" varSeq="1">quaedam</rdg>     <!-- @varSeq indicates which entry came first -->
+                  <rdg wit="#N" hand="#N2" varSeq="2" copyOf="#abc"/>   <!-- @copyOf avoids just repeating the value of the <lem> -->
+               </rdgGrp>
+            </app>
+            <!-- ante rasuram/a.r.: Reporting a variant that has been erased, but is still legible -->
+            <app>
+               <lem xml:id="def">libero</lem>
+               <rdgGrp type="anteRas">
+                  <rdg wit="#N" hand="#N1" varSeq="1">librario</rdg>
+                  <rdg wit="#N" hand="#N2" varSeq="2" copyOf="#def"/>
+               </rdgGrp>
+            </app>
+            <!-- Correction in margin -->
+            <app>
+               <lem xml:id="lem123456">ipsum</lem>
+               <rdgGrp type="corrMarg">
+                  <rdg wit="#N" hand="N1" varSeq="1">ipsem</rdg>
+                  <rdg wit="N" hand="#N2" varSeq="2"><add place="margin" copyOf="#lem123456"/></rdg>
+               </rdgGrp>
+            </app>
+         </listApp>
+         
+         <listApp type="additions">
+            <!-- Reading added in mg./in margine. -->
+            <app>
+               <lem>lorem</lem>
+               <rdg wit="#N"><add place="margin" hand="#N1">larem</add></rdg> <!-- Other values for @place: below = "inf.", above = "sup." , inline = "in textu/i.t.", erasure = "in ras." -->
+            </app>
+            <!-- Addition of characters in textu (no mention of method) to correct a variant to the lemma. Display as "consectur (te add. N2)" -->
+            <app>
+               <lem>consectetur</lem>
+               <rdg wit="#N">consec<add place="inline" hand="#N2">te</add>tur</rdg>
+            </app>
+            <!-- in rasura/in ras.: Text written over other text that has been erased. Display as "nocturna N2 in ras." -->
+               <app>
+                  <lem>nocturnaque</lem>
+                  <rdg wit="#N" type="inRas"><add place="inline" rend="erasure" hand="#N2">nocturna</add>que</rdg>
+               </app>
+         </listApp>
+         
+         <listApp type="deletions">
+            <!-- Characters deleted, no indication of method -->
+            <app>
+               <lem>tristique</lem>
+               <rdg wit="#N">tristi<del hand="#N1">que</del></rdg>
+            </app>
+            <!-- Characters deleted by expunction -->
+            <app>
+               <lem>Daphni</lem>
+               <rdg wit="#P">dū<del rend="expunction">m</del></rdg> <!-- Display as dūm (<q>m</q> exp.) -->
+            </app>
+            <!-- Omission of a word -->
+            <app>
+               <lem>Nullam</lem>
+               <rdg wit="#N" type="omission"/> <!-- Self-closing tag to indicate that there isn't a value for this reading, thus it has been omitted. Display as "nullam om. N." -->
+            </app>
+            <!-- Text missing, but not because of omission. -->
+            <app>
+               <lem>Nisi</lem>
+               <rdg wit="#N" type="missing"/> <!-- Value indicates that text hasn't been deliberately or mistakenly omitted, but might be lost for other reasons (e.g., damage). Display as "nisi deest N" -->
+            </app>
+         </listApp>
+         
+         <listApp type="omissions">
+            <!-- Omission of a single word or phrase -->
+            <app>
+               <lem>est</lem>
+               <rdg wit="#N"/> <!-- Self-closing tag indicates no data. Display as "om. N". -->
+            </app>
+         </listApp>
+         
+         <listApp type="conjectures-emendations">
+            <app>
+               <lem>laram</lem>
+               <rdg source="#Heins.">larem</rdg> <!-- A rdg with only @source should indicate that the value is a conjecture. Display as "larem Heins." or "larem conj. Heins." -->
+            </app>
+            <!-- List of multiple conjectures. Display as "lorem vel larem vel lyram Heins." -->
+            <app>
+               <lem>laram</lem>
+               <rdgGrp type="conjecture">
+                  <rdg source="#Heins.">lorem</rdg>
+                  <rdg source="#Heins.">larem</rdg>
+                  <rdg source="#Heins.">lyram</rdg>
+               </rdgGrp>
+            </app>
+            <!-- Emendation. Display as "et] ac codd. (emend. Dipson)" -->
+            <app>
+               <lem source="#Dipson" type="emendation">et</lem>
+               <rdg wit="#codd.">ac</rdg>
+            </app>
+         </listApp>
+         
+         <listApp type="miscellaneous">
+            <!-- One witness in a string of witnesses has a corrected subvariant -->
+            <!-- Example: orti NGPκρπμα (ex ortis) βδγ -->
+            <app loc="C2.15.63">
+               <lem wit="#λ #v #η #γ #ε #φ">horti</lem>
+               <rdgGrp> <!-- What @type should this have? -->
+                  <rdg wit="#N #G #P #κ #ρ #π #μ #β #δ #χ" xml:id="rdg2.15.63">orti</rdg>
+                  <rdgGrp type="subvariant"><!-- I have no idea how to insert this so that the witnesses are in chronological order -->
+                     <rdg wit="#α" varSeq="1">ortis</rdg>
+                     <rdg wit="#α" varSeq="2" copyOf="#rdg2.15.63"/>
+                  </rdgGrp>
+               </rdgGrp>
+            </app>
+         </listApp>
+      </body>
+  </text>
+</TEI>
