@@ -37,7 +37,7 @@
             <label>Other values</label>
             <item>
                <list>
-                  <item xml:id="inRas">in ras.: </item>
+                  <item xml:id="inRas">in ras.</item>
                </list>
             </item>
          </list>
@@ -48,59 +48,105 @@
             <item xml:id="cett">cett.: ceteri codices, "other manuscripts."</item>
             <item xml:id="codd">codd.: codex/codices. Equivalent to mss. for manuscript/manuscripts.
                Meaning: all manuscripts not already mentioned elsewhere with regard to this lemma.
-               Could have the added meaning, "all of the manuscripts have this, but it seems wrong."
-            </item>
-            <item xml:id="recc">recc.: the later manuscripts.</item><!-- Possibly handled better with a siglum? -->
-            <item xml:id="vett">vett.: the older manuscripts.</item><!-- Possibly handled better with a siglum also? -->
+               Could have the added meaning, "all of the manuscripts have this, but it seems wrong." </item>
+            <item xml:id="recc">recc.: the later manuscripts.</item>
+            <!-- Possibly handled better with a siglum? -->
+            <item xml:id="vett">vett.: the older manuscripts.</item>
+            <!-- Possibly handled better with a siglum also? -->
             <!-- What to do about "fere omnes", "plerique", "plures"? -->
          </list>
 
 
          <listApp type="corrections">
+            
+            <!-- The basic pattern for many of these involves using <rdgGrp> and @varSeq, with @copyOf back to the <lem> -->
 
-            <!-- "Ante" readings: variants before they were corrected or changed in some way. -->
+            <!-- "Ante" readings: variants before they were corrected or changed in some way. Display as "quaedam N ante corr./ante ras." -->
             <app>
                <lem xml:id="abc">quidem</lem>
                <rdgGrp type="anteCorr">
                   <!-- Value of @type helps determine how the entry will be handled, i.e., displaying the uncorrected form. Values: "anteCorr" (before correction), "anteRas" (before erasure) -->
-                  <rdg wit="#N" hand="#N1" varSeq="1">quaedam</rdg>
+                  <rdg wit="#N" varSeq="1">quaedam</rdg>
                   <!-- @varSeq indicates which entry came first -->
-                  <rdg wit="#N" hand="#N2" varSeq="2" copyOf="#abc"/>
+                  <rdg wit="#N1" varSeq="2" copyOf="#abc"/>
                   <!-- @copyOf avoids just repeating the value of the <lem> -->
                </rdgGrp>
             </app>
 
-
             <!-- Correction in margin. Display as "ipsem N (corr. N2 in mg.)" -->
+            <!-- Same basic structure as "anteCorr" above. -->
             <app>
                <lem xml:id="lem123456">ipsum</lem>
                <rdgGrp type="corrMarg">
-                  <rdg wit="#N" hand="N1" varSeq="1">ipsem</rdg>
-                  <rdg wit="N" hand="#N2" varSeq="2"><add place="margin" copyOf="#lem123456"/></rdg>
+                  <rdg wit="#N" varSeq="1">ipsem</rdg>
+                  <rdg wit="N2" varSeq="2"><add place="margin" copyOf="#lem123456"/></rdg>
+               </rdgGrp>
+            </app>
+            
+            <!-- Correction of an omission. Display as "om. N (corr. N1)" -->
+            <!-- Same basic structure as "anteCorr" above. -->
+            <app>
+               <lem xml:id="lem1.7.O">lorem</lem>
+               <rdgGrp type="corrOmission">
+                  <rdg wit="#N" varSeq="1"/>
+                  <rdg wit="#N1" varSeq="2" copyOf="#lem1.7.O"/>
+               </rdgGrp>
+            </app>
+            
+            <!-- Erroneous reading printed in text of early edition, corrected to lemma in commentary by editor -->
+            <!-- Same basic structure as "anteCorr" above. -->
+            <app>
+               <lem xml:id="lem1.13Leuce">Leuce</lem>
+               <rdgGrp type="edCorr">
+                  <rdg wit="#b" varSeq="1">luce</rdg>
+                  <rdg source="#Guid." varSeq="2" copyOf="#lem1.13Leuce"/>
+               </rdgGrp>
+            </app>
+            
+            <!-- "Correction" that isn't really a correction. That is, a variant is "corrected" to another variant. -->
+            <!-- Same basic structure as "anteCorr" above. -->
+            <app>
+               <lem wit="#P #V #N2">descripta</lem>
+               <rdgGrp type="mutation">
+                  <rdg wit="#N" varSeq="1">dipicta</rdg>
+                  <rdg wit="#N1" varSeq="2">depicta</rdg>
+                  <!-- Display as dipicta N (mut. in depicta N1) -->
                </rdgGrp>
             </app>
 
-            <!-- Emendation: used to indicate that the editor has emended the text or adopted an emendation proposed elsewhere because none of the documented readings is acceptable. Display as "Mauris] Martis codd. (emend. Burm.)" -->
+            <!-- Correction by deletion. -->
             <app>
-               <lem source="#Burm." type="emendation">Mauris</lem>
-               <rdg wit="#A #B #C #D">Martis</rdg>
-            </app>
-            
-            <!-- Restoring a text where there is no evidence in the documentary sources, but the editor believes text is missing. -->
-            <app>
-               <lem source="Vettel" type="supplied">etiam</lem> <!-- Display in text as <etiam> and in app. as "etiam suppl. Vettel". -->
+               <lem>gaudete</lem>
+               <!-- Rendering "cogaudete (co exp.) N" -->
+               <rdg wit="#N" type="corrDeletion"><del hand="#N1">co</del>gaudete</rdg>
             </app>
 
+            <!-- Correction by addition. -->
+            <app>
+               <lem>insidias</lem>
+               <rdg wit="#N" type="corrAddition">insidia<add hand="#N2" place="inline">s</add></rdg>
+               <!-- Display as "insidia N (s add. N2)" -->
+            </app>
+
+            <!-- One witness in a string of witnesses has a corrected subvariant -->
+            <!-- Example: flore PQRST (corr. T2) UV. That is, the second hand in witness T corrected the variant. -->
+            <app>
+               <lem>Flora</lem>
+               <rdg wit="#P #Q #R #S #T #U #V" xml:id="rdg2.13.32">flore</rdg>
+               <!-- @xml:id for reference in <witDetail> -->
+               <witDetail wit="#T" target="rdg2.13.32">(corr. <ref target="#T2">T2</ref>)</witDetail>
+            </app>
 
          </listApp>
 
          <listApp type="additions">
 
-            <!-- add./addidit/Reading added. Display as "larem N1 add. <value of @place>" -->
+            <!-- add./addidit: Reading added. Display as "larem N2 add. <value of @place>" -->
             <app>
                <lem>lorem</lem>
-               <rdg wit="#N"><add place="margin" hand="#N1">larem</add></rdg>
-               <!-- margin= in mg. Other values for @place: below = "inf.", above = "sup." , inline = "in textu/i.t.", erasure = "in ras." -->
+               <rdg wit="#N"><add place="margin" hand="#N2">larem</add></rdg>
+               <!-- See other values in list for @place above -->
+               <!-- It's important to be able to use @hand to indicate which hand made the addition. -->
             </app>
 
 
@@ -114,22 +160,30 @@
             <!-- in rasura/in ras.: Text written over other text that has been erased. Display as "nocturna N2 in ras." -->
             <app>
                <lem>nocturnaque</lem>
-               <rdg wit="#N" type="inRas"><add place="inline" rend="erasure" hand="#N2"
-                     >nocturna</add>que</rdg>
+               <rdg wit="#N" type="inRas"><add place="inline">nocturna</add>que</rdg>
             </app>
          </listApp>
 
          <listApp type="deletions">
+            
+            <!-- See "Correction by deletion" above for what to do when a deletion corrects a variant to the lemma. Otherwise: -->
+
             <!-- Characters deleted, no indication of method -->
             <app>
                <lem>tristique</lem>
                <rdg wit="#N">tristi<del hand="#N1">que</del></rdg>
             </app>
+
             <!-- Characters deleted by expunction -->
             <app>
-               <lem>Daphni</lem>
-               <rdg wit="#P">dū<del rend="expunction">m</del></rdg>
-               <!-- Display as dūm (<hi>m</hi> exp.) -->
+               <lem>causam</lem>
+               <rdg wit="#μ">cur<del rend="expunction">n</del>am</rdg>
+            </app>
+
+            <!-- Erased but legible character(s), [Epidoc] -->
+            <app>
+               <lem>docilis</lem>
+               <rdg wit="#N">docili<del rend="erasure">s</del></rdg>
             </app>
 
          </listApp>
@@ -139,8 +193,8 @@
             <!-- Omission of a word, phrase, or other unit. -->
             <app>
                <lem>Nullam</lem>
-               <rdg wit="#N" type="omission"/>
-               <!-- Self-closing tag to indicate that there isn't a value for this reading, thus it has been omitted. Display as "nullam om. N." -->
+               <rdg wit="#N"/>
+               <!-- Self-closing tag to indicate that there isn't a value for this reading, since it has been omitted. Display as "nullam om. N." -->
             </app>
 
             <!-- Missing text. Note that a lacuna is something the editor indicates in the main text as a place where all manuscripts are missing, or are thought to be missing, text. -->
@@ -148,57 +202,64 @@
                <lem>Mauris ut mauris et metus laoreet pharetra dictum et risus. Suspendisse ut
                   maximus diam. Suspendisse luctus diam non libero pellentesque, et aliquam ex
                   congue. Suspendisse vitae lacinia urna, nec egestas arcu. Quisque eget arcu sem.
-                  Aenean eu lacinia orci, commodo blandit nibh.</lem>
+                  Aenean eu lacinia orci, commodo blandit.</lem>
                <rdg wit="#N" type="missing"/>
-               <!-- Value indicates that text hasn't been deliberately or mistakenly omitted, but might be lost for other reasons (e.g., damage). Display as "nisi deest N." If more than one witness, can the verb be made plural automatically? -->
+               <!-- Value indicates that text hasn't been deliberately or mistakenly omitted, but might be lost for other reasons (e.g., damage). Display as "Mauris … blandit deest N." If more than one witness, can the verb be made plural automatically? -->
                <!-- But: if it's a long stretch, the <app> could stretch over several kinds of divisions. It might be best to handle it as a <witDetail>? -->
             </app>
-
-
          </listApp>
 
 
 
-         <listApp type="conjectures-emendations">
+         <listApp type="conjectures">
             <app>
                <lem>laram</lem>
                <rdg source="#Heins.">larem</rdg>
                <!-- A rdg with only @source should indicate that the value is a conjecture. Display as "larem Heins." or "larem conj. Heins." -->
-               <!-- Perhaps it would be worthwhile to have @type="conjecture", just to be explicit about it. -->
+               <!-- Perhaps it would be worthwhile to have @type="conjecture", just to be explicit about it, so that this doesn't happen for every instance of @source? -->
             </app>
+
+
             <!-- List of multiple conjectures. Display as "lorem vel larem vel lyram coni. Heins." -->
             <app>
                <lem>laram</lem>
-               <rdgGrp type="conjecture">
+               <rdgGrp type="conjectures">
                   <rdg source="#Heins.">lorem</rdg>
                   <rdg source="#Heins.">larem</rdg>
                   <rdg source="#Heins.">lyram</rdg>
                </rdgGrp>
             </app>
-            <!-- Emendation. Display as "et] ac codd. (emend. Dipson)" -->
+
+            <!-- Emendation: used to indicate that the editor has emended the text or adopted an emendation proposed elsewhere because none of the documented readings is acceptable. Display as "Mauris] Martis codd. (emend. Burm.)" -->
             <app>
-               <lem source="#Dipson" type="emendation">et</lem>
-               <rdg wit="#codd.">ac</rdg>
-               <rdg source="#Bert">nec</rdg>
+               <lem source="#Burm." type="emendation">Mauris</lem>
+               <!-- What if the source of the emendation is the editor of the current edition? -->
+               <rdg wit="#A #B #C #D">Martis</rdg>
             </app>
+
+            <!-- Restoring a text where there is no evidence in the documentary sources, but the editor believes text is missing. -->
+            <app>
+               <lem source="Vettel" type="supplied">etiam</lem>
+               <!-- Display in text as <etiam> and in app. as "etiam suppl. Vettel". -->
+            </app>
+
          </listApp>
 
-         <listApp type="miscellaneous">
-            <!-- One witness in a string of witnesses has a corrected subvariant -->
-            <!-- Example: orti NGPκρπμα (ex ortis) βδγ -->
-            <app loc="C2.15.63">
-               <lem wit="#λ #v #η #γ #ε #φ">horti</lem>
-               <rdgGrp>
-                  <!-- What @type should this have? -->
-                  <rdg wit="#N #G #P #κ #ρ #π #μ #β #δ #χ" xml:id="rdg2.15.63">orti</rdg>
-                  <rdgGrp type="subvariant">
-                     <!-- I have no idea how to insert this so that the witnesses are in chronological order -->
-                     <rdg wit="#α" varSeq="1">ortis</rdg>
-                     <rdg wit="#α" varSeq="2" copyOf="#rdg2.15.63"/>
-                  </rdgGrp>
-               </rdgGrp>
-            </app>
-         </listApp>
+            <!-- Transposition of readings across lines -->
+
+            <l n="8">Hoc potius, frater Corydon nemus <app type="transposition">
+                  <lem wit="#N #G" source="#GlaeserSqq" xml:id="l8a1lem1" exclude="l9a1rdg1"
+                     >antra</lem>
+                  <rdg wit="#P #V" source="#eddAnteGlaeser" xml:id="l8a1rdg1" exclude="l9a1lem1"
+                     >ista</rdg>
+               </app> petamus</l>
+            <l n="9"><app type="transposition">
+                  <lem wit="#N #G" source="#GlaeserSqq" xml:id="l9a1lem1" exclude="#l8a1rdg1"
+                     >ista</lem>
+                  <rdg wit="P V" source="#eddAnteGlaeser" xml:id="l9a1rdg1" exclude="l8a1lem1"
+                     >antra</rdg>
+               </app> patris Fauni, graciles ubi pinea denset</l>
+         
       </body>
    </text>
 </TEI>
