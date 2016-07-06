@@ -18,47 +18,54 @@
    </teiHeader>
    <text>
       <body>
-         <list>
-            <label>Equivalent values for @place</label>
-            <item>
-               <list>
-                  <item>below = infra</item>
-                  <item>bottom = subscr.</item>
-                  <item>margin = mg.</item>
-                  <item>top</item>
-                  <item>opposite</item>
-                  <item>overleaf</item>
-                  <item>above = suprascr.</item>
-                  <item>end</item>
-                  <item>inline = in textu</item>
-                  <item>inspace</item>
-               </list>
-            </item>
-            <label>Other values</label>
-            <item>
-               <list>
-                  <item xml:id="inRas">in ras.</item>
-               </list>
-            </item>
-         </list>
 
-         <list>
-            <head>Abbreviations for groups of witnesses and sources.</head>
-            <item xml:id="alii">alii: generically referring to other editors or manuscripts.</item>
-            <item xml:id="cett">cett.: ceteri codices, "other manuscripts."</item>
-            <item xml:id="codd">codd.: codex/codices. Equivalent to mss. for manuscript/manuscripts.
-               Meaning: all manuscripts not already mentioned elsewhere with regard to this lemma.
-               Could have the added meaning, "all of the manuscripts have this, but it seems wrong." </item>
-            <item xml:id="recc">recc.: the later manuscripts.</item>
-            <!-- Possibly handled better with a siglum? -->
-            <item xml:id="vett">vett.: the older manuscripts.</item>
-            <!-- Possibly handled better with a siglum also? -->
-            <!-- What to do about "fere omnes", "plerique", "plures"? -->
-         </list>
+         <listApp type="basic">
 
+            <!-- Reporting variant readings, no other information. -->
+            <app>
+               <lem>lorem</lem>
+               <rdg wit="#A #B #C" source="#a #b #c">larem</rdg>
+               <!-- @wit for manuscripts and early printed editions that might be the sole copy of a lost ms; @source for later printed editions, scholarly notes, commentaries, etc. -->
+               <rdg wit="#D #E #F" source="#Gittinger">lolam</rdg>
+               <rdg source="#edd">loram</rdg>
+            </app>
+            <!-- Display as: larem ABC abc, lolam DEF Gittinger, loram edd. -->
+
+
+            <!-- A basic reading with multiple witnesses, but with an editorial comment about only one of them. -->
+            <app>
+               <lem>ipsum</lem>
+               <rdg wit="#A #B #C" xml:id="rdg456">ipsam</rdg>
+               <witDetail wit="#B" target="#rdg456">spatio relicto tribus punctis
+                  expleto</witDetail>
+            </app>
+            <!-- Display as: ipsam ABC (spatio relicto tribus punctis expleto). -->
+
+            <!-- Two variants in one manuscript, no other details -->
+            <app>
+               <lem>reclinis</lem>
+               <rdgGrp type="MSVariants">
+                  <rdg wit="#A">reclivus</rdg>
+                  <rdg wit="#A">reclivis</rdg>
+               </rdgGrp>
+            </app>
+            <!-- Display as: reclivus -->
+
+
+            <!-- Two variants in one manuscript, with detail about where the variants are found -->
+            <app>
+               <lem>densat</lem>
+               <rdgGrp type="MSVariants">
+                  <rdg wit="#N">pensat</rdg>
+                  <rdg wit="#N2" xml:id="rdg4.111pulsat"><add place="margin">pulsat</add></rdg>
+                  <!-- Need to decide if we should do this or <witDetail> or both. -->
+               </rdgGrp>
+               <witDetail wit="#N2" target="#rdg4.111pulsat">in mg.</witDetail>
+            </app>
+         </listApp>
 
          <listApp type="corrections">
-            
+
             <!-- The basic pattern for many of these involves using <rdgGrp> and @varSeq, with @copyOf back to the <lem> -->
 
             <!-- "Ante" readings: variants before they were corrected or changed in some way. Display as "quaedam N ante corr./ante ras." -->
@@ -73,16 +80,24 @@
                </rdgGrp>
             </app>
 
-            <!-- Correction in margin. Display as "ipsem N (corr. N2 in mg.)" -->
-            <!-- Same basic structure as "anteCorr" above. -->
+            <!-- Correction in margin. Display as "iantabimur G (corr. in mg.)" -->
+            <!-- What if the correction is different orthographically? See 1.19 captata -->
             <app>
-               <lem xml:id="lem123456">ipsum</lem>
-               <rdgGrp type="corrMarg">
-                  <rdg wit="#N" varSeq="1">ipsem</rdg>
-                  <rdg wit="N2" varSeq="2"><add place="margin" copyOf="#lem123456"/></rdg>
+               <lem xml:id="lem4.166mactabimus">mactabimus</lem>
+               <rdgGrp type="anteCorr">
+                  <rdg wit="#G">iantabimur</rdg>
+                  <rdg wit="#G" copyOf="#lem4.166mactabimus" xml:id="rdg4.166mactabimus"/>
                </rdgGrp>
+               <witDetail wit="#G" target="#rdg4.166mactabimus">in mg.</witDetail>
             </app>
             
+            <!-- But we also need something for when only one ms in a group does something in mg. Maybe this:
+               <lem wit="#N #G" source="#Baehr. #Schenkl">portes</lem>
+               <rdg wit="#V" source="#edd." xml:id="rdg5.49porta">porta</rdg>
+               <witDetail wit="#V" target="#rdg5.49porta"><hi rend="italic">portu</hi> <ref target="#φ">φ</ref> <hi rend="italic">ponta</hi> <ref target="#δ">δ</ref></witDetail>
+               
+             -->  
+
             <!-- Correction of an omission. Display as "om. N (corr. N1)" -->
             <!-- Same basic structure as "anteCorr" above. -->
             <app>
@@ -92,9 +107,10 @@
                   <rdg wit="#N1" varSeq="2" copyOf="#lem1.7.O"/>
                </rdgGrp>
             </app>
-            
+
             <!-- Erroneous reading printed in text of early edition, corrected to lemma in commentary by editor -->
             <!-- Same basic structure as "anteCorr" above. -->
+            <!-- 12/29/2015: I no longer like this. What if the witness is among many that report this? Better to use a witDetail? Or just report the reading of the editor, too? -->
             <app>
                <lem xml:id="lem1.13Leuce">Leuce</lem>
                <rdgGrp type="edCorr">
@@ -102,7 +118,7 @@
                   <rdg source="#Guid." varSeq="2" copyOf="#lem1.13Leuce"/>
                </rdgGrp>
             </app>
-            
+
             <!-- "Correction" that isn't really a correction. That is, a variant is "corrected" to another variant. -->
             <!-- Same basic structure as "anteCorr" above. -->
             <app>
@@ -134,7 +150,8 @@
                <lem>Flora</lem>
                <rdg wit="#P #Q #R #S #T #U #V" xml:id="rdg2.13.32">flore</rdg>
                <!-- @xml:id for reference in <witDetail> -->
-               <witDetail wit="#T" target="rdg2.13.32">(corr. <ref target="#T2">T2</ref>)</witDetail>
+               <witDetail wit="#T" target="#rdg2.13.32">(corr. <ref target="#T2"
+                  >T2</ref>)</witDetail>
             </app>
 
          </listApp>
@@ -165,7 +182,7 @@
          </listApp>
 
          <listApp type="deletions">
-            
+
             <!-- See "Correction by deletion" above for what to do when a deletion corrects a variant to the lemma. Otherwise: -->
 
             <!-- Characters deleted, no indication of method -->
@@ -207,7 +224,31 @@
                <!-- Value indicates that text hasn't been deliberately or mistakenly omitted, but might be lost for other reasons (e.g., damage). Display as "Mauris … blandit deest N." If more than one witness, can the verb be made plural automatically? -->
                <!-- But: if it's a long stretch, the <app> could stretch over several kinds of divisions. It might be best to handle it as a <witDetail>? -->
             </app>
+
+            <!-- Need something for omission of a verse. Do we do this: -->
+            <l>
+               <app>
+                  <lem>The entire verse</lem>
+                  <rdg/>
+               </app></l>
+
+            <!-- Or this: -->
+
+            <app>
+               <lem><l>The entire verse</l></lem>
+               <rdg/>
+            </app>
+            
+            <!-- Or this: -->
+            
+            <l n="1" xml:id="line">The entire verse</l>
+            <note target="#line">Note about the omission</note>
+            
+            
          </listApp>
+
+
+
 
 
 
@@ -245,21 +286,21 @@
 
          </listApp>
 
-            <!-- Transposition of readings across lines -->
+         <!-- Transposition of readings across lines -->
 
-            <l n="8">Hoc potius, frater Corydon nemus <app type="transposition">
-                  <lem wit="#N #G" source="#GlaeserSqq" xml:id="l8a1lem1" exclude="l9a1rdg1"
-                     >antra</lem>
-                  <rdg wit="#P #V" source="#eddAnteGlaeser" xml:id="l8a1rdg1" exclude="l9a1lem1"
-                     >ista</rdg>
-               </app> petamus</l>
-            <l n="9"><app type="transposition">
-                  <lem wit="#N #G" source="#GlaeserSqq" xml:id="l9a1lem1" exclude="#l8a1rdg1"
-                     >ista</lem>
-                  <rdg wit="P V" source="#eddAnteGlaeser" xml:id="l9a1rdg1" exclude="l8a1lem1"
-                     >antra</rdg>
-               </app> patris Fauni, graciles ubi pinea denset</l>
-         
+         <l n="8">Hoc potius, frater Corydon nemus <app type="transposition">
+               <lem wit="#N #G" source="#GlaeserSqq" xml:id="l8a1lem1" exclude="l9a1rdg1"
+                  >antra</lem>
+               <rdg wit="#P #V" source="#eddAnteGlaeser" xml:id="l8a1rdg1" exclude="l9a1lem1"
+                  >ista</rdg>
+            </app> petamus</l>
+         <l n="9"><app type="transposition">
+               <lem wit="#N #G" source="#GlaeserSqq" xml:id="l9a1lem1" exclude="#l8a1rdg1"
+                  >ista</lem>
+               <rdg wit="P V" source="#eddAnteGlaeser" xml:id="l9a1rdg1" exclude="l8a1lem1"
+                  >antra</rdg>
+            </app> patris Fauni, graciles ubi pinea denset</l>
+
       </body>
    </text>
 </TEI>
