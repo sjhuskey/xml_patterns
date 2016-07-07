@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>XML Patterns for Representing Critical Edition Data</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Working guidelines for the Digital Latin Library</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Born digital, with references to the Epidoc Guidelines</p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <div1 xml:id="main-text-symbols" xml:lang="en">
+            <head>Representing symbols commonly used in critical editions</head>
+            <p>The symbols in this section have been gleaned from <bibl><author>Martin
+                  West</author>, <title>Textual Criticism and Editorial Technique</title>
+                     (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
+                     >??–??</biblScope></bibl>.</p>
+            <div2 xml:id="abbreviation-expansion">
+               <head>Expansion of Abbreviations</head>
+               <p>
+                  <specList>
+                     <specDesc key="expan"/>
+                     <specDesc key="abbr"/>
+                     <specDesc key="ex"/>
+                     <specDesc key="supplied"/>
+                  </specList>
+               </p>
+               <p><gi>expan</gi> (expansion) contains the full expansion of an abbreviation.</p>
+               <p><gi>abbr</gi> (abbreviation) contains the abbreviated part, i.e. the letters
+                  actually on the page.</p>
+               <p><gi>ex</gi> (editorial expansion) contains a sequence of letters added by an
+                  editor or transcriber when expanding an abbreviation.</p>
+               <p><gi>supplied</gi> signifies text supplied by the transcriber or editor.</p>
+               <p>
+                  <quote>a(bc)</quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <expan>
+                     <abbr>a</abbr>
+                     <ex>bc</ex>
+                  </expan>
+               </egXML>
+
+               <p>Multiple &lt;abbr&gt; elements within a single &lt;expan&gt; compose a single
+                  abbreviation between them. For example, e.g. is one abbreviation for the phrase
+                  "exempli gratia."</p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <expan>
+                     <abbr>e</abbr>
+                     <ex>xempli</ex>
+                     <abbr>g</abbr>
+                     <ex>ratia</ex>
+                  </expan>
+               </egXML>
+               <!-- Need discussion of values for @cert on <expan> -->
+            </div2>
+            <div2 xml:id="add-conjecture">
+               <head>Text added by conjecture</head>
+               <p>An editor supplies text believed to be missing from the original source.</p>
+               <p>
+                  <specList>
+                     <specDesc key="supplied"/>
+                  </specList>
+               </p>
+               <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
+                  missing.</p>
+               <p><att>reason</att> indicates that the text has been supplied by conjecture.</p>
+               <p>
+                  <quote>&lt;abc&gt;</quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <supplied reason="conjecture">abc</supplied>
+               </egXML>
+            </div2>
+            <div2 xml:id="undetermined-loss">
+               <head>Undetermined Amount Of Text Lost Through Damage</head>
+               <p>Text has been lost from one or more witnesses because of damage.</p>
+               <p>
+                  <specList>
+                     <specDesc key="gap"/>
+                  </specList>
+               </p>
+               <p><gi>gap</gi> signifies text missing because of damage.</p>
+               <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+               <p><att>extent</att> with value "unknown" indicates that an undetermined amount of
+                  text has been lost.</p>
+               <p><att>unit</att> with value "characters" indicates that an unspecified number of
+                  characters (whether single characters or words or larger groups of text) have been
+                  lost.</p>
+               <p>
+                  <quote>[ ]</quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <gap reason="lost" extent="unknown" unit="characters"/>
+               </egXML>
+            </div2>
+            <div2 xml:id="known-loss">
+               <head>Known Amount Of Text Lost Through Damage</head>
+               <p>The editor or transcriber knows from context and/or observation how much text has
+                  been lost.</p>
+               <p>
+                  <specList>
+                     <specDesc key="gap"/>
+                  </specList>
+               </p>
+               <p><gi>gap</gi> signifies text missing because of damage.</p>
+               <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+               <p><att>quantity</att> indicates the amount of text has been lost.</p>
+               <p><att>unit</att> indicates the unit measured in <att>quantity</att>.</p>
+               <p>
+                  <quote>[ ... ]</quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <gap reason="lost" quantity="3" unit="characters"/>
+               </egXML>
+               <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
+            </div2>
+            <div2 xml:id="editorial-deletion">
+               <head>Interpolation</head>
+               <p>Text suspected by the editor to be an interpolation.</p>
+               <!-- Expand on this -->
+               <p>
+                  <specList>
+                     <specDesc key="surplus"/>
+                  </specList>
+               </p>
+               <p><gi>surplus</gi> signifies text identified by the editor as added by someone other
+                  than the original author.</p>
+               <p><att>reason</att> with value "interpolation" indicates why the text has been
+                  marked as surplus.</p>
+               <p>
+                  <quote>{lorem ipsum}</quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <surplus reason="interpolation">lorem ipsum</surplus>
+               </egXML>
+            </div2>
+            <div2 xml:id="deleted-legible">
+               <head>Deleted But Legible Text</head>
+               <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
+               <p>
+                  <specList>
+                     <specDesc key="del"/>
+                  </specList>
+               </p>
+               <p><gi>del</gi> indicates the text that has been deleted but is still legible.</p>
+               <p><att>rend</att> with value "erasure" indicates that the text has been erased.
+                  Other values: "strikethrough" and "expunction".</p>
+               <!-- Separate sections for these other values? Or are they really values? Should they be explained in a note? -->
+               <p>
+                  <quote>[[co]]gaudete</quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <del rend="erasure">co</del>gaudete </egXML>
+            </div2>
+            <div2 xml:id="deleted-illegible">
+               <head>Deleted and Lost</head>
+               <p>Text deleted in an ancient source to the point of illegibility.</p>
+               <p>
+                  <specList>
+                     <specDesc key="del"/>
+                     <specDesc key="gap"/>
+                  </specList>
+               </p>
+               <p><gi>del</gi> indicates that a deletion has occurred.</p>
+               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
+                  strikethrough).</p>
+               <p><gi>gap</gi> indicates that the deletion has left a gap of irrecoverable text.</p>
+               <p><att>reason</att> with value "lost" indicates that the text is irrecoverable.</p>
+               <p><att>quantity</att> indicates the extent of the deletion.</p>
+               <p><att>unit</att> indicates the unit of measurement for <att>quantityt</att>.</p>
+               <p>
+                  <quote>[[ ... ]]</quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <del rend="erasure">
+                     <gap quantity="3" unit="characters"/>
+                  </del>
+               </egXML>
+            </div2>
+            <div2 xml:id="deleted-restored">
+               <head>Deleted and Illegible But Restored</head>
+               <p>Text deleted in an ancient source to the point of illegibility, but restored by
+                  the editor (e.g., by comparison with another exemplar).</p>
+               <p>
+                  <specList>
+                     <specDesc key="del"/>
+                     <specDesc key="supplied"/>
+                     <specDesc key="orig"/>
+                     <specDesc key="unclear"/>
+                  </specList>
+               </p>
+               <p><gi>del</gi> indicates that a deletion has occurred.</p>
+               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
+                  strikethrough).</p>
+               <p><gi>supplied</gi> indicates the text that has been restored.</p>
+               <p><att>reason</att> with value "lost" indicates why the text had to be supplied.</p>
+               <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
+               <p><gi>unclear</gi> indicates that the supplied original is unclear.</p>
+               <p>
+                  <quote> [[ abc ]] </quote>
+               </p>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <del rend="erasure">
+                     <supplied reason="lost">abc</supplied>
+                  </del>
+               </egXML>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <del rend="erasure">
+                     <supplied reason="lost">
+                        <orig>abc</orig>
+                     </supplied>
+                  </del>
+               </egXML>
+
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <del rend="erasure">
+                     <supplied reason="lost">
+                        <unclear>abc</unclear>
+                     </supplied>
+                  </del>
+               </egXML>
+            </div2>
+            <div2 xml:id="crux">
+               <head>Crux</head>
+               <p>Text deemed by the editor to be irredeemably corrupt.</p>
+               <p>
+                  <specList>
+                     <specDesc key="unclear"/>
+                  </specList>
+               </p>
+               <p><gi>unclear</gi> indicates that the text is readable but not understandable.</p>
+               <p>
+                  <quote>†lorem ipsum†</quote>
+               </p>
+               
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <unclear>lorem ipsum</unclear>
+               </egXML>
+            </div2>
+         </div1>
+      </body>
+   </text>
+</TEI>

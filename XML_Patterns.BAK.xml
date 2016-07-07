@@ -6,7 +6,7 @@
    <teiHeader>
       <fileDesc>
          <titleStmt>
-            <title>XML Patterns for Representing Critical Edition Data</title>
+            <title>Title</title>
          </titleStmt>
          <publicationStmt>
             <p>Publication</p>
@@ -18,23 +18,9 @@
    </teiHeader>
    <text>
       <body>
-         <list>
-            <head>Symbols in the main text</head>
-            <item>( ) = expansion of abbreviation: <choice><expan cert="high"><abbr>e.g.</abbr><ex>exempli gratia</ex></expan></choice>. Other values for @cert: unknown, low, medium.</item>
-            <item>&lt; &gt; = Added by conjecture: <supplied reason="conjecture">abc</supplied></item>
-            <item>[ ] = Undetermined amount of text lost through damage: <gap reason="lost" extent="unknown" unit="characters"/></item>
-            <item>[ ... ] = Undetermined amount of text lost through physical damage: <gap reason="lost" quantity="3" unit="characters"/>. Other values for @unit: "word" and "line"</item>
-            <item>{ } = Editorial deletion: <surplus reason="interpolation">lorem ipsum</surplus></item>
-            <item>[[ ]] = Letters or words deleted by the scribe in the source, but still legible: <del rend="erasure">co</del>gaudete. Other values for @rend: "strikethrough" and "expunction".</item>
-            <item>[[ ... ]] = Illegible letters or words deleted by the scribe in the source: <gap rend="erasure" quantity="3" unit="characters"/>. Other values for @rend: "strikethrough" and "expunction"</item>
-            <item>[[ abc ]] = Letters deleted in the source, but restored by the editor: <del rend="erasure"><supplied reason="lost">abc</supplied></del></item>
-            <item>/ = Erased character, one slash for each erased character: <del rend="erasure"><gap reason="lost" quantity="3" unit="character"/></del></item>
-            <item>† = Word(s) deemed by the editor to be irredeemably corrupt. <unclear>lorem ipsum</unclear></item>
-         </list>
 
          <listApp type="basic">
-            <head>Basic reporting of variant readings</head>
-            
+
             <!-- Reporting variant readings, no other information. -->
             <app>
                <lem>lorem</lem>
@@ -43,7 +29,7 @@
                <rdg wit="#D #E #F" source="#Gittinger">lolam</rdg>
                <rdg source="#edd">loram</rdg>
             </app>
-            <!-- Display as: larem ABCabc, lolam DEF Gittinger, loram edd. -->
+            <!-- Display as: larem ABC abc, lolam DEF Gittinger, loram edd. -->
 
 
             <!-- A basic reading with multiple witnesses, but with an editorial comment about only one of them. -->
@@ -53,7 +39,7 @@
                <witDetail wit="#B" target="#rdg456">spatio relicto tribus punctis
                   expleto</witDetail>
             </app>
-            <!-- Display as: ipsam A B (spatio relicto tribus punctis expleto) C . -->
+            <!-- Display as: ipsam ABC (spatio relicto tribus punctis expleto). -->
 
             <!-- Two variants in one manuscript, no other details -->
             <app>
@@ -61,9 +47,9 @@
                <rdgGrp type="MSVariants">
                   <rdg wit="#A">reclivus</rdg>
                   <rdg wit="#A">reclivis</rdg>
-               </rdgGrp><!-- Not sure we really need <rdgGrp> at all here. Room for discussion. -->
+               </rdgGrp>
             </app>
-            <!-- Display as: reclivus A, reclivis A -->
+            <!-- Display as: reclivus -->
 
 
             <!-- Two variants in one manuscript, with detail about where the variants are found -->
@@ -72,51 +58,48 @@
                <rdgGrp type="MSVariants">
                   <rdg wit="#N">pensat</rdg>
                   <rdg wit="#N2" xml:id="rdg4.111pulsat"><add place="margin">pulsat</add></rdg>
+                  <!-- Need to decide if we should do this or <witDetail> or both. -->
                </rdgGrp>
                <witDetail wit="#N2" target="#rdg4.111pulsat">in mg.</witDetail>
             </app>
          </listApp>
-         <!-- Display as: pensat N, pulsat N² (in mg.) -->
 
          <listApp type="corrections">
-            <head>Corrections</head>
 
             <!-- The basic pattern for many of these involves using <rdgGrp> and @varSeq, with @copyOf back to the <lem> -->
 
             <!-- "Ante" readings: variants before they were corrected or changed in some way. Display as "quaedam N ante corr./ante ras." -->
             <app>
-               <lem xml:id="lem1.33quidem">quidem</lem>
+               <lem xml:id="abc">quidem</lem>
                <rdgGrp type="anteCorr">
-                  <!-- Value of @type on the <rdgGrp> helps determine how the entry will be handled, i.e., displaying the uncorrected form. Values: "anteCorr" (before correction), "anteRas" (before erasure) -->
+                  <!-- Value of @type helps determine how the entry will be handled, i.e., displaying the uncorrected form. Values: "anteCorr" (before correction), "anteRas" (before erasure) -->
                   <rdg wit="#N" varSeq="1">quaedam</rdg>
                   <!-- @varSeq indicates which entry came first -->
-                  <rdg wit="#N1" varSeq="2" copyOf="#lem1.33quidem"/>
-                  <!-- @copyOf avoids repeating the value of the <lem>; it's also semantically cleaner. -->
+                  <rdg wit="#N1" varSeq="2" copyOf="#abc"/>
+                  <!-- @copyOf avoids just repeating the value of the <lem> -->
                </rdgGrp>
             </app>
-            <!-- Display as: quaedam N (corr. N¹). -->
-            
 
-            <!-- Correction in margin. -->
+            <!-- Correction in margin. Display as "iantabimur G (corr. in mg.)" -->
+            <!-- What if the correction is different orthographically? See 1.19 captata -->
             <app>
                <lem xml:id="lem4.166mactabimus">mactabimus</lem>
                <rdgGrp type="anteCorr">
-                  <rdg wit="#G" varSeq="1">iantabimur</rdg>
-                  <rdg wit="#G" varSeq="2"><add place="margin" copyOf="#lem4.166mactabimus" xml:id="rdg4.166mactabimus"/></rdg>
+                  <rdg wit="#G">iantabimur</rdg>
+                  <rdg wit="#G" copyOf="#lem4.166mactabimus" xml:id="rdg4.166mactabimus"/>
                </rdgGrp>
-               <witDetail wit="#G" target="#rdg4.166mactabimus">in mg.</witDetail><!-- Not yet sure if this is necessary if we have <add> above in the <rdg> -->
+               <witDetail wit="#G" target="#rdg4.166mactabimus">in mg.</witDetail>
             </app>
-            <!-- Display as "iantabimur G (corr. G in mg.)" -->
             
             <!-- But we also need something for when only one ms in a group does something in mg. Maybe this:
-<app>               
-<lem wit="#N #G" source="#Baehr. #Schenkl">portes</lem>
+               <lem wit="#N #G" source="#Baehr. #Schenkl">portes</lem>
                <rdg wit="#V" source="#edd." xml:id="rdg5.49porta">porta</rdg>
                <witDetail wit="#V" target="#rdg5.49porta"><hi rend="italic">portu</hi> <ref target="#φ">φ</ref> <hi rend="italic">ponta</hi> <ref target="#δ">δ</ref></witDetail>
-               </app>
+               
              -->  
 
-            <!-- Correction of an omission. Same basic structure as "anteCorr" above. -->
+            <!-- Correction of an omission. Display as "om. N (corr. N1)" -->
+            <!-- Same basic structure as "anteCorr" above. -->
             <app>
                <lem xml:id="lem1.7.O">lorem</lem>
                <rdgGrp type="corrOmission">
@@ -124,9 +107,9 @@
                   <rdg wit="#N1" varSeq="2" copyOf="#lem1.7.O"/>
                </rdgGrp>
             </app>
-            <!-- Display as: om. N (corr. N¹) -->
 
-            <!-- Erroneous reading printed in text of early edition, corrected to lemma in commentary by editor Same basic structure as "anteCorr" above. -->
+            <!-- Erroneous reading printed in text of early edition, corrected to lemma in commentary by editor -->
+            <!-- Same basic structure as "anteCorr" above. -->
             <!-- 12/29/2015: I no longer like this. What if the witness is among many that report this? Better to use a witDetail? Or just report the reading of the editor, too? -->
             <app>
                <lem xml:id="lem1.13Leuce">Leuce</lem>
@@ -136,61 +119,59 @@
                </rdgGrp>
             </app>
 
-            <!-- "Correction" that isn't really a correction. That is, a variant is "corrected" to another variant. This is more properly a "mutation," hence the value of @type. Same basic structure as "anteCorr" above. -->
+            <!-- "Correction" that isn't really a correction. That is, a variant is "corrected" to another variant. -->
+            <!-- Same basic structure as "anteCorr" above. -->
             <app>
                <lem wit="#P #V #N2">descripta</lem>
                <rdgGrp type="mutation">
                   <rdg wit="#N" varSeq="1">dipicta</rdg>
                   <rdg wit="#N1" varSeq="2">depicta</rdg>
+                  <!-- Display as dipicta N (mut. in depicta N1) -->
                </rdgGrp>
             </app>
-            <!-- Display as: dipicta N (mut. in depicta N1) -->
 
-            <!-- Correction by deletion. Same basic structure as "anteCorr" above, but with witDetail. -->
+            <!-- Correction by deletion. -->
             <app>
-               <lem xml:id="lem2.5gaudete">gaudete</lem>
-               <rdgGrp type="anteCorr">
-                  <rdg wit="#N" varSeq="1">cogaudete</rdg>
-                  <rdg wit="#N1" varSeq="2" xml:id="rdg2.5gaudete"><del>co</del>gaudete</rdg>
-               </rdgGrp>
-               <witDetail wit="#N1" target="rdg2.5gaudete"><hi rend="italic">co</hi> exp.</witDetail><!-- Describing the action of <del> above --> 
+               <lem>gaudete</lem>
+               <!-- Rendering "cogaudete (co exp.) N" -->
+               <rdg wit="#N" type="corrDeletion"><del hand="#N1">co</del>gaudete</rdg>
             </app>
-            <!-- Render as: cogaudete N (corr. N¹, co exp.)  -->
 
-            <!-- Correction by addition. Same basic structure as "anteCorr" above, but with witDetail. -->
+            <!-- Correction by addition. -->
             <app>
-               <lem xml:id="lem3.2insidias">insidias</lem>
-               <rdgGrp type="anteCorr">
-                  <rdg wit="#N" varSeq="1">insidia</rdg>
-                  <rdg wit="#N2" varSeq="2">insidia<add place="inline">s</add></rdg>
-               </rdgGrp>
-               <witDetail wit="#N2"><hi rend="italic">(s</hi> add. N²)</witDetail>
-               <!-- Display as "insidia N (s add. N²)" -->
+               <lem>insidias</lem>
+               <rdg wit="#N" type="corrAddition">insidia<add hand="#N2" place="inline">s</add></rdg>
+               <!-- Display as "insidia N (s add. N2)" -->
             </app>
 
-            <!-- One witness in a string of witnesses has a corrected subvariant Example: flore PQRST (corr. T2) UV. That is, the second hand in witness T corrected the variant. -->
+            <!-- One witness in a string of witnesses has a corrected subvariant -->
+            <!-- Example: flore PQRST (corr. T2) UV. That is, the second hand in witness T corrected the variant. -->
             <app>
                <lem>Flora</lem>
                <rdg wit="#P #Q #R #S #T #U #V" xml:id="rdg2.13.32">flore</rdg>
                <!-- @xml:id for reference in <witDetail> -->
-               <witDetail wit="#T" target="#rdg2.13.32">(corr. <ref target="#T2">T²</ref>)</witDetail>
+               <witDetail wit="#T" target="#rdg2.13.32">(corr. <ref target="#T2"
+                  >T2</ref>)</witDetail>
             </app>
-            <!-- May need to revisit this one, if we think it's important to be able to query #T2 itself -->
 
          </listApp>
 
          <listApp type="additions">
-            <head>Additions</head>
 
-            <!-- add./addidit: Reading added. -->
+            <!-- add./addidit: Reading added. Display as "larem N2 add. <value of @place>" -->
             <app>
                <lem>lorem</lem>
-               <rdg wit="#N2"><add place="margin">larem</add></rdg>
+               <rdg wit="#N"><add place="margin" hand="#N2">larem</add></rdg>
                <!-- See other values in list for @place above -->
                <!-- It's important to be able to use @hand to indicate which hand made the addition. -->
             </app>
-            <!-- Display as: larem N² (add. in mg.) -->
-            <!-- Could also do this with a <witDetail>. Room for discussion. -->
+
+
+            <!-- Addition of characters in textu (no mention of method) to correct a variant to the lemma. Display as "consectur (te add. N2)" -->
+            <app>
+               <lem>consectetur</lem>
+               <rdg wit="#N">consec<add place="inline" hand="#N2">te</add>tur</rdg>
+            </app>
 
 
             <!-- in rasura/in ras.: Text written over other text that has been erased. Display as "nocturna N2 in ras." -->
@@ -201,7 +182,6 @@
          </listApp>
 
          <listApp type="deletions">
-            <head>Deletions</head>
 
             <!-- See "Correction by deletion" above for what to do when a deletion corrects a variant to the lemma. Otherwise: -->
 
@@ -226,7 +206,6 @@
          </listApp>
 
          <listApp type="omissions">
-            <head>Omissions</head>
 
             <!-- Omission of a word, phrase, or other unit. -->
             <app>
@@ -246,46 +225,58 @@
                <!-- But: if it's a long stretch, the <app> could stretch over several kinds of divisions. It might be best to handle it as a <witDetail>? -->
             </app>
 
-            <!-- Omission of a verse. Standard TEI schema does not allow <app> to enclose a <l>, so schema must be customized to accommodate. -->
-            
-            <app type="lineOmission">
-               <lem>
-                  <l n="3">et spument rauco ferventia musta susurro.</l>
-               </lem>
-               <rdg wit="#κ #χ"/>
+            <!-- Need something for omission of a verse. Do we do this: -->
+            <l>
+               <app>
+                  <lem>The entire verse</lem>
+                  <rdg/>
+               </app></l>
+
+            <!-- Or this: -->
+
+            <app>
+               <lem><l>The entire verse</l></lem>
+               <rdg/>
             </app>
-            <!-- Note that variant readings within the line should be handled as usual, nesting the <app> inside the one for the line omission, since the omission is of the line in any form it may take. --> 
+            
+            <!-- Or this: -->
+            
+            <l n="1" xml:id="line">The entire verse</l>
+            <note target="#line">Note about the omission</note>
+            
+            
          </listApp>
 
+
+
+
+
+
          <listApp type="conjectures">
-            <head>Conjectures</head>
-            
-            <!-- Conjecture: some portion of text (or absence of text) not in a witness, but proposed by some person and determined by an editor to be worthy of consideration in establishing the text, but not to be printed in the main text of the edition. -->
-            <app type="conjecture">
+            <app>
                <lem>laram</lem>
                <rdg source="#Heins.">larem</rdg>
-               <!-- A rdg with only @source should indicate that the value is a conjecture, but it is worthwhile to have @type="conjecture" just to be explicit about it, so that this doesn't happen for every instance of @source. -->
-               <!-- NOTE: The value of @type on <app> cascades to all <rdg> elements. If there is more than one <rdg> and not all of them are conjectures, @type should go on the <rdg> that is a conjecture. -->
+               <!-- A rdg with only @source should indicate that the value is a conjecture. Display as "larem Heins." or "larem conj. Heins." -->
+               <!-- Perhaps it would be worthwhile to have @type="conjecture", just to be explicit about it, so that this doesn't happen for every instance of @source? -->
             </app>
 
 
             <!-- List of multiple conjectures. Display as "lorem vel larem vel lyram coni. Heins." -->
             <app>
                <lem>laram</lem>
-               <rdgGrp type="conjecture">
+               <rdgGrp type="conjectures">
                   <rdg source="#Heins.">lorem</rdg>
                   <rdg source="#Heins.">larem</rdg>
                   <rdg source="#Heins.">lyram</rdg>
                </rdgGrp>
             </app>
-            <!-- Display as: lorem vel larem vel lyram Heins. -->
 
-            <!-- Emendation: used to indicate that the editor has emended the text or adopted an emendation proposed elsewhere because none of the documented readings is acceptable. Same rules about cascading mentioned above in  -->
-            <app type="emendation">
-               <lem source="#Burm.">Mauris</lem>
+            <!-- Emendation: used to indicate that the editor has emended the text or adopted an emendation proposed elsewhere because none of the documented readings is acceptable. Display as "Mauris] Martis codd. (emend. Burm.)" -->
+            <app>
+               <lem source="#Burm." type="emendation">Mauris</lem>
+               <!-- What if the source of the emendation is the editor of the current edition? -->
                <rdg wit="#A #B #C #D">Martis</rdg>
             </app>
-            <!-- Display as: Mauris] Burm.; Martis ABCD. -->
 
             <!-- Restoring a text where there is no evidence in the documentary sources, but the editor believes text is missing. -->
             <app>
@@ -293,18 +284,6 @@
                <!-- Display in text as <etiam> and in app. as "etiam suppl. Vettel". -->
             </app>
 
-         </listApp>
-         
-         <listApp type="notes">
-            <!-- A note indicating a scholar's opinion about a reading. Could be used for other miscellaneous notes. -->
-            <app>
-               <lem wit="#P #V" source="#edd.">molle sub</lem>
-               <rdg wit="#N #G #A #H" source="#Glaeser #Keene" ana="#syntactic" xml:id="rdg1.5molliter">molliter</rdg><!-- The <rdg> that is the subject of a <note> has an xml:id which will be the note's @target. -->
-               <rdg source="#Schenkl2" ana="#lexical">molle per</rdg>
-               <note target="#rdg1.5molliter"><ref target="#Jacoby">Jacoby</ref> defendit (p. 1290 <ref target="https://books.google.de/books?id=q5blAAAAMAAJ&amp;hl=de&amp;pg=PA128#v=onepage&amp;q&amp;f=false">Wochenschrift für Klassische Philologie</ref>)</note>
-            </app>
-            <!-- Note that <ref> is used here first to point to the bibliographical entry for Jacoby, second to point to the exact page of the journal in question. -->
-            
          </listApp>
 
          <!-- Transposition of readings across lines -->

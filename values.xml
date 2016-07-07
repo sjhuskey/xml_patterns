@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Title</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication Information</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Information about the source</p>
+         </sourceDesc>
+      </fileDesc>
+  </teiHeader>
+  <text>
+      <body>
+         <list>
+            <item>Values for reading groups showing corrections made by manuscript hands. <list>
+               <item>anteCorr: The variant has been corrected to the lemma without specifying
+                  how.</item>
+               <item>corrMarg: The variant has been corrected to the lemma in the margin.</item>
+               <item>corrDeletion: The variant has been corrected to the lemma through deletion
+                  of whole words or parts of words.</item>
+               <item>corrAddition: The variant has been corrected to the lemma through addition
+                  of whole words or parts of words.</item>
+               <item>omitCorr: The variant is an omission that has been corrected to the lemma in
+                  some way.</item>
+               <item>mutation: One variant has been changed to another variant.</item>
+            </list></item>
+            <item>Values for reading groups showing the activities of modern editors.
+               <list>
+                  <item>commCorr: Used when the text of an edition and the text of an editor's commentary differ.</item>
+               </list>
+            </item>
+         </list>
+         <list>
+            <label>Equivalent values for @place</label>
+            <item>
+               <list>
+                  <item>below = infra</item>
+                  <item>bottom = subscr.</item>
+                  <item>margin = mg.</item>
+                  <item>top</item>
+                  <item>opposite</item>
+                  <item>overleaf</item>
+                  <item>above = suprascr.</item>
+                  <item>end</item>
+                  <item>inline = in textu</item>
+                  <item>inspace</item>
+               </list>
+            </item>
+            <label>Other values</label>
+            <item>
+               <list>
+                  <item xml:id="inRas">in ras.</item>
+               </list>
+            </item>
+         </list>
+      </body>
+  </text>
+</TEI>
