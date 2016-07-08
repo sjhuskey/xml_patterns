@@ -289,7 +289,7 @@
 
             <!-- Restoring a text where there is no evidence in the documentary sources, but the editor believes text is missing. -->
             <app>
-               <lem source="Vettel" type="supplied">etiam</lem>
+               <lem source="Vettel"><supplied>etiam</supplied></lem>
                <!-- Display in text as <etiam> and in app. as "etiam suppl. Vettel". -->
             </app>
 

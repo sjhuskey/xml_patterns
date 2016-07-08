@@ -69,7 +69,7 @@
             </div2>
             <div2 xml:id="add-conjecture"
                corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
-               <head>Text added by conjecture</head>
+               <head>Text added by emendation</head>
                <p>An editor supplies text believed to be missing from the original source.</p>
                <p>
                   <specList>
@@ -79,13 +79,17 @@
                <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
                   missing.</p>
                <p><att>reason</att> indicates that text has been lost, but supplied by
-                  conjecture.</p>
+                  emendation.</p>
                <p>
                   <quote>&lt;abc&gt;</quote>
                </p>
 
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <supplied reason="lost">abc</supplied>
+                  <app>
+                     <lem source="#Vettel">
+                        <supplied reason="lost">abc</supplied>
+                     </lem>
+                  </app>
                </egXML>
             </div2>
             <div2 xml:id="undetermined-loss"
@@ -154,7 +158,11 @@
                </p>
 
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <surplus reason="interpolation">lorem ipsum</surplus>
+                  <app>
+                     <lem source="#Alonso">
+                        <surplus reason="interpolation">lorem ipsum</surplus>
+                     </lem>
+                  </app>
                </egXML>
             </div2>
             <div2 xml:id="deleted-legible"
@@ -218,8 +226,7 @@
                   </specList>
                </p>
                <p><gi>del</gi> indicates that a deletion has occurred.</p>
-               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
-                  strikethrough).</p>
+               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction).</p>
                <p><gi>supplied</gi> indicates the text that has been restored.</p>
                <p><att>reason</att> with value "lost" indicates why the text had to be supplied.</p>
                <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
@@ -229,9 +236,13 @@
                </p>
 
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">
-                     <supplied reason="lost">abc</supplied>
-                  </del>
+                  <app>
+                     <lem>
+                        <del rend="erasure">
+                           <supplied reason="lost">abc</supplied><!-- Use @resp to indicate who supplied the text? -->
+                        </del>
+                     </lem>
+                  </app>
                </egXML>
 
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -265,7 +276,11 @@
                </p>
 
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <unclear>lorem ipsum</unclear>
+                  <app>
+                     <lem>
+                        <unclear>lorem ipsum</unclear><!-- How to indicate the this is an editor's determination? -->
+                     </lem>
+                  </app>
                </egXML>
             </div2>
          </div1>
@@ -282,38 +297,481 @@
                   <specDesc key="note"/>
                </specList>
             </p>
-            <p xml:id="app"><gi>app</gi> (apparatus entry) contains the lemma and readings for a single entry in
-               the apparatus criticus, though it and its contents may be nested inside of another
-                  <gi>app</gi></p>
-            <p xml:id="lem"><gi>lem</gi> (lemma) contains a reading judged by the editor to be what the author wrote, or
-               as close as possible. This type of reading constitutes the text printed in the main
-               portion of a critical edition.</p>
-            <p xml:id="rdg"><gi>rdg</gi> (reading) contains some text (or absence of text) witnessed by a manuscript or
-               found in an early printed edition where it is not expressly proposed, but judged by
-               the editor to be unsatisfactory or corrupt for linguistic and/or stylistic reasons.
-               This text is printed in the apparatus criticus.</p>
-            <p xml:id="wit"><att>wit</att> (witness) indicates any manuscript(s) or early printed edition(s) (esp. without an apparatus or commentary; i.e., <foreign xml:lang="la">editiones
-                  vetustiores</foreign>)</p>
-            <p xml:id="source"><att>source</att> (source) indicates any printed edition(s) or other scholarly work(s) (e.g., article, textual note, commentary) addressing an aspect of the text.</p>
-            <p><att>ana</att> (analysis) indicates that a reading belongs to at least one category in the LDLT's taxonomy of readings. More than one value is possible.</p>
-            <p xml:id="witDetail"><gi>witDetail</gi> (witness detail) contains information about a particular witness (<att>wit</att>) to a lemma (<gi>lem</gi>) or reading (<gi>rdg</gi>).</p>
-            <p xml:id="note"><gi>note</gi> (note) contains editorial comments, bibliographical references, or other information pertaining to the apparatus entry.</p>
-            
+            <p xml:id="app"><gi>app</gi> (apparatus entry) contains the lemma and readings for a
+               single entry in the apparatus criticus, though it and its contents may be nested
+               inside of another <gi>app</gi></p>
+            <p xml:id="lem"><gi>lem</gi> (lemma) contains a reading judged by the editor to be what
+               the author wrote, or as close as possible. This type of reading constitutes the text
+               printed in the main portion of a critical edition.</p>
+            <p xml:id="rdg"><gi>rdg</gi> (reading) contains some text (or absence of text) witnessed
+               by a manuscript or found in an early printed edition where it is not expressly
+               proposed, but judged by the editor to be unsatisfactory or corrupt for linguistic
+               and/or stylistic reasons. This text is printed in the apparatus criticus.</p>
+            <p xml:id="wit"><att>wit</att> (witness) indicates any manuscript(s) or early printed
+               edition(s) (esp. without an apparatus or commentary; i.e., <foreign xml:lang="la"
+                  >editiones vetustiores</foreign>)</p>
+            <p xml:id="source"><att>source</att> (source) indicates any printed edition(s) or other
+               scholarly work(s) (e.g., article, textual note, commentary) addressing an aspect of
+               the text.</p>
+            <p><att>ana</att> (analysis) indicates that a reading belongs to at least one category
+               in the LDLT's taxonomy of readings. More than one value is possible.</p>
+            <p xml:id="witDetail"><gi>witDetail</gi> (witness detail) contains information about a
+               particular witness (<att>wit</att>) to a lemma (<gi>lem</gi>) or reading
+                  (<gi>rdg</gi>).</p>
+            <p xml:id="note"><gi>note</gi> (note) contains editorial comments, bibliographical
+               references, or other information pertaining to the apparatus entry.</p>
+            <div2><p>Need discussion about the order in which information is presented.</p></div2>
             <div2 xml:id="basic-app-entry">
                <head>Basic reporting of a variant reading</head>
-               <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> has a reading that varies from the lemma in some way. For example, if the editor has accepted the text <quote xml:lang="la">Lorem ipsum dolor sit amet</quote> into the main text of the edition, but manuscript <hi rend="bold">A</hi> has <quote xml:lang="la">larem</quote> instead of <quote xml:lang="la">lorem</quote>, the variant reading would be reported in a printed edition as follows:</p>
+               <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> has a
+                  reading that varies from the lemma in some way. For example, if the editor has
+                  accepted the text <quote xml:lang="la">Lorem ipsum dolor sit amet</quote> into the
+                  main text of the edition, but manuscript <hi rend="bold">A</hi> has <quote
+                     xml:lang="la">larem</quote> instead of <quote xml:lang="la">lorem</quote>, the
+                  variant reading would be reported in a printed edition as follows:</p>
                <p>
                   <quote>18 larem <hi rend="bold">A</hi></quote>
                </p>
-               <p>Since the lemma is not typically printed in an apparatus criticus (unless there is a chance for confusion), it is up to the reader to recognize that <quote xml:lang="la">larem</quote> is a variant for <quote xml:lang="la">lorem</quote>.</p>
-               <p>In this model, an <gi>app</gi> contains both the lemma and the variant reading, eliminating the need for guesswork.</p>
+               <p>Since the lemma is not typically printed in an apparatus criticus (unless there is
+                  a chance for confusion), it is up to the reader to recognize that <quote
+                     xml:lang="la">larem</quote> is a variant for <quote xml:lang="la"
+                  >lorem</quote>.</p>
+               <p>In this model, an <gi>app</gi> contains both the lemma and the variant reading,
+                  reducing the need for guesswork, at least when looking at the XML code.</p>
+               <p>The patterns displayed below are designed to handle the various kinds of
+                  information conveyed in a typical apparatus criticus, including readings <foreign
+                     xml:lang="la">ante correctionem</foreign> and <foreign xml:lang="la">in
+                     rasura</foreign>, among other paleographical and editorial details.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <p>
                      <app>
                         <lem>Lorem</lem>
                         <rdg wit="#A">larem</rdg>
-                     </app> 
-                     ipsum dolor sit amet</p>
+                     </app> ipsum dolor sit amet </p>
+               </egXML>
+               <p>If an editor deems it important to indicate that a <gi>rdg</gi> also appears in a
+                     <ref target="source"><att>source</att></ref>, the same pattern applies, but
+                     <att>source</att> is added after <att>wit</att>:</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <p>
+                     <app>
+                        <lem>Lorem</lem>
+                        <rdg wit="#A" source="#Jones">larem</rdg>
+                     </app> ipsum dolor sit amet </p>
+               </egXML>
+               <p>If there are multiple variant readings, another <gi>rdg</gi> should be added for
+                  each one.</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <p>
+                     <app>
+                        <lem>Lorem</lem>
+                        <rdg wit="#A" source="#Jones">larem</rdg>
+                        <rdg wit="#B">lurum</rdg>
+                     </app> ipsum dolor sit amet </p>
+               </egXML>
+            </div2>
+            <div2 xml:id="additions">
+               <head>Additions</head>
+               <p>A <ref target="#witness">witness</ref> or <ref target="#source">source</ref> adds
+                  text (e.g., in the margin) that an editor deems worthy of notice.</p>
+               <p>
+                  <specList>
+                     <specDesc key="add"/>
+                  </specList>
+               </p>
+               <p><gi>add</gi> (addition) contains text that has been added.</p>
+               <p><att>place</att> indicates the placed where the text has been added. Possible
+                  values: <list>
+                     <item><hi rend="bold">above</hi>: above the line (<hi rend="italic">suprascr. =
+                           superscriptum/a</hi>)</item>
+                     <item><hi rend="bold">below</hi>: below the line (<hi rend="italic">subscr. =
+                           subscriptum/a</hi>)</item>
+                     <item><hi rend="bold">bottom</hi>: bottom of the page (<hi rend="italic">ad
+                           fin. = ad finem</hi></item>
+                     <item><hi rend="bold">inline</hi>: within the body of the original text (<hi
+                           rend="italic">in textu</hi>)</item>
+                     <item><hi rend="bold">inRas</hi>: in the space where text has been erased. (<hi
+                           rend="italic">in ras. = in rasura</hi>)</item>
+                     <!-- Note that this is in addition to TEI spec. -->
+                     <item><hi rend="bold">margin</hi>: right, left, or both (<hi rend="italic">in
+                           mg. = in margine</hi>)</item>
+                     <item><hi rend="bold">top</hi>: at the top of the page (<hi rend="italic">ad
+                           init. = ad initium</hi></item>
+                  </list>
+               </p>
+               <p><att>hand</att> indicates the manuscript hand that added the text. See the section
+                  on manuscript hands for more information about encoding that information.</p>
+               <!-- To be added -->
+               <p>For example, the copyist of manuscript <hi rend="bold">N</hi> has the <ref
+                     target="#lem">lemma</ref>, but a second hand has added a variant reading in the
+                  margin.</p>
+               <p>
+                  <quote>89 certare] certate <hi rend="bold">G</hi>
+                     <hi rend="italic">in mg.</hi></quote>
+               </p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app>
+                     <lem>certare</lem>
+                     <rdg wit="#G" xml:id="rdg89certate"><add hand="#G1" place="margin"
+                           >certate</add></rdg>
+                  </app>
+               </egXML>
+            </div2>
+            <div2 xml:id="deletions">
+               <head>Deletions</head>
+               <p>A <ref target="#witness">witness</ref> or <ref target="#source">source</ref> has
+                  deleted some text, and an editor deems it worthy of notice.</p>
+               <p>
+                  <specList>
+                     <specDesc key="del"/>
+                  </specList>
+               </p>
+               <p><gi>del</gi> (deletion) contains text that has been deleted.</p>
+               <p><att>rend</att> (rendition) indicates the method of deletion. Possible values: <list>
+                     <item>erasure: text has been physically removed from the page or lines have
+                        been drawn through it (<hi rend="italic">del. =
+                        delevit/deleverunt</hi>)</item>
+                     <item>expunction: text has been marked for deletion with dots underneath (<hi
+                           rend="italic">exp. = expunxit/expunxerunt</hi>)</item>
+                  </list>
+               </p>
+               <p>For example, the copyist of manuscript <hi rend="bold">N</hi> has printed the <ref
+                     target="#lem">lemma</ref>
+                  <foreign xml:lang="la">tristique</foreign>, but a later hand has deleted the
+                  letters <hi rend="italic">que</hi>.</p>
+               <p>
+                  <quote>tristi (que <hi rend="ital">del.</hi>
+                     <hi rend="bold">N²</hi>)</quote>
+               </p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app ana="#subtractive">
+                     <lem>tristique</lem>
+                     <rdg wit="#N">tristi<del hand="#N2" rend="erasure">que</del></rdg>
+                  </app>
+               </egXML>
+               <p>Note that <att>ana</att> with value "subtractive" is on the <gi>app</gi> to
+                  indicate that the entire entry concerns a reading that takes away something from
+                  the lemma. If there are several <gi>rdg</gi> elements and not all of them are
+                  subtractive in nature, <att>ana</att> would be applied to the relevant
+                     <gi>rdg</gi>.</p>
+            </div2>
+            <div2 xml:id="omissions">
+               <head>Omissions</head>
+               <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> omits
+                  some text and the editor deems it important to report the omission.</p>
+               <p>For example, the witness known as "P" has omitted the word <foreign xml:lang="la"
+                     >pecus</foreign> from the following text: <foreign xml:lang="la">securo custode
+                     pecus nocturnaque pastor</foreign>. The traditional apparatus criticus
+                  indicates the omission as follows:</p>
+               <p>
+                  <quote>pecus <hi rend="italic">om.</hi>
+                     <hi rend="bold">P</hi></quote>
+               </p>
+               <p>In this model, the omission is represented by a "self-closing" <gi>rdg</gi>:</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <l>securo custode <app ana="#subtractive">
+                        <lem>pecus</lem>
+                        <rdg wit="#P"/>
+                     </app> nocturnaque pastor</l>
+               </egXML>
+               <p>Note that <att>ana</att> is used with the value "subtractive" to enable querying
+                  for this type of data. If there is only one <gi>rdg</gi>, then
+                  <att>ana</att>="subtractive" is attached to <gi>app</gi> to indicate that the
+                  entire entry in the apparatus concerns an omission. If an omission is to be
+                  reported among other readings, <att>ana</att>="subtractive" is applied to the
+                     <gi>rdg</gi> that reports the omission:</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <l>securo custode <app>
+                        <lem>pecus</lem>
+                        <rdg wit="#B">pecore</rdg>
+                        <rdg wit="#P" ana="#subtractive"/>
+                     </app> nocturnaque pastor</l>
+               </egXML>
+               <p>The same model applies to the omission of an entire line of verse, but in that
+                  case <gi>app</gi> (with <att>type</att>="lineOmission") and <gi>lem</gi> contain
+                  the entire line, and the omission is marked by a self-closing <gi>rdg</gi>:</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app type="lineOmission">
+                     <lem>
+                        <l n="3">et spument rauco ferventia musta susurro.</l>
+                     </lem>
+                     <rdg wit="#κ #χ"/>
+                  </app>
+               </egXML>
+               <p>This is displayed in the apparatus criticus as <quote><hi rend="italic">vers.
+                        om.</hi>
+                     <hi rend="italic">κχ</hi></quote></p>
+            </div2>
+            <div2 xml:id="lacuna"
+               corresp="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/TC.html#TCAPMI">
+               <head>Lacuna</head>
+               <p>A <ref target="#wit">witness</ref> is missing a portion of the text.</p>
+               <p>
+                  <specList>
+                     <specDesc key="lacunaStart"/>
+                     <specDesc key="lacunaEnd"/>
+                  </specList>
+               </p>
+               <p><gi>lacunaStart</gi> is a self-closing tag with <att>wit</att> indicating where in
+                  a witness the lacuna begins.</p>
+               <p><gi>lacunaEnd</gi> is a self-closing tag with <att>wit</att> indicating where in a
+                  witness the lacuna ends.</p>
+               <p>For example, witness <hi rend="bold">N</hi> has a lacuna that begins after the
+                  word <foreign xml:lang="la">metus</foreign> and ends before the word <foreign
+                     xml:lang="la">arcu</foreign> in the following passage: <quote>Mauris ut mauris
+                     et metus pharetra dictum et risus. Suspendisse ut maximus diam. Suspendisse
+                     luctus diam non libero pellentesque, et aliquam ex congue. Suspendisse vitae
+                     lacinia urna, nec egestas arcu. Quisque eget.</quote></p>
+               <p>A traditional apparatus criticus might have the following to indicate the
+                  lacuna:</p>
+               <p>
+                  <quote>pharetra … arcu <hi rend="italic">deest</hi>
+                     <hi rend="bold">N</hi></quote>
+               </p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <p>Mauris ut mauris et metus <app>
+                        <lem>pharetra</lem>
+                        <rdg wit="#N"><lacunaStart/></rdg>
+                     </app> dictum et risus. Suspendisse ut maximus diam. Suspendisse luctus diam
+                     non libero pellentesque, et aliquam ex congue. Suspendisse vitae lacinia urna,
+                     nec <app>
+                        <lem>egestas</lem>
+                        <rdg wit="#N"><lacunaEnd/></rdg>
+                     </app> arcu. Quisque eget.</p>
+               </egXML>
+            </div2>
+            <div2 xml:id="corrections">
+               <head>Corrections</head>
+               <p>A variant <ref target="#rdg">reading</ref> has been corrected to the value of the
+                     <ref target="#lem">lemma</ref>, but the editor deems the reading prior to
+                  correction worthy of notice.</p>
+               <p>
+                  <specList>
+                     <specDesc key="rdgGrp"/>
+                  </specList>
+               </p>
+               <p><gi>rdgGrp</gi> (reading group) contains the readings before and after correction,
+                  but since the emphasis is on the original, uncorrected, reading, <att>type</att>
+                  is applied with the value "anteCorr" (i.e., <foreign xml:lang="la">ante
+                     correctionem</foreign>)</p>
+               <p><att>varSeq</att> (variant sequence) indicates the order of the readings (e.g., 1
+                  for the first reading, 2 for the correction.</p>
+               <p><att>copyOf</att> indicates that the correction is a copy of the <ref
+                     target="#lem">lemma</ref>. Instead of copying the value of the lemma, we point
+                  to it to indicate that they are the same.</p>
+               <p>For example, manuscript <hi rend="bold">N</hi> originally had <foreign
+                     xml:lang="la">quaedam</foreign> for the lemma <foreign xml:lang="la"
+                     >quidem</foreign>. The editor wishes to note the reading <foreign xml:lang="la"
+                     >ante correctionem</foreign>.</p>
+               <p>In a traditional critical edition, this would be handled in the apparatus criticus
+                  as follows: <quote>quaedam N (ante corr. N¹).</quote> There is no need to print
+                  the result of the correction, since "correction" implies the editor's accepted
+                  reading (i.e., lemma).</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app>
+                     <lem xml:id="lem1.33quidem">quidem</lem>
+                     <rdgGrp type="anteCorr">
+                        <rdg wit="#N" varSeq="1">quaedam</rdg>
+                        <rdg wit="#N1" varSeq="2" copyOf="#lem1.33quidem"/>
+                     </rdgGrp>
+                  </app>
+               </egXML>
+               <p>Note that the <gi>lem</gi> must have an <att>xml:id</att> to be a target for
+                     <att>copyOf</att></p>
+               <p>This pattern is the basis for a number of other representations of reading
+                  sequences.</p>
+               <div3 xml:id="correction-margin">
+                  <head>Correction in the Margin</head>
+                  <p>A manuscript hand has corrected a variant reading to the lemma by writing it in
+                     the margin.</p>
+                  <p>For example, manuscript <hi rend="bold">G</hi> has <foreign xml:lang="la"
+                        >iantabimur</foreign> in the text, but a second hand has added the accepted
+                     reading <foreign xml:lang="la">mactabimus</foreign> in the margin. This would
+                     be handled in a traditional apparatus as follows: <quote>iantabimur G (corr. G²
+                        in mg.)</quote>.</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem xml:id="lem4.166mactabimus">mactabimus</lem>
+                        <rdgGrp type="anteCorr">
+                           <rdg wit="#G" varSeq="1">iantabimur</rdg>
+                           <rdg wit="#G" varSeq="2"><add place="margin" copyOf="#lem4.166mactabimus"
+                              /></rdg>
+                        </rdgGrp>
+                     </app>
+                  </egXML>
+                  <p>A self-closing <gi>add</gi> is used here with <att>place</att> and
+                        <att>copyOf</att> to indicate that the marginal reading is identical to the
+                     accepted reading.</p>
+               </div3>
+               <div3 xml:id="correction-omission">
+                  <head>Correction of an Omission</head>
+                  <p>The original copyist has omitted a reading from the text, but another hand (or
+                     the original copyist) has supplied the missing text.</p>
+                  <p>For example, manuscript <hi rend="bold">G</hi> has omitted the lemma <foreign
+                        xml:lang="la">tandem</foreign>, but the original copyist has supplied it. In
+                     a traditional critical edition, that would be represented as follows:
+                        <quote>tandem] om. G (corr. G¹)</quote>.</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem xml:id="lem1.43tandem">tandem</lem>
+                        <rdgGrp type="corrOmission">
+                           <rdg wit="#G" varSeq="1"/>
+                           <rdg wit="#G1" varSeq="2" copyOf="#lem1.43tandem"/>
+                        </rdgGrp>
+                     </app>
+                  </egXML>
+                  <p>If the corrector has added the reading in the margin or elsewhere (e.g.,
+                        <quote>tandem] om. G (corr. G¹ in mg.)</quote>, <gi>add</gi> with
+                        <att>place</att> and <att>copyOf</att> can be used:</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app ana="#subtractive">
+                        <lem xml:id="lem1.43tandem">tandem</lem>
+                        <rdgGrp type="corrOmission">
+                           <rdg wit="#G" varSeq="1"/>
+                           <rdg wit="#G" varSeq="2"><add place="margin" copyOf="#lem1.43tandem"
+                              /></rdg>
+                        </rdgGrp>
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="correction-addition">
+                  <head>Correction by Addition</head>
+                  <p>A variant reading differs from the <ref target="lem">lemma</ref> by one or more
+                     characters, which have been supplied by the original copyist or another hand at
+                     a later time.</p>
+                  <p>For example, manuscript <hi rend="bold">N</hi> has <foreign xml:lang="la"
+                        >insidia</foreign>, which differs from the lemma <foreign xml:lang="la"
+                        >insidia</foreign>by a single letter "s". A later hand has added the missing
+                     "s". That might be handled as follows in a traditional apparatus criticus:
+                     insidia N (<hi rend="italic">s</hi> add. N²).</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem xml:id="lem3.2insidias">insidias</lem>
+                        <rdgGrp type="anteCorr">
+                           <rdg wit="#N" varSeq="1">insidia</rdg>
+                           <rdg wit="#N2" varSeq="2">insidia<add place="inline">s</add></rdg>
+                           <!-- Or should this be handled by a <witDetail>? Or both? -->
+                        </rdgGrp>
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="correction-deletion">
+                  <head>Correction by Deletion</head>
+                  <p>A variant reading differs from the <ref target="lem">lemma</ref> by one or more
+                     characters, which have been deleted by the original copyist or another hand at
+                     a later time.</p>
+                  <p>For example, manuscript <hi rend="bold">N</hi> has the reading <foreign
+                        xml:lang="la">cogaudete</foreign> where the lemma is just <foreign
+                        xml:lang="la">gaudete</foreign>. The original copyist has deleted the
+                     letters "co" from the beginning of the word. In a traditional apparatus
+                     criticus, that might be printed as follows: <quote>cogaudete <hi rend="bold">N</hi> (<hi rend="italic">corr.</hi> N¹, co <hi rend="italic"
+                        >exp.</hi>)</quote>.</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem xml:id="lem2.5gaudete">gaudete</lem>
+                        <rdgGrp type="anteCorr">
+                           <rdg wit="#N" varSeq="1">cogaudete</rdg>
+                           <rdg wit="#N1" varSeq="2" xml:id="rdg2.5gaudete"><del rend="expunction">co</del>gaudete</rdg>
+                        </rdgGrp>
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="correction-with-witDetail">
+                  <head>One Witness Among Many Has Been Corrected</head>
+                  <p>A variant reading has several witnesses, but only one of them has been corrected, and the editor believes it is important to make that clear.</p>
+                  <p>For example, manuscripts <hi rend="bold">P Q R S T U V</hi> have the variant reading <foreign xml:lang="la">flore</foreign> where the lemma is <foreign xml:lang="la">Flora</foreign>. Only manuscript <hi rend="bold">T</hi> has been corrected. In a traditional apparatus criticus, that might be handled as follows: <quote>flore <hi rend="bold">PQRST</hi> (<hi rend="italic">corr.</hi> <hi rend="bold">T¹</hi>) <hi rend="bold">UV</hi></quote>.</p>
+                  <p>Since only one witness has been corrected, <gi>rdgGrp</gi> with <att>type</att>="anteCorr" cannot contain the reading of all of the manuscripts, so we must use <att>copyOf</att> on both the lemma and the variant reading.</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem xml:id="lem1.2Flora">Flora</lem>
+                        <rdg wit="#P #Q #R #S #U #V" xml:id="rdg1.2">flore</rdg>
+                        <rdgGrp>
+                           <rdg wit="#T" varSeq="1" copyOf="#rdg1.2flore"/>
+                           <rdg wit="#T1" varSeq="2" copyOf="#lem1.2Flora"/>
+                        </rdgGrp><!-- Need to consider whether this should be done with <witDetail> instead or in addition to it. -->
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="mutation">
+                  <head>Mutation</head>
+                  <p>Sometimes the copyist or a later hand "corrects" a variant reading to another variant reading. Although the motivation may have been to correct, the action results in mutation.</p>
+                  <p>For example, manuscript <hi rend="bold">N</hi> has <foreign xml:lang="la">dipicta</foreign> for lemma <foreign xml:lang="la">descripta</foreign>, and the original copyist has "corrected" the reading to <foreign xml:lang="la">depicta</foreign>.</p>
+                  <p>A traditional apparatus criticus might handle that as follows: <quote>dipicta <hi rend="bold">N</hi> (<hi rend="italic">mut. in</hi> depicta <hi rend="bold">N¹</hi>)</quote>.</p>
+                  <p>The same pattern for the <foreign xml:lang="la">ante correctionem</foreign> scenarios can be used here, with a different value for <att>type</att> ("mutation") on <gi>rdgGrp</gi>:</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem wit="#P #V #N2">descripta</lem>
+                        <rdgGrp type="mutation">
+                           <rdg wit="#N" varSeq="1">dipicta</rdg>
+                           <rdg wit="#N1" varSeq="2">depicta</rdg>
+                        </rdgGrp>
+                     </app>
+                  </egXML>
+               </div3>
+            </div2>
+            <div2 xml:id="conjecture">
+               <head>Conjecture</head>
+               <p>A conjecture is some portion of text (or absence of text) proposed by some person (ancient or modern) and determined by an editor to be worthy of consideration in establishing the text, but not to be printed in the main text of the edition.</p>
+               <p>In a traditional critical edition, a conjecture might be noted as follows: <quote>rapidoque] rabidoque <hi rend="italic">conj.</hi> Baehrens</quote>.</p>
+               <p>Although conjectures are more common in modern editions and other scholarship, they are not unheard of in manuscripts, where a hand has written a reading (e.g., in the margin) that does not resemble any other variant readings and cannot be attributed to a recognizable error. Therefore, conjecture is not limited to those materials identified in <att>source</att>. For this reason, <att>type</att> with value "conjecture" must be used to identify a reading as a conjecture.</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app type="conjecture">
+                     <lem>rapidoque</lem>
+                     <rdg source="#Baehrens">rabidoque</rdg>
+                  </app>
+               </egXML>
+               <p>In this example, <att>type</att> is attached to <gi>app</gi> because the entire entry concerns a conjecture. If the conjecture is just one among many readings, <att>type</att> must be used on the individual <gi>rdg</gi> that contains the conjecture.</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app>
+                     <lem>bullantes</lem>
+                     <rdg wit="#ε #δ #e #d2">bullentes</rdg>
+                     <rdg wit="#η #ν #φ #ρ2 #r #s">bullantis</rdg>
+                     <rdg source="#Heins." type="#conjecture">palantes</rdg>
+                  </app>
+               </egXML>
+               <p>If a single scholar has proposed multiple conjectures for a single lemma, <gi>rdgGrp</gi> with <att>type</att> contains all of the conjectures as individual readings:</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app>
+                     <lem>nullos ducet</lem>
+                     <rdgGrp type="conjecture">
+                        <rdg source="#Heins.">nullosque sui</rdg>
+                        <rdg source="#Heins.">nullosque ducis</rdg>
+                        <rdg source="#Heins.">nullosque ducum</rdg>
+                     </rdgGrp>
+                  </app>
+               </egXML>
+               <p>That should be displayed as: <quote>nullosque sui <hi rend="italic">vel</hi> nullosque duics <hi rend="italic">vel</hi> nullosque ducum <hi rend="italic">conj.</hi> Heins.</quote></p>
+            </div2>
+            <div2 xml:id="emendation">
+               <head>Emendation</head>
+               <p>An emendation is a "successful" <ref target="#conjecture">conjecture</ref>. That is, an emendation is some portion of text (or absence of text) expressly proposed by some person through the application of critical judgment, accepted by the editor in place of the transmitted readings, and printed in the main text of an edition. For this reason, only a <ref target="#lem">lemma</ref> can be classified as an emendation.</p>
+               <p>The following example illustrates the difference between an emendation and a conjecture by virtue of the fact that the <gi>lem</gi> has <att>type</att>="emendation" and <gi>rdg</gi> has <att>type</att>="conjecture":</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app>
+                     <lem source="#Ulit." type="emendation">niteat</lem>
+                     <rdg wit="#N #G #β #κ #π #ρ1 #λ1">mutat</rdg>
+                     <rdg wit="#P #δ" source="#p #t #h #Kempfer #Burm.">mittat</rdg>
+                     <rdg wit="#μ" ana="#lexical">micat</rdg>
+                     <rdg wit="#θ #ν #α #η #r #s" source="#o #n #l2 #i2 #Guid. #Wernsd. #Beck #Glaeser #Keene">nutet</rdg>
+                     <rdg wit="#ε #χ #γ #ρ2 #λ2 #d #e #u #b" source="#i1 #l1 #Tig. #Vienn.">nutat</rdg>
+                     <rdg wit="#φ">mutet</rdg>
+                     <rdg source="#Leo" type="conjecture">micet ac</rdg>
+                     <rdg source="#Barth" type="conjecture">nictat</rdg>
+                  </app>
+               </egXML>
+            </div2>
+            <div2 xml:id="notes">
+               <head>Notes</head>
+               <p>An editor wishes to comment on a reading, include bibliographical information, or note something else about the passage in question.</p>
+               <p>For example, the editor has recorded a variant reading that another scholar has supported in a textual note. That would be handled in a traditional edition as follows: molle sub] molliter Glaeser, def. Jacoby (Wochenschrift für klassische Philologie III, 1886, p. 1290).</p>
+               <p>We handle this with <gi>note</gi> with <att>target</att> pointing at the value of <att>xml:id</att> on the <gi>lem</gi> or <gi>rdg</gi> in question.</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <app>
+                     <lem wit="#P #V" source="#edd.">molle sub</lem>
+                     <rdg wit="#N #G #A #H" source="#Glaeser #Keene" xml:id="rdg1.5molliter">molliter</rdg>
+                     <rdg source="#Schenkl2">molle per</rdg>
+                     <note target="#rdg1.5molliter"><ref target="#Jacoby">Jacoby</ref> defendit (<ref target="https://books.google.de/books?id=q5blAAAAMAAJ&amp;hl=de&amp;pg=PA128#v=onepage&amp;q&amp;f=false">Wochenschrift für klassische Philologie</ref> III, 1886, p. 1290)</note>
+                  </app>
                </egXML>
             </div2>
          </div1>
