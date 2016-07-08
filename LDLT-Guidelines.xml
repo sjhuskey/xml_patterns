@@ -24,8 +24,10 @@
                   West</author>, <title>Textual Criticism and Editorial Technique</title>
                      (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
                      >80–81</biblScope></bibl>.</p>
-            <div2 xml:id="abbreviation-expansion" corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
-               <head>Abbreviation Fully Expanded</head><!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
+            <div2 xml:id="abbreviation-expansion"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
+               <head>Abbreviation Fully Expanded</head>
+               <!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
                <p>
                   <specList>
                      <specDesc key="expan"/>
@@ -65,7 +67,8 @@
                </egXML>
                <!-- Need discussion of values for @cert on <expan>. Note that different sections in Epidoc guidelines for abbreviations are based on value of @cert  -->
             </div2>
-            <div2 xml:id="add-conjecture" corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
+            <div2 xml:id="add-conjecture"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
                <head>Text added by conjecture</head>
                <p>An editor supplies text believed to be missing from the original source.</p>
                <p>
@@ -75,7 +78,8 @@
                </p>
                <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
                   missing.</p>
-               <p><att>reason</att> indicates that text has been lost, but supplied by conjecture.</p>
+               <p><att>reason</att> indicates that text has been lost, but supplied by
+                  conjecture.</p>
                <p>
                   <quote>&lt;abc&gt;</quote>
                </p>
@@ -84,7 +88,8 @@
                   <supplied reason="lost">abc</supplied>
                </egXML>
             </div2>
-            <div2 xml:id="undetermined-loss" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
+            <div2 xml:id="undetermined-loss"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
                <head>Undetermined Amount Of Text Lost Through Damage</head>
                <p>Text has been lost from one or more witnesses because of damage.</p>
                <p>
@@ -107,7 +112,8 @@
                   <gap reason="lost" extent="unknown" unit="characters"/>
                </egXML>
             </div2>
-            <div2 xml:id="known-loss" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
+            <div2 xml:id="known-loss"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
                <head>Known Amount Of Text Lost Through Damage</head>
                <p>The editor or transcriber knows from context and/or observation how much text has
                   been lost.</p>
@@ -129,7 +135,8 @@
                </egXML>
                <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
             </div2>
-            <div2 xml:id="editorial-deletion" corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
+            <div2 xml:id="editorial-deletion"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
                <head>Editorial Deletion</head>
                <p>Text suspected by the editor to be an interpolation.</p>
                <!-- Expand on this -->
@@ -150,7 +157,8 @@
                   <surplus reason="interpolation">lorem ipsum</surplus>
                </egXML>
             </div2>
-            <div2 xml:id="deleted-legible" corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
+            <div2 xml:id="deleted-legible"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
                <head>Deleted But Legible Text</head>
                <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
                <p>
@@ -169,7 +177,8 @@
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <del rend="erasure">co</del>gaudete </egXML>
             </div2>
-            <div2 xml:id="deleted-illegible" corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
+            <div2 xml:id="deleted-illegible"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
                <head>Deleted and Lost</head>
                <p>Text deleted in an ancient source to the point of illegibility.</p>
                <p>
@@ -195,7 +204,8 @@
                   </del>
                </egXML>
             </div2>
-            <div2 xml:id="deleted-restored" corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
+            <div2 xml:id="deleted-restored"
+               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
                <head>Deleted and Illegible But Restored</head>
                <p>Text deleted in an ancient source to the point of illegibility, but restored by
                   the editor (e.g., by comparison with another exemplar).</p>
@@ -240,7 +250,8 @@
                   </del>
                </egXML>
             </div2>
-            <div2 xml:id="crux" corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html"><!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
+            <div2 xml:id="crux" corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
+               <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
                <head>Crux</head>
                <p>Text deemed by the editor to be irredeemably corrupt.</p>
                <p>
@@ -252,9 +263,57 @@
                <p>
                   <quote>†lorem ipsum†</quote>
                </p>
-               
+
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <unclear>lorem ipsum</unclear>
+               </egXML>
+            </div2>
+         </div1>
+         <div1 xml:id="apparatus-criticus-patterns">
+            <head>Apparatus Criticus</head>
+            <p>This section provides models for handling the different kinds of data that occur in
+               the apparatus criticus.</p>
+            <p>
+               <specList>
+                  <specDesc key="app"/>
+                  <specDesc key="lem"/>
+                  <specDesc key="rdg"/>
+                  <specDesc key="witDetail"/>
+                  <specDesc key="note"/>
+               </specList>
+            </p>
+            <p xml:id="app"><gi>app</gi> (apparatus entry) contains the lemma and readings for a single entry in
+               the apparatus criticus, though it and its contents may be nested inside of another
+                  <gi>app</gi></p>
+            <p xml:id="lem"><gi>lem</gi> (lemma) contains a reading judged by the editor to be what the author wrote, or
+               as close as possible. This type of reading constitutes the text printed in the main
+               portion of a critical edition.</p>
+            <p xml:id="rdg"><gi>rdg</gi> (reading) contains some text (or absence of text) witnessed by a manuscript or
+               found in an early printed edition where it is not expressly proposed, but judged by
+               the editor to be unsatisfactory or corrupt for linguistic and/or stylistic reasons.
+               This text is printed in the apparatus criticus.</p>
+            <p xml:id="wit"><att>wit</att> (witness) indicates any manuscript(s) or early printed edition(s) (esp. without an apparatus or commentary; i.e., <foreign xml:lang="la">editiones
+                  vetustiores</foreign>)</p>
+            <p xml:id="source"><att>source</att> (source) indicates any printed edition(s) or other scholarly work(s) (e.g., article, textual note, commentary) addressing an aspect of the text.</p>
+            <p><att>ana</att> (analysis) indicates that a reading belongs to at least one category in the LDLT's taxonomy of readings. More than one value is possible.</p>
+            <p xml:id="witDetail"><gi>witDetail</gi> (witness detail) contains information about a particular witness (<att>wit</att>) to a lemma (<gi>lem</gi>) or reading (<gi>rdg</gi>).</p>
+            <p xml:id="note"><gi>note</gi> (note) contains editorial comments, bibliographical references, or other information pertaining to the apparatus entry.</p>
+            
+            <div2 xml:id="basic-app-entry">
+               <head>Basic reporting of a variant reading</head>
+               <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> has a reading that varies from the lemma in some way. For example, if the editor has accepted the text <quote xml:lang="la">Lorem ipsum dolor sit amet</quote> into the main text of the edition, but manuscript <hi rend="bold">A</hi> has <quote xml:lang="la">larem</quote> instead of <quote xml:lang="la">lorem</quote>, the variant reading would be reported in a printed edition as follows:</p>
+               <p>
+                  <quote>18 larem <hi rend="bold">A</hi></quote>
+               </p>
+               <p>Since the lemma is not typically printed in an apparatus criticus (unless there is a chance for confusion), it is up to the reader to recognize that <quote xml:lang="la">larem</quote> is a variant for <quote xml:lang="la">lorem</quote>.</p>
+               <p>In this model, an <gi>app</gi> contains both the lemma and the variant reading, eliminating the need for guesswork.</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <p>
+                     <app>
+                        <lem>Lorem</lem>
+                        <rdg wit="#A">larem</rdg>
+                     </app> 
+                     ipsum dolor sit amet</p>
                </egXML>
             </div2>
          </div1>
