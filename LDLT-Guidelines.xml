@@ -19,13 +19,13 @@
    <text>
       <body>
          <div1 xml:id="main-text-symbols" xml:lang="en">
-            <head>Representing symbols commonly used in critical editions</head>
+            <head>Representing symbols commonly used in the main text of a critical edition</head>
             <p>The symbols in this section have been gleaned from <bibl><author>Martin
                   West</author>, <title>Textual Criticism and Editorial Technique</title>
                      (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
-                     >??–??</biblScope></bibl>.</p>
-            <div2 xml:id="abbreviation-expansion">
-               <head>Expansion of Abbreviations</head>
+                     >80–81</biblScope></bibl>.</p>
+            <div2 xml:id="abbreviation-expansion" corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
+               <head>Abbreviation Fully Expanded</head><!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
                <p>
                   <specList>
                      <specDesc key="expan"/>
@@ -63,9 +63,9 @@
                      <ex>ratia</ex>
                   </expan>
                </egXML>
-               <!-- Need discussion of values for @cert on <expan> -->
+               <!-- Need discussion of values for @cert on <expan>. Note that different sections in Epidoc guidelines for abbreviations are based on value of @cert  -->
             </div2>
-            <div2 xml:id="add-conjecture">
+            <div2 xml:id="add-conjecture" corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
                <head>Text added by conjecture</head>
                <p>An editor supplies text believed to be missing from the original source.</p>
                <p>
@@ -75,16 +75,16 @@
                </p>
                <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
                   missing.</p>
-               <p><att>reason</att> indicates that the text has been supplied by conjecture.</p>
+               <p><att>reason</att> indicates that text has been lost, but supplied by conjecture.</p>
                <p>
                   <quote>&lt;abc&gt;</quote>
                </p>
 
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <supplied reason="conjecture">abc</supplied>
+                  <supplied reason="lost">abc</supplied>
                </egXML>
             </div2>
-            <div2 xml:id="undetermined-loss">
+            <div2 xml:id="undetermined-loss" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
                <head>Undetermined Amount Of Text Lost Through Damage</head>
                <p>Text has been lost from one or more witnesses because of damage.</p>
                <p>
@@ -107,7 +107,7 @@
                   <gap reason="lost" extent="unknown" unit="characters"/>
                </egXML>
             </div2>
-            <div2 xml:id="known-loss">
+            <div2 xml:id="known-loss" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
                <head>Known Amount Of Text Lost Through Damage</head>
                <p>The editor or transcriber knows from context and/or observation how much text has
                   been lost.</p>
@@ -129,8 +129,8 @@
                </egXML>
                <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
             </div2>
-            <div2 xml:id="editorial-deletion">
-               <head>Interpolation</head>
+            <div2 xml:id="editorial-deletion" corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
+               <head>Editorial Deletion</head>
                <p>Text suspected by the editor to be an interpolation.</p>
                <!-- Expand on this -->
                <p>
@@ -150,7 +150,7 @@
                   <surplus reason="interpolation">lorem ipsum</surplus>
                </egXML>
             </div2>
-            <div2 xml:id="deleted-legible">
+            <div2 xml:id="deleted-legible" corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
                <head>Deleted But Legible Text</head>
                <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
                <p>
@@ -169,7 +169,7 @@
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <del rend="erasure">co</del>gaudete </egXML>
             </div2>
-            <div2 xml:id="deleted-illegible">
+            <div2 xml:id="deleted-illegible" corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
                <head>Deleted and Lost</head>
                <p>Text deleted in an ancient source to the point of illegibility.</p>
                <p>
@@ -195,7 +195,7 @@
                   </del>
                </egXML>
             </div2>
-            <div2 xml:id="deleted-restored">
+            <div2 xml:id="deleted-restored" corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
                <head>Deleted and Illegible But Restored</head>
                <p>Text deleted in an ancient source to the point of illegibility, but restored by
                   the editor (e.g., by comparison with another exemplar).</p>
@@ -240,7 +240,7 @@
                   </del>
                </egXML>
             </div2>
-            <div2 xml:id="crux">
+            <div2 xml:id="crux" corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html"><!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
                <head>Crux</head>
                <p>Text deemed by the editor to be irredeemably corrupt.</p>
                <p>
