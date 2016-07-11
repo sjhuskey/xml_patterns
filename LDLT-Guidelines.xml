@@ -7,6 +7,11 @@
       <fileDesc>
          <titleStmt>
             <title>XML Patterns for Representing Critical Edition Data</title>
+            <respStmt>
+               <resp>Developed by</resp>
+               <name>Samuel J. Huskey</name>
+               <name>Hugh Cayless</name>
+            </respStmt>
          </titleStmt>
          <publicationStmt>
             <p>Working guidelines for the Digital Latin Library</p>
@@ -18,270 +23,350 @@
    </teiHeader>
    <text>
       <body>
-         <div1 xml:id="main-text-symbols" xml:lang="en">
-            <head>Representing symbols commonly used in the main text of a critical edition</head>
-            <p>The symbols in this section have been gleaned from <bibl><author>Martin
-                  West</author>, <title>Textual Criticism and Editorial Technique</title>
-                     (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
-                     >80–81</biblScope></bibl>.</p>
-            <div2 xml:id="abbreviation-expansion"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
-               <head>Abbreviation Fully Expanded</head>
-               <!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
-               <p>
-                  <specList>
-                     <specDesc key="expan"/>
-                     <specDesc key="abbr"/>
-                     <specDesc key="ex"/>
-                     <specDesc key="supplied"/>
-                  </specList>
-               </p>
-               <p><gi>expan</gi> (expansion) contains the full expansion of an abbreviation.</p>
-               <p><gi>abbr</gi> (abbreviation) contains the abbreviated part, i.e. the letters
-                  actually on the page.</p>
-               <p><gi>ex</gi> (editorial expansion) contains a sequence of letters added by an
-                  editor or transcriber when expanding an abbreviation.</p>
-               <p><gi>supplied</gi> signifies text supplied by the transcriber or editor.</p>
-               <p>
-                  <quote>a(bc)</quote>
-               </p>
-
+         <div1 xml:id="LDLT-edition-structure">
+            <head>Structure of an LDLT Edition</head>
+            <p>This section describes the basic structure of the file that contains an edition for
+               the Digital Latin Library's <bibl><title>Library of Digital Latin
+                  Texts</title></bibl> (LDLT). The structure of an LDLT edition resembles the
+               structure of a traditional printed critical edition:</p>
+            <list>
+               <head>Parts of an LDLT Edition</head>
+               <item>Publication Details</item>
+               <item>Front Matter</item>
+               <item>Critical Text (including apparatus)</item>
+               <item>Indices</item>
+            </list>
+            <p>Since every text is unique, not every LDLT edition will have all of these sections.
+               The nature of the text and the editor's judgment will determine the contents of an
+               edition. The purpose of this section is to define the parts of an LDLT edition and
+               provide guidelines for representing them in XML.</p>
+            <p>These guidelines are based on the standard set by the Text Encoding Initiative (TEI),
+               with modification and customization to accommodate the special characteristics of
+               Latin texts.</p>
+            <div2 xml:id="front-matter">
+               <head>Front Matter</head>
+               <p>A traditional critical edition in print has a title page announcing the title of the work, its author, the editor(s), and details of publication. In an LDLT edition, these details are presented as structured data within a TEI header (<gi>teiHeader</gi>). For example:</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <expan>
-                     <abbr>a</abbr>
-                     <ex>bc</ex>
-                  </expan>
+                     <teiHeader>
+                        <fileDesc>
+                           <titleStmt>
+                              <title>Bucolica</title>
+                              <author>Calpurnius Siculus</author>
+                              <editor>Jane Doe</editor>
+                           </titleStmt>
+                           <editionStmt>
+                              <edition>First Edition</edition>
+                           </editionStmt>
+                           <publicationStmt>
+                              <publisher>Society for Classical Studies</publisher>
+                              <distributor>Digital Latin Library</distributor>
+                              <date>2016</date>
+                              <availability>
+                                 <license target="https://creativecommons.org/licenses/by/4.0/">Distributed under a Creative Commons Attribution 4.0 International License.</license>
+                              </availability>
+                           </publicationStmt>
+                           <seriesStmt>
+                              <title level="s">Library of Digital Latin Texts</title>
+                              <biblScope unit="vol">1</biblScope>
+                           </seriesStmt>
+                           <sourceDesc>
+                              <p>Born digital.</p>
+                           </sourceDesc>
+                        </fileDesc>
+                     </teiHeader>
                </egXML>
-
-               <p>Multiple &lt;abbr&gt; elements within a single &lt;expan&gt; compose a single
-                  abbreviation between them. For example, e.g. is one abbreviation for the phrase
-                  "exempli gratia."</p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <expan>
-                     <abbr>e</abbr>
-                     <ex>xempli</ex>
-                     <abbr>g</abbr>
-                     <ex>ratia</ex>
-                  </expan>
-               </egXML>
-               <!-- Need discussion of values for @cert on <expan>. Note that different sections in Epidoc guidelines for abbreviations are based on value of @cert  -->
+               <p>Since a critical edition is often based upon many sources (e.g., manuscripts, previous editions, commentaries, etc.), the <gi>teiHeader</gi> for an LDLT edition does not hew strictly to the TEI guidelines for <gi>sourceDesc</gi>. The sources for an LDLT edition are documented and described in the edition's front matter. </p>
+               
+               <!-- Start here -->
+               
+               
+               
             </div2>
-            <div2 xml:id="add-conjecture"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
-               <head>Text added by emendation</head>
-               <p>An editor supplies text believed to be missing from the original source.</p>
-               <p>
-                  <specList>
-                     <specDesc key="supplied"/>
-                  </specList>
-               </p>
-               <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
-                  missing.</p>
-               <p><att>reason</att> indicates that text has been lost, but supplied by
-                  emendation.</p>
-               <p>
-                  <quote>&lt;abc&gt;</quote>
-               </p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem source="#Vettel">
-                        <supplied reason="lost">abc</supplied>
-                     </lem>
-                  </app>
-               </egXML>
+         </div1>
+         <div1 xml:id="edition-text" xml:lang="en">
+            <head>Edition Text</head>
+            <p>The edition text is composed of "accepted readings," that is, text judged by the
+               editor to be authentic or as close as possible to what was originally written. It
+               corresponds to the text printed "above the line" of the critical apparatus in a
+               traditional critical edition.</p>
+            <div2 xml:id="text-structure">
+               <head>Text Structure</head>
+               <p/>
             </div2>
-            <div2 xml:id="undetermined-loss"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
-               <head>Undetermined Amount Of Text Lost Through Damage</head>
-               <p>Text has been lost from one or more witnesses because of damage.</p>
-               <p>
-                  <specList>
-                     <specDesc key="gap"/>
-                  </specList>
-               </p>
-               <p><gi>gap</gi> signifies text missing because of damage.</p>
-               <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
-               <p><att>extent</att> with value "unknown" indicates that an undetermined amount of
-                  text has been lost.</p>
-               <p><att>unit</att> with value "characters" indicates that an unspecified number of
-                  characters (whether single characters or words or larger groups of text) have been
-                  lost.</p>
-               <p>
-                  <quote>[ ]</quote>
-               </p>
+            <div2 xml:id="main-text-symbols">
+               <head>Representing symbols commonly used in the main text of a critical
+                  edition</head>
+               <p>The symbols in this section have been gleaned from <bibl><author>Martin
+                        West</author>, <title>Textual Criticism and Editorial Technique</title>
+                        (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
+                        >80–81</biblScope></bibl>.</p>
+               <div3 xml:id="abbreviation-expansion"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
+                  <head>Abbreviation Fully Expanded</head>
+                  <!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
+                  <p>
+                     <specList>
+                        <specDesc key="expan"/>
+                        <specDesc key="abbr"/>
+                        <specDesc key="ex"/>
+                        <specDesc key="supplied"/>
+                     </specList>
+                  </p>
+                  <p><gi>expan</gi> (expansion) contains the full expansion of an abbreviation.</p>
+                  <p><gi>abbr</gi> (abbreviation) contains the abbreviated part, i.e. the letters
+                     actually on the page.</p>
+                  <p><gi>ex</gi> (editorial expansion) contains a sequence of letters added by an
+                     editor or transcriber when expanding an abbreviation.</p>
+                  <p><gi>supplied</gi> signifies text supplied by the transcriber or editor.</p>
+                  <p>
+                     <quote>a(bc)</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <gap reason="lost" extent="unknown" unit="characters"/>
-               </egXML>
-            </div2>
-            <div2 xml:id="known-loss"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
-               <head>Known Amount Of Text Lost Through Damage</head>
-               <p>The editor or transcriber knows from context and/or observation how much text has
-                  been lost.</p>
-               <p>
-                  <specList>
-                     <specDesc key="gap"/>
-                  </specList>
-               </p>
-               <p><gi>gap</gi> signifies text missing because of damage.</p>
-               <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
-               <p><att>quantity</att> indicates the amount of text has been lost.</p>
-               <p><att>unit</att> indicates the unit measured in <att>quantity</att>.</p>
-               <p>
-                  <quote>[ ... ]</quote>
-               </p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <expan>
+                        <abbr>a</abbr>
+                        <ex>bc</ex>
+                     </expan>
+                  </egXML>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <gap reason="lost" quantity="3" unit="characters"/>
-               </egXML>
-               <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
-            </div2>
-            <div2 xml:id="editorial-deletion"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
-               <head>Editorial Deletion</head>
-               <p>Text suspected by the editor to be an interpolation.</p>
-               <!-- Expand on this -->
-               <p>
-                  <specList>
-                     <specDesc key="surplus"/>
-                  </specList>
-               </p>
-               <p><gi>surplus</gi> signifies text identified by the editor as added by someone other
-                  than the original author.</p>
-               <p><att>reason</att> with value "interpolation" indicates why the text has been
-                  marked as surplus.</p>
-               <p>
-                  <quote>{lorem ipsum}</quote>
-               </p>
+                  <p>Multiple &lt;abbr&gt; elements within a single &lt;expan&gt; compose a single
+                     abbreviation between them. For example, e.g. is one abbreviation for the phrase
+                     "exempli gratia."</p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem source="#Alonso">
-                        <surplus reason="interpolation">lorem ipsum</surplus>
-                     </lem>
-                  </app>
-               </egXML>
-            </div2>
-            <div2 xml:id="deleted-legible"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
-               <head>Deleted But Legible Text</head>
-               <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
-               <p>
-                  <specList>
-                     <specDesc key="del"/>
-                  </specList>
-               </p>
-               <p><gi>del</gi> indicates the text that has been deleted but is still legible.</p>
-               <p><att>rend</att> with value "erasure" indicates that the text has been erased.
-                  Other values: "strikethrough" and "expunction".</p>
-               <!-- Separate sections for these other values? Or are they really values? Should they be explained in a note? -->
-               <p>
-                  <quote>[[co]]gaudete</quote>
-               </p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <expan>
+                        <abbr>e</abbr>
+                        <ex>xempli</ex>
+                        <abbr>g</abbr>
+                        <ex>ratia</ex>
+                     </expan>
+                  </egXML>
+                  <!-- Need discussion of values for @cert on <expan>. Note that different sections in Epidoc guidelines for abbreviations are based on value of @cert  -->
+               </div3>
+               <div3 xml:id="add-conjecture"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
+                  <head>Text added by emendation</head>
+                  <p>An editor supplies text believed to be missing from the original source.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="supplied"/>
+                     </specList>
+                  </p>
+                  <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
+                     missing.</p>
+                  <p><att>reason</att> indicates that text has been lost, but supplied by
+                     emendation.</p>
+                  <p>
+                     <quote>&lt;abc&gt;</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">co</del>gaudete </egXML>
-            </div2>
-            <div2 xml:id="deleted-illegible"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
-               <head>Deleted and Lost</head>
-               <p>Text deleted in an ancient source to the point of illegibility.</p>
-               <p>
-                  <specList>
-                     <specDesc key="del"/>
-                     <specDesc key="gap"/>
-                  </specList>
-               </p>
-               <p><gi>del</gi> indicates that a deletion has occurred.</p>
-               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
-                  strikethrough).</p>
-               <p><gi>gap</gi> indicates that the deletion has left a gap of irrecoverable text.</p>
-               <p><att>reason</att> with value "lost" indicates that the text is irrecoverable.</p>
-               <p><att>quantity</att> indicates the extent of the deletion.</p>
-               <p><att>unit</att> indicates the unit of measurement for <att>quantityt</att>.</p>
-               <p>
-                  <quote>[[ ... ]]</quote>
-               </p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem source="#Vettel">
+                           <supplied reason="lost">abc</supplied>
+                        </lem>
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="undetermined-loss"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
+                  <head>Undetermined Amount Of Text Lost Through Damage</head>
+                  <p>Text has been lost from one or more witnesses because of damage.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>gap</gi> signifies text missing because of damage.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+                  <p><att>extent</att> with value "unknown" indicates that an undetermined amount of
+                     text has been lost.</p>
+                  <p><att>unit</att> with value "characters" indicates that an unspecified number of
+                     characters (whether single characters or words or larger groups of text) have
+                     been lost.</p>
+                  <p>
+                     <quote>[ ]</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">
-                     <gap quantity="3" unit="characters"/>
-                  </del>
-               </egXML>
-            </div2>
-            <div2 xml:id="deleted-restored"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
-               <head>Deleted and Illegible But Restored</head>
-               <p>Text deleted in an ancient source to the point of illegibility, but restored by
-                  the editor (e.g., by comparison with another exemplar).</p>
-               <p>
-                  <specList>
-                     <specDesc key="del"/>
-                     <specDesc key="supplied"/>
-                     <specDesc key="orig"/>
-                     <specDesc key="unclear"/>
-                  </specList>
-               </p>
-               <p><gi>del</gi> indicates that a deletion has occurred.</p>
-               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction).</p>
-               <p><gi>supplied</gi> indicates the text that has been restored.</p>
-               <p><att>reason</att> with value "lost" indicates why the text had to be supplied.</p>
-               <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
-               <p><gi>unclear</gi> indicates that the supplied original is unclear.</p>
-               <p>
-                  <quote> [[ abc ]] </quote>
-               </p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <gap reason="lost" extent="unknown" unit="characters"/>
+                  </egXML>
+               </div3>
+               <div3 xml:id="known-loss"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
+                  <head>Known Amount Of Text Lost Through Damage</head>
+                  <p>The editor or transcriber knows from context and/or observation how much text
+                     has been lost.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>gap</gi> signifies text missing because of damage.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+                  <p><att>quantity</att> indicates the amount of text has been lost.</p>
+                  <p><att>unit</att> indicates the unit measured in <att>quantity</att>.</p>
+                  <p>
+                     <quote>[ ... ]</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem>
-                        <del rend="erasure">
-                           <supplied reason="lost">abc</supplied><!-- Use @resp to indicate who supplied the text? -->
-                        </del>
-                     </lem>
-                  </app>
-               </egXML>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <gap reason="lost" quantity="3" unit="characters"/>
+                  </egXML>
+                  <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
+               </div3>
+               <div3 xml:id="editorial-deletion"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
+                  <head>Editorial Deletion</head>
+                  <p>Text suspected by the editor to be an interpolation.</p>
+                  <!-- Expand on this -->
+                  <p>
+                     <specList>
+                        <specDesc key="surplus"/>
+                     </specList>
+                  </p>
+                  <p><gi>surplus</gi> signifies text identified by the editor as added by someone
+                     other than the original author.</p>
+                  <p><att>reason</att> with value "interpolation" indicates why the text has been
+                     marked as surplus.</p>
+                  <p>
+                     <quote>{lorem ipsum}</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">
-                     <supplied reason="lost">
-                        <orig>abc</orig>
-                     </supplied>
-                  </del>
-               </egXML>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem source="#Alonso">
+                           <surplus reason="interpolation">lorem ipsum</surplus>
+                        </lem>
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="deleted-legible"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
+                  <head>Deleted But Legible Text</head>
+                  <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
+                  <p>
+                     <specList>
+                        <specDesc key="del"/>
+                     </specList>
+                  </p>
+                  <p><gi>del</gi> indicates the text that has been deleted but is still legible.</p>
+                  <p><att>rend</att> with value "erasure" indicates that the text has been erased.
+                     Other values: "strikethrough" and "expunction".</p>
+                  <!-- Separate sections for these other values? Or are they really values? Should they be explained in a note? -->
+                  <p>
+                     <quote>[[co]]gaudete</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">
-                     <supplied reason="lost">
-                        <unclear>abc</unclear>
-                     </supplied>
-                  </del>
-               </egXML>
-            </div2>
-            <div2 xml:id="crux" corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
-               <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
-               <head>Crux</head>
-               <p>Text deemed by the editor to be irredeemably corrupt.</p>
-               <p>
-                  <specList>
-                     <specDesc key="unclear"/>
-                  </specList>
-               </p>
-               <p><gi>unclear</gi> indicates that the text is readable but not understandable.</p>
-               <p>
-                  <quote>†lorem ipsum†</quote>
-               </p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">co</del>gaudete </egXML>
+               </div3>
+               <div3 xml:id="deleted-illegible"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
+                  <head>Deleted and Lost</head>
+                  <p>Text deleted in an ancient source to the point of illegibility.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="del"/>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
+                  <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
+                     strikethrough).</p>
+                  <p><gi>gap</gi> indicates that the deletion has left a gap of irrecoverable
+                     text.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text is
+                     irrecoverable.</p>
+                  <p><att>quantity</att> indicates the extent of the deletion.</p>
+                  <p><att>unit</att> indicates the unit of measurement for <att>quantityt</att>.</p>
+                  <p>
+                     <quote>[[ ... ]]</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem>
-                        <unclear>lorem ipsum</unclear><!-- How to indicate the this is an editor's determination? -->
-                     </lem>
-                  </app>
-               </egXML>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">
+                        <gap quantity="3" unit="characters"/>
+                     </del>
+                  </egXML>
+               </div3>
+               <div3 xml:id="deleted-restored"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
+                  <head>Deleted and Illegible But Restored</head>
+                  <p>Text deleted in an ancient source to the point of illegibility, but restored by
+                     the editor (e.g., by comparison with another exemplar).</p>
+                  <p>
+                     <specList>
+                        <specDesc key="del"/>
+                        <specDesc key="supplied"/>
+                        <specDesc key="orig"/>
+                        <specDesc key="unclear"/>
+                     </specList>
+                  </p>
+                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
+                  <p><att>rend</att> indicates the method of deletion (e.g., erasure,
+                     expunction).</p>
+                  <p><gi>supplied</gi> indicates the text that has been restored.</p>
+                  <p><att>reason</att> with value "lost" indicates why the text had to be
+                     supplied.</p>
+                  <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
+                  <p><gi>unclear</gi> indicates that the supplied original is unclear.</p>
+                  <p>
+                     <quote> [[ abc ]] </quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem>
+                           <del rend="erasure">
+                              <supplied reason="lost"
+                              >abc</supplied><!-- Use @resp to indicate who supplied the text? -->
+                           </del>
+                        </lem>
+                     </app>
+                  </egXML>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">
+                        <supplied reason="lost">
+                           <orig>abc</orig>
+                        </supplied>
+                     </del>
+                  </egXML>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">
+                        <supplied reason="lost">
+                           <unclear>abc</unclear>
+                        </supplied>
+                     </del>
+                  </egXML>
+               </div3>
+               <div3 xml:id="crux"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
+                  <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
+                  <head>Crux</head>
+                  <p>Text deemed by the editor to be irredeemably corrupt.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="unclear"/>
+                     </specList>
+                  </p>
+                  <p><gi>unclear</gi> indicates that the text is readable but not
+                     understandable.</p>
+                  <p>
+                     <quote>†lorem ipsum†</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem>
+                           <unclear>lorem
+                           ipsum</unclear><!-- How to indicate the this is an editor's determination? -->
+                        </lem>
+                     </app>
+                  </egXML>
+               </div3>
             </div2>
          </div1>
          <div1 xml:id="apparatus-criticus-patterns">
@@ -320,7 +405,9 @@
                   (<gi>rdg</gi>).</p>
             <p xml:id="note"><gi>note</gi> (note) contains editorial comments, bibliographical
                references, or other information pertaining to the apparatus entry.</p>
-            <div2><p>Need discussion about the order in which information is presented.</p></div2>
+            <div2>
+               <p>Need discussion about the order in which information is presented.</p>
+            </div2>
             <div2 xml:id="basic-app-entry">
                <head>Basic reporting of a variant reading</head>
                <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> has a
@@ -664,23 +751,34 @@
                         xml:lang="la">cogaudete</foreign> where the lemma is just <foreign
                         xml:lang="la">gaudete</foreign>. The original copyist has deleted the
                      letters "co" from the beginning of the word. In a traditional apparatus
-                     criticus, that might be printed as follows: <quote>cogaudete <hi rend="bold">N</hi> (<hi rend="italic">corr.</hi> N¹, co <hi rend="italic"
+                     criticus, that might be printed as follows: <quote>cogaudete <hi rend="bold"
+                           >N</hi> (<hi rend="italic">corr.</hi> N¹, co <hi rend="italic"
                         >exp.</hi>)</quote>.</p>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem xml:id="lem2.5gaudete">gaudete</lem>
                         <rdgGrp type="anteCorr">
                            <rdg wit="#N" varSeq="1">cogaudete</rdg>
-                           <rdg wit="#N1" varSeq="2" xml:id="rdg2.5gaudete"><del rend="expunction">co</del>gaudete</rdg>
+                           <rdg wit="#N1" varSeq="2" xml:id="rdg2.5gaudete"><del rend="expunction"
+                                 >co</del>gaudete</rdg>
                         </rdgGrp>
                      </app>
                   </egXML>
                </div3>
                <div3 xml:id="correction-with-witDetail">
                   <head>One Witness Among Many Has Been Corrected</head>
-                  <p>A variant reading has several witnesses, but only one of them has been corrected, and the editor believes it is important to make that clear.</p>
-                  <p>For example, manuscripts <hi rend="bold">P Q R S T U V</hi> have the variant reading <foreign xml:lang="la">flore</foreign> where the lemma is <foreign xml:lang="la">Flora</foreign>. Only manuscript <hi rend="bold">T</hi> has been corrected. In a traditional apparatus criticus, that might be handled as follows: <quote>flore <hi rend="bold">PQRST</hi> (<hi rend="italic">corr.</hi> <hi rend="bold">T¹</hi>) <hi rend="bold">UV</hi></quote>.</p>
-                  <p>Since only one witness has been corrected, <gi>rdgGrp</gi> with <att>type</att>="anteCorr" cannot contain the reading of all of the manuscripts, so we must use <att>copyOf</att> on both the lemma and the variant reading.</p>
+                  <p>A variant reading has several witnesses, but only one of them has been
+                     corrected, and the editor believes it is important to make that clear.</p>
+                  <p>For example, manuscripts <hi rend="bold">P Q R S T U V</hi> have the variant
+                     reading <foreign xml:lang="la">flore</foreign> where the lemma is <foreign
+                        xml:lang="la">Flora</foreign>. Only manuscript <hi rend="bold">T</hi> has
+                     been corrected. In a traditional apparatus criticus, that might be handled as
+                     follows: <quote>flore <hi rend="bold">PQRST</hi> (<hi rend="italic">corr.</hi>
+                        <hi rend="bold">T¹</hi>) <hi rend="bold">UV</hi></quote>.</p>
+                  <p>Since only one witness has been corrected, <gi>rdgGrp</gi> with
+                     <att>type</att>="anteCorr" cannot contain the reading of all of the
+                     manuscripts, so we must use <att>copyOf</att> on both the lemma and the variant
+                     reading.</p>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem xml:id="lem1.2Flora">Flora</lem>
@@ -694,10 +792,19 @@
                </div3>
                <div3 xml:id="mutation">
                   <head>Mutation</head>
-                  <p>Sometimes the copyist or a later hand "corrects" a variant reading to another variant reading. Although the motivation may have been to correct, the action results in mutation.</p>
-                  <p>For example, manuscript <hi rend="bold">N</hi> has <foreign xml:lang="la">dipicta</foreign> for lemma <foreign xml:lang="la">descripta</foreign>, and the original copyist has "corrected" the reading to <foreign xml:lang="la">depicta</foreign>.</p>
-                  <p>A traditional apparatus criticus might handle that as follows: <quote>dipicta <hi rend="bold">N</hi> (<hi rend="italic">mut. in</hi> depicta <hi rend="bold">N¹</hi>)</quote>.</p>
-                  <p>The same pattern for the <foreign xml:lang="la">ante correctionem</foreign> scenarios can be used here, with a different value for <att>type</att> ("mutation") on <gi>rdgGrp</gi>:</p>
+                  <p>Sometimes the copyist or a later hand "corrects" a variant reading to another
+                     variant reading. Although the motivation may have been to correct, the action
+                     results in mutation.</p>
+                  <p>For example, manuscript <hi rend="bold">N</hi> has <foreign xml:lang="la"
+                        >dipicta</foreign> for lemma <foreign xml:lang="la">descripta</foreign>, and
+                     the original copyist has "corrected" the reading to <foreign xml:lang="la"
+                        >depicta</foreign>.</p>
+                  <p>A traditional apparatus criticus might handle that as follows: <quote>dipicta
+                           <hi rend="bold">N</hi> (<hi rend="italic">mut. in</hi> depicta <hi
+                           rend="bold">N¹</hi>)</quote>.</p>
+                  <p>The same pattern for the <foreign xml:lang="la">ante correctionem</foreign>
+                     scenarios can be used here, with a different value for <att>type</att>
+                     ("mutation") on <gi>rdgGrp</gi>:</p>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem wit="#P #V #N2">descripta</lem>
@@ -711,16 +818,27 @@
             </div2>
             <div2 xml:id="conjecture">
                <head>Conjecture</head>
-               <p>A conjecture is some portion of text (or absence of text) proposed by some person (ancient or modern) and determined by an editor to be worthy of consideration in establishing the text, but not to be printed in the main text of the edition.</p>
-               <p>In a traditional critical edition, a conjecture might be noted as follows: <quote>rapidoque] rabidoque <hi rend="italic">conj.</hi> Baehrens</quote>.</p>
-               <p>Although conjectures are more common in modern editions and other scholarship, they are not unheard of in manuscripts, where a hand has written a reading (e.g., in the margin) that does not resemble any other variant readings and cannot be attributed to a recognizable error. Therefore, conjecture is not limited to those materials identified in <att>source</att>. For this reason, <att>type</att> with value "conjecture" must be used to identify a reading as a conjecture.</p>
+               <p>A conjecture is some portion of text (or absence of text) proposed by some person
+                  (ancient or modern) and determined by an editor to be worthy of consideration in
+                  establishing the text, but not to be printed in the main text of the edition.</p>
+               <p>In a traditional critical edition, a conjecture might be noted as follows:
+                     <quote>rapidoque] rabidoque <hi rend="italic">conj.</hi> Baehrens</quote>.</p>
+               <p>Although conjectures are more common in modern editions and other scholarship,
+                  they are not unheard of in manuscripts, where a hand has written a reading (e.g.,
+                  in the margin) that does not resemble any other variant readings and cannot be
+                  attributed to a recognizable error. Therefore, conjecture is not limited to those
+                  materials identified in <att>source</att>. For this reason, <att>type</att> with
+                  value "conjecture" must be used to identify a reading as a conjecture.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app type="conjecture">
                      <lem>rapidoque</lem>
                      <rdg source="#Baehrens">rabidoque</rdg>
                   </app>
                </egXML>
-               <p>In this example, <att>type</att> is attached to <gi>app</gi> because the entire entry concerns a conjecture. If the conjecture is just one among many readings, <att>type</att> must be used on the individual <gi>rdg</gi> that contains the conjecture.</p>
+               <p>In this example, <att>type</att> is attached to <gi>app</gi> because the entire
+                  entry concerns a conjecture. If the conjecture is just one among many readings,
+                     <att>type</att> must be used on the individual <gi>rdg</gi> that contains the
+                  conjecture.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem>bullantes</lem>
@@ -729,7 +847,9 @@
                      <rdg source="#Heins." type="#conjecture">palantes</rdg>
                   </app>
                </egXML>
-               <p>If a single scholar has proposed multiple conjectures for a single lemma, <gi>rdgGrp</gi> with <att>type</att> contains all of the conjectures as individual readings:</p>
+               <p>If a single scholar has proposed multiple conjectures for a single lemma,
+                     <gi>rdgGrp</gi> with <att>type</att> contains all of the conjectures as
+                  individual readings:</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem>nullos ducet</lem>
@@ -740,20 +860,32 @@
                      </rdgGrp>
                   </app>
                </egXML>
-               <p>That should be displayed as: <quote>nullosque sui <hi rend="italic">vel</hi> nullosque duics <hi rend="italic">vel</hi> nullosque ducum <hi rend="italic">conj.</hi> Heins.</quote></p>
+               <p>That should be displayed as: <quote>nullosque sui <hi rend="italic">vel</hi>
+                     nullosque duics <hi rend="italic">vel</hi> nullosque ducum <hi rend="italic"
+                        >conj.</hi> Heins.</quote></p>
             </div2>
             <div2 xml:id="emendation">
                <head>Emendation</head>
-               <p>An emendation is a "successful" <ref target="#conjecture">conjecture</ref>. That is, an emendation is some portion of text (or absence of text) expressly proposed by some person through the application of critical judgment, accepted by the editor in place of the transmitted readings, and printed in the main text of an edition. For this reason, only a <ref target="#lem">lemma</ref> can be classified as an emendation.</p>
-               <p>The following example illustrates the difference between an emendation and a conjecture by virtue of the fact that the <gi>lem</gi> has <att>type</att>="emendation" and <gi>rdg</gi> has <att>type</att>="conjecture":</p>
+               <p>An emendation is a "successful" <ref target="#conjecture">conjecture</ref>. That
+                  is, an emendation is some portion of text (or absence of text) expressly proposed
+                  by some person through the application of critical judgment, accepted by the
+                  editor in place of the transmitted readings, and printed in the main text of an
+                  edition. For this reason, only a <ref target="#lem">lemma</ref> can be classified
+                  as an emendation.</p>
+               <p>The following example illustrates the difference between an emendation and a
+                  conjecture by virtue of the fact that the <gi>lem</gi> has
+                  <att>type</att>="emendation" and <gi>rdg</gi> has
+                  <att>type</att>="conjecture":</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem source="#Ulit." type="emendation">niteat</lem>
                      <rdg wit="#N #G #β #κ #π #ρ1 #λ1">mutat</rdg>
                      <rdg wit="#P #δ" source="#p #t #h #Kempfer #Burm.">mittat</rdg>
                      <rdg wit="#μ" ana="#lexical">micat</rdg>
-                     <rdg wit="#θ #ν #α #η #r #s" source="#o #n #l2 #i2 #Guid. #Wernsd. #Beck #Glaeser #Keene">nutet</rdg>
-                     <rdg wit="#ε #χ #γ #ρ2 #λ2 #d #e #u #b" source="#i1 #l1 #Tig. #Vienn.">nutat</rdg>
+                     <rdg wit="#θ #ν #α #η #r #s"
+                        source="#o #n #l2 #i2 #Guid. #Wernsd. #Beck #Glaeser #Keene">nutet</rdg>
+                     <rdg wit="#ε #χ #γ #ρ2 #λ2 #d #e #u #b" source="#i1 #l1 #Tig. #Vienn."
+                        >nutat</rdg>
                      <rdg wit="#φ">mutet</rdg>
                      <rdg source="#Leo" type="conjecture">micet ac</rdg>
                      <rdg source="#Barth" type="conjecture">nictat</rdg>
@@ -762,15 +894,24 @@
             </div2>
             <div2 xml:id="notes">
                <head>Notes</head>
-               <p>An editor wishes to comment on a reading, include bibliographical information, or note something else about the passage in question.</p>
-               <p>For example, the editor has recorded a variant reading that another scholar has supported in a textual note. That would be handled in a traditional edition as follows: molle sub] molliter Glaeser, def. Jacoby (Wochenschrift für klassische Philologie III, 1886, p. 1290).</p>
-               <p>We handle this with <gi>note</gi> with <att>target</att> pointing at the value of <att>xml:id</att> on the <gi>lem</gi> or <gi>rdg</gi> in question.</p>
+               <p>An editor wishes to comment on a reading, include bibliographical information, or
+                  note something else about the passage in question.</p>
+               <p>For example, the editor has recorded a variant reading that another scholar has
+                  supported in a textual note. That would be handled in a traditional edition as
+                  follows: molle sub] molliter Glaeser, def. Jacoby (Wochenschrift für klassische
+                  Philologie III, 1886, p. 1290).</p>
+               <p>We handle this with <gi>note</gi> with <att>target</att> pointing at the value of
+                     <att>xml:id</att> on the <gi>lem</gi> or <gi>rdg</gi> in question.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem wit="#P #V" source="#edd.">molle sub</lem>
-                     <rdg wit="#N #G #A #H" source="#Glaeser #Keene" xml:id="rdg1.5molliter">molliter</rdg>
+                     <rdg wit="#N #G #A #H" source="#Glaeser #Keene" xml:id="rdg1.5molliter"
+                        >molliter</rdg>
                      <rdg source="#Schenkl2">molle per</rdg>
-                     <note target="#rdg1.5molliter"><ref target="#Jacoby">Jacoby</ref> defendit (<ref target="https://books.google.de/books?id=q5blAAAAMAAJ&amp;hl=de&amp;pg=PA128#v=onepage&amp;q&amp;f=false">Wochenschrift für klassische Philologie</ref> III, 1886, p. 1290)</note>
+                     <note target="#rdg1.5molliter"><ref target="#Jacoby">Jacoby</ref> defendit
+                           (<ref
+                           target="https://books.google.de/books?id=q5blAAAAMAAJ&amp;hl=de&amp;pg=PA128#v=onepage&amp;q&amp;f=false"
+                           >Wochenschrift für klassische Philologie</ref> III, 1886, p. 1290)</note>
                   </app>
                </egXML>
             </div2>
