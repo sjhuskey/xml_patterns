@@ -7,6 +7,11 @@
       <fileDesc>
          <titleStmt>
             <title>XML Patterns for Representing Critical Edition Data</title>
+            <respStmt>
+               <resp>Developed by</resp>
+               <name>Samuel J. Huskey</name>
+               <name>Hugh Cayless</name>
+            </respStmt>
          </titleStmt>
          <publicationStmt>
             <p>Working guidelines for the Digital Latin Library</p>
@@ -18,270 +23,1085 @@
    </teiHeader>
    <text>
       <body>
-         <div1 xml:id="main-text-symbols" xml:lang="en">
-            <head>Representing symbols commonly used in the main text of a critical edition</head>
-            <p>The symbols in this section have been gleaned from <bibl><author>Martin
-                  West</author>, <title>Textual Criticism and Editorial Technique</title>
-                     (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
-                     >80–81</biblScope></bibl>.</p>
-            <div2 xml:id="abbreviation-expansion"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
-               <head>Abbreviation Fully Expanded</head>
-               <!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
-               <p>
-                  <specList>
-                     <specDesc key="expan"/>
-                     <specDesc key="abbr"/>
-                     <specDesc key="ex"/>
-                     <specDesc key="supplied"/>
-                  </specList>
-               </p>
-               <p><gi>expan</gi> (expansion) contains the full expansion of an abbreviation.</p>
-               <p><gi>abbr</gi> (abbreviation) contains the abbreviated part, i.e. the letters
-                  actually on the page.</p>
-               <p><gi>ex</gi> (editorial expansion) contains a sequence of letters added by an
-                  editor or transcriber when expanding an abbreviation.</p>
-               <p><gi>supplied</gi> signifies text supplied by the transcriber or editor.</p>
-               <p>
-                  <quote>a(bc)</quote>
-               </p>
-
+         <div1 xml:id="LDLT-edition-structure">
+            <head>Structure of an LDLT Edition</head>
+            <p>This section describes the basic structure of the file that contains an edition for
+               the Digital Latin Library's <bibl><title>Library of Digital Latin
+                  Texts</title></bibl> (LDLT). The structure of an LDLT edition resembles the
+               structure of a traditional printed critical edition:</p>
+            <list>
+               <head>Parts of an LDLT Edition</head>
+               <item>Publication Details</item>
+               <item>Front Matter</item>
+               <item>Critical Text (including apparatus)</item>
+               <item>Indices</item>
+            </list>
+            <p>Since every text is unique, not every LDLT edition will have all of these sections.
+               The nature of the text and the editor's judgment will determine the contents of an
+               edition. The purpose of this section is to define the parts of an LDLT edition and
+               provide guidelines for representing them in XML.</p>
+            <p>These guidelines are based on the standard set by the Text Encoding Initiative (TEI),
+               with modification and customization to accommodate the special characteristics of
+               Latin texts.</p>
+            <div2 xml:id="general-structure">
+               <p>The following is an example of the general overall structure of an XML file for an
+                  LDLT edition:</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <expan>
-                     <abbr>a</abbr>
-                     <ex>bc</ex>
-                  </expan>
-               </egXML>
-
-               <p>Multiple &lt;abbr&gt; elements within a single &lt;expan&gt; compose a single
-                  abbreviation between them. For example, e.g. is one abbreviation for the phrase
-                  "exempli gratia."</p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <expan>
-                     <abbr>e</abbr>
-                     <ex>xempli</ex>
-                     <abbr>g</abbr>
-                     <ex>ratia</ex>
-                  </expan>
-               </egXML>
-               <!-- Need discussion of values for @cert on <expan>. Note that different sections in Epidoc guidelines for abbreviations are based on value of @cert  -->
-            </div2>
-            <div2 xml:id="add-conjecture"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
-               <head>Text added by emendation</head>
-               <p>An editor supplies text believed to be missing from the original source.</p>
-               <p>
-                  <specList>
-                     <specDesc key="supplied"/>
-                  </specList>
-               </p>
-               <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
-                  missing.</p>
-               <p><att>reason</att> indicates that text has been lost, but supplied by
-                  emendation.</p>
-               <p>
-                  <quote>&lt;abc&gt;</quote>
-               </p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem source="#Vettel">
-                        <supplied reason="lost">abc</supplied>
-                     </lem>
-                  </app>
-               </egXML>
-            </div2>
-            <div2 xml:id="undetermined-loss"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
-               <head>Undetermined Amount Of Text Lost Through Damage</head>
-               <p>Text has been lost from one or more witnesses because of damage.</p>
-               <p>
-                  <specList>
-                     <specDesc key="gap"/>
-                  </specList>
-               </p>
-               <p><gi>gap</gi> signifies text missing because of damage.</p>
-               <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
-               <p><att>extent</att> with value "unknown" indicates that an undetermined amount of
-                  text has been lost.</p>
-               <p><att>unit</att> with value "characters" indicates that an unspecified number of
-                  characters (whether single characters or words or larger groups of text) have been
-                  lost.</p>
-               <p>
-                  <quote>[ ]</quote>
-               </p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <gap reason="lost" extent="unknown" unit="characters"/>
-               </egXML>
-            </div2>
-            <div2 xml:id="known-loss"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
-               <head>Known Amount Of Text Lost Through Damage</head>
-               <p>The editor or transcriber knows from context and/or observation how much text has
-                  been lost.</p>
-               <p>
-                  <specList>
-                     <specDesc key="gap"/>
-                  </specList>
-               </p>
-               <p><gi>gap</gi> signifies text missing because of damage.</p>
-               <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
-               <p><att>quantity</att> indicates the amount of text has been lost.</p>
-               <p><att>unit</att> indicates the unit measured in <att>quantity</att>.</p>
-               <p>
-                  <quote>[ ... ]</quote>
-               </p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <gap reason="lost" quantity="3" unit="characters"/>
-               </egXML>
-               <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
-            </div2>
-            <div2 xml:id="editorial-deletion"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
-               <head>Editorial Deletion</head>
-               <p>Text suspected by the editor to be an interpolation.</p>
-               <!-- Expand on this -->
-               <p>
-                  <specList>
-                     <specDesc key="surplus"/>
-                  </specList>
-               </p>
-               <p><gi>surplus</gi> signifies text identified by the editor as added by someone other
-                  than the original author.</p>
-               <p><att>reason</att> with value "interpolation" indicates why the text has been
-                  marked as surplus.</p>
-               <p>
-                  <quote>{lorem ipsum}</quote>
-               </p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem source="#Alonso">
-                        <surplus reason="interpolation">lorem ipsum</surplus>
-                     </lem>
-                  </app>
+                  <teiHeader>
+                     <fileDesc>
+                        <titleStmt>
+                           <title>Bucolica</title>
+                           <author>Calpurnius Siculus</author>
+                           <editor>Jane Doe</editor>
+                        </titleStmt>
+                        <editionStmt>
+                           <edition>First Edition</edition>
+                        </editionStmt>
+                        <publicationStmt>
+                           <publisher>Society for Classical Studies</publisher>
+                           <distributor>Digital Latin Library</distributor>
+                           <date>2016</date>
+                           <availability>
+                              <license target="https://creativecommons.org/licenses/by/4.0/"
+                                 >Distributed under a Creative Commons Attribution 4.0 International
+                                 License.</license>
+                           </availability>
+                        </publicationStmt>
+                        <seriesStmt>
+                           <title level="s">Library of Digital Latin Texts</title>
+                           <biblScope unit="vol">1</biblScope>
+                        </seriesStmt>
+                        <sourceDesc>
+                           <p>Born digital.</p>
+                        </sourceDesc>
+                     </fileDesc>
+                  </teiHeader>
+                  <text>
+                     <front xml:id="front">
+                        <div1 xml:id="preface">
+                           <head>Preface</head>
+                           <p>General introductory remarks about the edition.</p>
+                           <div2 xml:id="preface-section-1">
+                              <!--This is a subsection within the preface. Editors should use
+                              subsections to organize the content of the edition's preface.-->
+                           </div2>
+                        </div1>
+                        <div1 xml:id="bibliography">
+                           <head>Bibliography</head>
+                           <!--This is where the bibliography for the edition is listed.-->
+                           <div2 xml:id="bibliography-manuscripts">
+                              <head>Manuscripts</head>
+                              <!--Descriptions of manuscripts, using <gi>listWit</gi>.-->
+                           </div2>
+                           <div2 xml:id="bibliography-early-editions">
+                              <head>Early Editions</head>
+                              <!--Bibliographical details for early editions or editiones vetustiores, using
+                                 <gi>listBibl</gi> with <att>type</att>="editions-witnesses".-->
+                           </div2>
+                           <div2 xml:id="bibliography-modern-editions">
+                              <head>Modern Editions</head>
+                              <!--Bibliographical details for modern editions and commentaries, using
+                                 <gi>listBibl</gi> with <att>type</att>="editions-sources".-->
+                           </div2>
+                           <div2 xml:id="bibliography-secondary-sources">
+                              <head>Secondary Sources</head>
+                              <!--Bibliographical details for articles, notes, books, and other sources,
+                              using <gi>listBibl</gi> with <att>type</att>="secondary-sources".-->
+                           </div2>
+                           <div2 xml:id="bibliography-scholars">
+                              <head>List of Scholars Referred to By Name</head>
+                              <!-- A list of the names of individual scholars referred to by name in the 
+                                 apparatus, if they are not listed elsewhere in the bibliography (e.g., 
+                                 as the editor of an edition or author of an article). -->
+                           </div2>
+                        </div1>
+                        <div1 xml:id="conspectus">
+                           <head>Conspectus</head>
+                           <!--A key to the special sigla and abbreviations used in the edition (drawn
+                           from the <att>xml:id</att>'s assigned to the various items in the
+                           bibliography).-->
+                        </div1>
+                     </front>
+                     <body>
+                        <div1 type="edition" xml:id="edition-text" xml:space="preserve">
+                        <div2 type="textpart" n="1" xml:id="part1">
+                           <head>Title of First Part</head>
+                           <!--Text goes here, according to the conventions laid out elsewhere in these guidelines.-->
+                        </div2>
+                        <div2 type="textpart" n="2" xml:id="part2">
+                           <head>Title of Second Part</head>
+                           <!--Each new major section (e.g., book, volume) goes in a new <gi>div</gi>.-->
+                        </div2>
+                     </div1>
+                     </body>
+                     <back>
+                        <!--The content of the back matter will be determined in consultation between
+                        the editor and the staff of the DLL. Because LDLT editions are encoded, the
+                        matter traditionally found in the back of a printed critical edition may be
+                        generated by applications instead of having to be entered manually.
+                        Nevertheless, there is space here for notes, indices, and other kinds of
+                        information.-->
+                     </back>
+                  </text>
                </egXML>
             </div2>
-            <div2 xml:id="deleted-legible"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
-               <head>Deleted But Legible Text</head>
-               <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
-               <p>
-                  <specList>
-                     <specDesc key="del"/>
-                  </specList>
-               </p>
-               <p><gi>del</gi> indicates the text that has been deleted but is still legible.</p>
-               <p><att>rend</att> with value "erasure" indicates that the text has been erased.
-                  Other values: "strikethrough" and "expunction".</p>
-               <!-- Separate sections for these other values? Or are they really values? Should they be explained in a note? -->
-               <p>
-                  <quote>[[co]]gaudete</quote>
-               </p>
-
+            <div2 xml:id="publication-details">
+               <head>Publication Details</head>
+               <p>A traditional critical edition in print has a title page announcing the title of
+                  the work, its author, the editor(s), and details of publication. In an LDLT
+                  edition, these details are presented as structured data within a TEI header
+                     (<gi>teiHeader</gi>). For example:</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">co</del>gaudete </egXML>
+                  <teiHeader>
+                     <fileDesc>
+                        <titleStmt>
+                           <title>Bucolica</title>
+                           <author>Calpurnius Siculus</author>
+                           <editor>Jane Doe</editor>
+                        </titleStmt>
+                        <editionStmt>
+                           <edition>First Edition</edition>
+                        </editionStmt>
+                        <publicationStmt>
+                           <publisher>Society for Classical Studies</publisher>
+                           <distributor>Digital Latin Library</distributor>
+                           <date>2016</date>
+                           <availability>
+                              <license target="https://creativecommons.org/licenses/by/4.0/"
+                                 >Distributed under a Creative Commons Attribution 4.0 International
+                                 License.</license>
+                           </availability>
+                        </publicationStmt>
+                        <seriesStmt>
+                           <title level="s">Library of Digital Latin Texts</title>
+                           <biblScope unit="vol">1</biblScope>
+                        </seriesStmt>
+                        <sourceDesc>
+                           <p>Born digital.</p>
+                        </sourceDesc>
+                     </fileDesc>
+                  </teiHeader>
+               </egXML>
+               <p>Since a critical edition is often based upon many sources (e.g., manuscripts,
+                  previous editions, commentaries, etc.), the <gi>teiHeader</gi> for an LDLT edition
+                  does not hew strictly to the TEI guidelines for <gi>sourceDesc</gi>. The sources
+                  for an LDLT edition are documented and described in the edition's front
+                  matter.</p>
+               <p>Just as an editor is not expected to create the title page and document the
+                  publication information, this section of an LDLT is the responsibility of the DLL
+                  staff.</p>
             </div2>
-            <div2 xml:id="deleted-illegible"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
-               <head>Deleted and Lost</head>
-               <p>Text deleted in an ancient source to the point of illegibility.</p>
-               <p>
-                  <specList>
-                     <specDesc key="del"/>
-                     <specDesc key="gap"/>
-                  </specList>
-               </p>
-               <p><gi>del</gi> indicates that a deletion has occurred.</p>
-               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
-                  strikethrough).</p>
-               <p><gi>gap</gi> indicates that the deletion has left a gap of irrecoverable text.</p>
-               <p><att>reason</att> with value "lost" indicates that the text is irrecoverable.</p>
-               <p><att>quantity</att> indicates the extent of the deletion.</p>
-               <p><att>unit</att> indicates the unit of measurement for <att>quantityt</att>.</p>
-               <p>
-                  <quote>[[ ... ]]</quote>
-               </p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">
-                     <gap quantity="3" unit="characters"/>
-                  </del>
-               </egXML>
+            <div2 xml:id="front-matter">
+               <head>Front Matter</head>
+               <p>The <gi>front</gi> contains numbered divisions and subdivisions (e.g.,
+                     <gi>div1</gi>, <gi>div2</gi>) corresponding to the preface, bibliography, and
+                  conspectus for the edition.</p>
+               <p>The <hi rend="bold">preface</hi> lays out (in prose, using <gi>p</gi>) the
+                  argument for the edition. It also describes the textual tradition and the major
+                  sources for it, which is why it is recommended to compile the bibliography first,
+                  to take advantage of the ability to link to individual entries in the
+                  bibliography. For example, prefaces traditionally contain a description in prose
+                  of the manuscripts consulted in establishing the text of the edition. The preface
+                  of an LDLT can include prose descriptions of manuscripts, but it should also link
+                  to structured (i.e., machine-readable) data for the manuscript in the edition's
+                  bibliography.</p>
+               <p>The elements available in all TEI documents are available for use in the preface.
+                  For example, an editor might want to make a table comparing the readings of
+                  manuscript families. In that case, the editor would use <gi>table</gi> and its
+                  related elements.</p>
             </div2>
-            <div2 xml:id="deleted-restored"
-               corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
-               <head>Deleted and Illegible But Restored</head>
-               <p>Text deleted in an ancient source to the point of illegibility, but restored by
-                  the editor (e.g., by comparison with another exemplar).</p>
-               <p>
-                  <specList>
-                     <specDesc key="del"/>
-                     <specDesc key="supplied"/>
-                     <specDesc key="orig"/>
-                     <specDesc key="unclear"/>
-                  </specList>
-               </p>
-               <p><gi>del</gi> indicates that a deletion has occurred.</p>
-               <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction).</p>
-               <p><gi>supplied</gi> indicates the text that has been restored.</p>
-               <p><att>reason</att> with value "lost" indicates why the text had to be supplied.</p>
-               <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
-               <p><gi>unclear</gi> indicates that the supplied original is unclear.</p>
-               <p>
-                  <quote> [[ abc ]] </quote>
-               </p>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem>
-                        <del rend="erasure">
-                           <supplied reason="lost">abc</supplied><!-- Use @resp to indicate who supplied the text? -->
-                        </del>
-                     </lem>
-                  </app>
-               </egXML>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">
-                     <supplied reason="lost">
-                        <orig>abc</orig>
-                     </supplied>
-                  </del>
-               </egXML>
-
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <del rend="erasure">
-                     <supplied reason="lost">
-                        <unclear>abc</unclear>
-                     </supplied>
-                  </del>
-               </egXML>
+            <div2 xml:id="bibliography">
+               <head>Bibliography</head>
+               <!-- Issue: Should a consensus siglum be an xml:id on a <listBibl> containing the items, or a separate siglum listed elsewhere? -->
+               <!-- Issue: One <forename> for first and middle names? Or separate <forename> for each? -->
+               <!-- Issue: Nicknames. Should they be in parentheses with <surname>, or should they be in <addname> by themselves? -->
+               <p>The bibliography presents opportunities for leveraging the digital nature of an
+                  LDLT edition. Because every item in the bibliography is encoded as structured data
+                  (contained in <gi>msDesc</gi> or <gi>biblStruct</gi>), the bibliography itself can
+                  become a useful tool for finding and using resources, especially those that are
+                  available online.</p>
+               <p>The bibliography is all the more useful as a tool if it is created and made
+                  available via <ref target="http://www.zotero.org">Zotero</ref>, an open, online
+                  resource for building and managing bibliographies. In addition to providing an
+                  interface for compiling and managing a bibliography, Zotero can also export
+                  bibliographies in a TEI XML format that requires little to no modification for
+                  inclusion in an LDLT edition. Users can copy and paste Zotero information directly
+                  into an LDLT edition file. For these reasons, it is highly recommended that all
+                  LDLT editions have a corresponding Zotero repository for their bibliography.</p>
+               <p>Unfortunately, Zotero does not currently provide a format for describing and
+                  cataloging manuscripts, so that information must be entered manually. For that
+                  reason, and for the sake of completeness, the following sections provide
+                  information for encoding items in the bibliography, with examples.</p>
+               <div3 xml:id="bibliography-structure">
+                  <head>Structure of the Bibliography</head>
+                  <p>The bibliography should be organized according to the following structure:</p>
+                  <list>
+                     <head>Structure of the Bibliography for an LDLT Edition</head>
+                     <item>Manuscripts (<att>xml:id</att>="bibliography-manuscripts")</item>
+                     <item>Editions<list>
+                           <item>Early Editions
+                              (<att>xml:id</att>="bibliography-editions-witnesses"</item>
+                           <item>Modern Editions
+                              (<att>xml:id</att>="bibliography-editions-sources")</item>
+                        </list>
+                     </item>
+                     <item>Secondary Sources
+                        (<att>xml:id</att>="bibliography-secondary-sources")</item>
+                  </list>
+                  <p>Additionally, there should be a list of the names of individual scholars
+                        (<att>xml:id</att>="bibliography-scholars") referred to by name in the
+                     apparatus, if they are not listed elsewhere in the bibliography (e.g., as the
+                     editor of an edition or author of an article). It is common, for example, to
+                     refer to a scholar whose unpublished notes appear in a commentary or who has
+                     corresponded with the editor. For ease of reference, these sources should be
+                     listed with information about where the information can be verified.</p>
+               </div3>
+               <div3 xml:id="bibliography-sigla">
+                  <head>Human- and Machine-Readable Sigla, Symbols, and Abbreviations</head>
+                  <p>Printed editions have long used a system of shorthand references for
+                     manuscripts and other materials in the bibliography. Single letters, or <emph
+                        rend="italic">sigla</emph>, stand for a manuscript, and the last name of a
+                     scholar serves as a shorthand reference to an edition, commentary, or other
+                     work of scholarship. Centuries of publication have demontrated that sigla and
+                     other symbols and abbreviations are efficient, effective, and economic ways of
+                     conveying complex information in critical editions. But they are also examples
+                     of visually encoded information that is available only to human readers. In
+                     other words, a human might see <hi rend="bold">N²</hi> and correctly interpret
+                     it within a perticular edition as meaning "text written by the second person in
+                     a succession of people who wrote in the manuscript known as codex Neapolitanus
+                     V A 8." But a machine will interpret the same information as simply the letter
+                     N with a superscript numeral 2 next to it.</p>
+                  <p>To make an LDLT text readable by both humans and machines, there must be a
+                     system of reference that leverages both the traditional approach that has
+                     served textual criticism so well for so long and new ways of making information
+                     available to machines for processing and sophisticated analysis. To accomplish
+                     that goal, each item in the bibliography of an LDLT edition must have two
+                     unique identifiers: one for humans and one for machines.</p>
+                  <p>For the latter, the XML specification has the <att>xml:id</att> attribute,
+                     which has <ref target="https://www.w3.org/TR/xml-id/">strict rules</ref> that
+                     do not allow for the traditional conventions used in critical editions. For the
+                     former, the TEI standard has <att>n</att>, which allows for all of the usual
+                     conventions. In same instances, the two attributes might be identical. For
+                     example, if a manuscript is known by the siglum <hi rend="bold">V</hi>, it is
+                     possible to identify it to machines as <att>xml:id</att>="V" and to humans as
+                        <att>n</att>="V". But if an editor must refer to a number of manuscripts
+                     from the same collection designated as <hi rend="bold">V</hi>, the usual
+                     practice in a printed critical edition is to use the letter V to stand for the
+                     collection with subscript numerals distinguishing the different manuscripts. In
+                     an LDLT edition, the second one in the series would have <att>xml:id</att> of
+                     "V2", but the <att>n</att> would be V₂. Humans can read and understand both
+                     easily, but machines need a simpler method of identifying something.</p>
+                  <p><hi rend="bold">Every entry, regardless of type, in the bibliography of an LDLT
+                        edition must have values for both <att>xml:id</att> and <att>n</att>.</hi>
+                     Otherwise, the edition will not be able to make full use of the digital format.
+                     Morever, if an entry lacks <att>n</att>, it will not be available for the print
+                     version of the edition.</p>
+               </div3>
+               <div3 xml:id="bibliography-ms-description">
+                  <head>Manuscripts</head>
+                  <p>Manuscript description is a discipline unto itself, with an entire module in
+                     the TEI guidelines devoted to it (<ref
+                        target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/MS.html">10
+                        Manuscript Description</ref>). Since fully describing every manuscript
+                     consulted for an edition could be prohibitive, these guidelines set forth the
+                     minimum required for the LDLT.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="listWit"/>
+                        <specDesc key="witness"/>
+                        <specDesc key="msDesc"/>
+                        <specDesc key="msIdentifier"/>
+                        <specDesc key="settlement"/>
+                        <specDesc key="institution"/>
+                        <specDesc key="repository"/>
+                        <specDesc key="idno"/>
+                        <specDesc key="altIdentifier"/>
+                        <specDesc key="physDesc"/>
+                        <specDesc key="objectDesc"/>
+                        <specDesc key="supportDesc"/>
+                        <specDesc key="handDesc"/>
+                        <specDesc key="handNote"/>
+                        <specDesc key="history"/>
+                        <specDesc key="origin"/>
+                     </specList>
+                  </p>
+                  <p><gi>listWit</gi> (list of witnesses) contains the descriptions of manuscript
+                     sources for the edition.</p>
+                  <p><gi>witness</gi> (witness) groups the information about a manuscript, including
+                     the name used to refer to the manuscript in the edition (e.g., Codex
+                     Neapolitanus V A 8). Its <att>xml:id</att> is the unique machine-readable
+                     identifier to be used when referring to the manuscript's data (e.g., in the
+                        <att>wit</att> of a <gi>rdg</gi> in the apparatus criticus).</p>
+                  <p><gi>msDesc</gi> (manuscript description) groups the elements that compose the
+                     description of the manuscript:</p>
+                  <list>
+                     <head>Required Elements in the Manuscript Description</head>
+                     <item><gi>msIdentifier</gi> (manuscript identifier) groups information about
+                        the location and inventory number of the manuscript.</item>
+                     <item><gi>settlement</gi> contains the name of the place (e.g., city) where the
+                        manuscript is located.</item>
+                     <item><gi>institution</gi> contains the name of the library that houses the
+                        manuscript</item>
+                     <item><gi>repository</gi> contains the name of the collection to which the
+                        manuscript belongs.</item>
+                     <item><gi>idno</gi> (identifier) contains the catalog or inventory information
+                        for the manuscript.</item>
+                     <item><gi>altIdentifier</gi> (alternative identifier) contains other
+                        information (i.e., in addition to the <gi>idno</gi>) used to identify the
+                        manuscript.</item>
+                     <item><gi>phsyDesc</gi> (physical description) groups information about the
+                        manuscript.</item>
+                     <item><gi>objectDesc</gi> (object description) contains <gi>supportDesc</gi>
+                        (support description). It may have <att>form</att> to identify whether the
+                        manuscript is a codex, a set of unbound leaves, or other form.</item>
+                     <item><gi>supportDesc</gi> (support description) is a self-closing element that
+                        identifies (in <att>material</att>) the material upon which the manuscript's
+                        text is written (e.g., "parchment").</item>
+                     <item><gi>handDesc</gi> (hand description) groups information about the
+                        distinct hands that wrote in the manuscript. Use <att>hands</att> with the
+                        value of the number of hands detectable in the manuscript.</item>
+                     <item><gi>handNote</gi> is a self-closing element with attributes to
+                        distinguish one hand from another. Each <gi>handNote</gi> has an
+                           <att>xml:id</att> with a unique identifier (based on the
+                           <att>xml:id</att> of the manuscript), an <att>n</att> with a
+                        human-readable version of the value of the hand's <att>xml:id</att>,
+                           <att>scope</att> with value "major" or "minor" to indicate the extent of
+                        the hand's contribution, and, if necessary, <att>corresp</att> with the
+                        value of the <att>xml:id</att> for any discussion of the hand's contribution
+                        in the preface or elsewhere in the addition. Note that the first hand should
+                        also have <att>sameAs</att> with the value of the manuscript's
+                           <att>xml:id</att>, so that references to both <hi rend="bold">N</hi> and
+                           <hi rend="bold">N¹</hi> will point to the same entity, that is, the
+                        original copyist.</item>
+                     <item><gi>history</gi> groups information about the date of the
+                        manuscript.</item>
+                     <item><gi>origin</gi> encloses <gi>origDate</gi>, which contains the Roman
+                        numeral for the century in which the manuscript was written, or the Arabic
+                        numeral for the year, if known. If century is used, include
+                           <att>notBefore</att> and <att>notAfter</att> with appropriate values. If
+                        year is used, enclose it with <gi>date</gi>.</item>
+                  </list>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <listWit>
+                        <head>First family</head>
+                        <witness xml:id="N" n="N">Codex Neapolitanus V A 8 <msDesc>
+                              <msIdentifier>
+                                 <settlement>Naples</settlement>
+                                 <repository>Biblioteca Nazionale di Napoli</repository>
+                                 <idno>V A 8</idno>
+                                 <altIdentifier>
+                                    <idno>380</idno>
+                                 </altIdentifier>
+                              </msIdentifier>
+                              <physDesc>
+                                 <objectDesc form="codex">
+                                    <supportDesc material="parch"/>
+                                 </objectDesc>
+                                 <handDesc hands="3">
+                                    <handNote xml:id="N1" n="N¹" sameAs="#N" scope="major"
+                                       corresp="#Ndesc-manusprima"/>
+                                    <handNote xml:id="N2" n="N²" scope="major"
+                                       corresp="#Ndesc-manusaltera"/>
+                                    <handNote xml:id="N3" n="N³" scope="minor"
+                                       corresp="#Ndesc-manustertia"/>
+                                 </handDesc>
+                              </physDesc>
+                              <history>
+                                 <origin>
+                                    <origDate notAfter="1500" notBefore="1400">XV</origDate>
+                                 </origin>
+                              </history>
+                           </msDesc>
+                        </witness>
+                        <witness xml:id="G" n="G">Codex Gaddianus pl. 90, 12 inf. <msDesc>
+                              <msIdentifier>
+                                 <settlement>Florence</settlement>
+                                 <repository>Biblioteca Medicea Laurenziana</repository>
+                                 <idno>plut. 90, 12 inf.</idno>
+                              </msIdentifier>
+                              <physDesc>
+                                 <objectDesc form="codex">
+                                    <supportDesc material="paper"/>
+                                 </objectDesc>
+                                 <handDesc hands="2">
+                                    <handNote xml:id="G1" n="G¹" sameAs="#G"/>
+                                    <handNote xml:id="G2" n="G²"/>
+                                 </handDesc>
+                              </physDesc>
+                              <history>
+                                 <origin>
+                                    <origDate notAfter="1500" notBefore="1400" xml:id="witGdate"
+                                       >XV</origDate>
+                                    <note target="#witGdate">saec. XV ineunte scriptus</note>
+                                 </origin>
+                              </history>
+                           </msDesc>
+                        </witness>
+                     </listWit>
+                  </egXML>
+                  <p>Note that <gi>note</gi> may be used to specify the portion of the century in
+                     which a manuscript was written, if known.</p>
+                  <p>If it is important to distinguish among families of manuscripts, separate
+                        <gi>listWit</gi> containers (each with an identifying <gi>head</gi>) should
+                     be used. In cases of multiple <gi>listWit</gi> containers, each
+                        <gi>listWit</gi> should have a unique <att>xml:id</att> to use when
+                     referring to the family itself or a consensus of readings in that family.</p>
+               </div3>
+               <div3 xml:id="bibliography-sources">
+                  <head>Other Sources</head>
+                  <div4 xml:id="bibliography-common-elements">
+                     <head>Common Elements for All Entries</head>
+                     <p>All entries, regardless of the type, will have certain common elements.</p>
+                     <div5 xml:id="bibliography-biblStruct">
+                        <p>Entries for items other than manuscripts should be contained in
+                              <gi>biblStruct</gi> with <att>xml:id</att> and <att>n</att> as <ref
+                              target="#bibliography-sigla">described above</ref>. Entries should
+                           also be classified with <att>type</att> and encoded according to the
+                           guidelines and examples below.</p>
+                     </div5>
+                     <div5 xml:id="bibliography-pub">
+                        <p>Publication information for all types of entries should be handled with
+                           these elements:</p>
+                        <p><specList>
+                              <specDesc key="imprint"/>
+                              <specDesc key="pubPlace"/>
+                              <specDesc key="publisher"/>
+                              <specDesc key="date"/>
+                           </specList></p>
+                        <p><gi>imprint</gi> groups information pertaining to the publication of the
+                           edition</p>
+                        <p><gi>pubPlace</gi> (place of publication) contains the name of the place
+                           where the edition was published, as it appears on the title page (e.g.,
+                           Lipsiae instead of Leipzig). If the place is unknown, <gi>pubPlace</gi>
+                           should be self-closing (e.g., &lt;pubPlace/&gt;).</p>
+                        <!-- Value if self-closing: "s.l." (sine loco) -->
+                        <p><gi>publisher</gi> contains the name of the publisher, as it appears on
+                           the title page. If the publisher's name is unknown, <gi>publisher</gi>
+                           should be self-closing (e.g., &lt;publisher/&gt;).</p>
+                        <!-- Value if self-closing: "s.n." (sine nomine) -->
+                        <p><gi>date</gi> contains the date in Arabic numerals (e.g., 1504, not
+                           MDIV). If the date is unknown, <gi>date</gi> should be self-closing
+                           (e.g., &lt;date/&gt;).</p>
+                        <!-- Value if self-closing: "s.d." (sine die). -->
+                        <p><gi>note</gi> with <att>type</att>="url" contains the URL for an online
+                           copy of the edition, if available.</p>
+                     </div5>
+                  </div4>
+                  <div4 xml:id="bibliography-editions">
+                     <head>Editions</head>
+                     <p>Previous editions must be classified in one of two categories: early
+                        editions based on a single manuscript and modern critical editions based on
+                        more than one source. This will have ramifications for how the editions are
+                        handled in the apparatus criticus (see below, <ref
+                           target="apparatus-criticus-patterns">Apparatus Criticus</ref>). This
+                        distinction should be preserved in the bibliography with the use of two
+                           <gi>listBibl</gi> lists, with <att>type</att> "witness" and "source",
+                        respectively. The structure of the individual entries should be the same in
+                        both lists.</p>
+                     <p>The individual entries in each <gi>listBibl</gi> should have
+                        <att>type</att>="book".</p>
+                     <p>
+                        <specList>
+                           <specDesc key="biblStruct"/>
+                           <specDesc key="monogr"/>
+                           <specDesc key="title"/>
+                           <specDesc key="editor"/>
+                           <specDesc key="name"/>
+                           <specDesc key="forename"/>
+                           <specDesc key="surname"/>
+                        </specList>
+                     </p>
+                     <p><gi>biblStruct</gi> (structured bibliographic citation) is the top-level
+                        element for each edition. It should have <att>type</att> of "book". The
+                        values for <att>xml:id</att> and <att>n</att> should be based on the surname
+                        of the editor. Additionally, if the bibliography has been generated by
+                        Zotero, each entry should have <att>corresp</att> with the URL for the entry
+                        in the online Zotero bibliography.</p>
+                     <p><gi>monogr</gi> (monographic level) contains bibliographic elements
+                        describing an edition.</p>
+                     <p><gi>title</gi> with <att>level</att>="m" (monographic) contains the full
+                        title of the edition.</p>
+                     <p><gi>editor</gi> contains information identifying the editor of the edition.
+                        If the edition has more than one editor, use one <gi>editor</gi> for each
+                        editor.</p>
+                     <p><gi>name</gi> contains the value "Anonymous" in cases where the name of the
+                        editor is not known.</p>
+                     <p><gi>forename</gi> contains the first and middle names, or initials, of an
+                        editor in cases where that information is known.</p>
+                     <p><gi>surname</gi> contains the last name of an editor, in cases where that
+                        information is known. If the editor is known by a nickname or a Latin name,
+                        that information is enclosed in parentheses and quotation marks:
+                        ("Ascensius").</p>
+                     <p>Publication information is handled according to the guidelines in the <ref
+                           target="#bibliography-pub">section above on publication</ref>.</p>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <biblStruct type="book" xml:id="Nordh." n="Nordh."
+                           corresp="http://zotero.org/groups/542622/items/UAZU56E4">
+                           <monogr>
+                              <title level="m">[Bucolica]</title>
+                              <editor>
+                                 <name>Anonymous</name>
+                              </editor>
+                              <imprint>
+                                 <pubPlace>Nordheim</pubPlace>
+                                 <publisher/>
+                                 <date/>
+                              </imprint>
+                           </monogr>
+                        </biblStruct>
+                        <biblStruct type="book" xml:id="s" n="s"
+                           corresp="http://zotero.org/groups/542622/items/TXA4M9HA">
+                           <monogr>
+                              <title level="m">Buccolica, cum adnotatione Ascensiana, jam
+                                 diligentius recognita</title>
+                              <editor xml:id="Ascensius">
+                                 <forename>Josse</forename>
+                                 <surname>Badius ("Ascensius")</surname>
+                              </editor>
+                              <imprint>
+                                 <pubPlace>Paris</pubPlace>
+                                 <publisher>In vico Maturinorum a Durando Gerlerio</publisher>
+                                 <date>1503</date>
+                                 <note target="#s" type="url"
+                                    >http://gallica.bnf.fr/ark:/12148/bpt6k841539v</note>
+                              </imprint>
+                           </monogr>
+                        </biblStruct>
+                     </egXML>
+                  </div4>
+                  <div4 xml:id="books">
+                     <head>Books Other than Editions</head>
+                     <p>The bibliographical information for monographs, commentaries, and other
+                        books that are not editions should be handled using these elements and
+                        attributes:</p>
+                     <p>
+                        <specList>
+                           <specDesc key="biblStruct"/>
+                           <specDesc key="monogr"/>
+                           <specDesc key="title"/>
+                           <specDesc key="author"/>
+                           <specDesc key="name"/>
+                           <specDesc key="forename"/>
+                           <specDesc key="surname"/>
+                        </specList>
+                     </p>
+                     <p><gi>biblStruct</gi> (structured bibliographic citation) is the top-level
+                        element for each book. It should have <att>type</att> of "book". The values
+                        for <att>xml:id</att> and <att>n</att> should be based on the surname of the
+                        author. Additionally, if the bibliography has been generated by Zotero, each
+                        entry should have <att>corresp</att> with the URL for the entry in the
+                        online Zotero bibliography.</p>
+                     <p><gi>monogr</gi> (monographic level) groups bibliographic elements describing
+                        a book.</p>
+                     <p><gi>title</gi> with <att>level</att>="m" (monographic) contains the full
+                        title of the book.</p>
+                     <p><gi>author</gi> contains information identifying the author of the book. If
+                        the book has more than one author, use one <gi>author</gi> for each
+                        author.</p>
+                     <p><gi>name</gi> contains the value "Anonymous" in cases where the name of the
+                        author is not known.</p>
+                     <p><gi>forename</gi> contains the first and middle names (middle name
+                        optional), or initials, of an author in cases where that information is
+                        known.</p>
+                     <p><gi>surname</gi> contains the last name of an author, in cases where that
+                        information is known.</p>
+                     <p>Publication information is handled according to the guidelines in the <ref
+                           target="#bibliography-pub">section above on publication</ref>.</p>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <biblStruct type="book" xml:id="Wilamowitz" n="Wilamowitz"
+                           corresp="http://zotero.org/groups/542622/items/S2QGZ9FN">
+                           <monogr>
+                              <title level="m">Coniectanea</title>
+                              <author>
+                                 <forename>Ulrich von</forename>
+                                 <surname>Wilamowitz-Moellendorff</surname>
+                              </author>
+                              <imprint>
+                                 <pubPlace>Göttingen</pubPlace>
+                                 <publisher>Dieterich'sche Druckerei</publisher>
+                                 <date>1884</date>
+                                 <note type="url"
+                                    >http://hdl.handle.net/2027/nnc2.ark:/13960/t8jd66k2f</note>
+                              </imprint>
+                           </monogr>
+                        </biblStruct>
+                     </egXML>
+                  </div4>
+                  <div4 xml:id="bibliography-articles">
+                     <head>Articles</head>
+                     <p>Bibliographic details for articles published in journals should be encoded
+                        using the following elements and attributes:</p>
+                     <p>
+                        <specList>
+                           <specDesc key="biblStruct"/>
+                           <specDesc key="analytic"/>
+                           <specDesc key="title"/>
+                           <specDesc key="author"/>
+                           <specDesc key="forename"/>
+                           <specDesc key="surname"/>
+                           <specDesc key="monogr"/>
+                           <specDesc key="imprint"/>
+                           <specDesc key="date"/>
+                           <specDesc key="note"/>
+                        </specList>
+                     </p>
+                     <p><gi>biblStruct</gi> (structured bibliographic citation) is the top-level
+                        element for each article. It should have <att>type</att> of "journalArticle"
+                        (note case). The values for <att>xml:id</att> and <att>n</att> should be
+                        based on the surname of the author. Additionally, if the bibliography has
+                        been generated by Zotero, each entry should have <att>corresp</att> with the
+                        URL for the entry in the online Zotero bibliography.</p>
+                     <p><gi>analytic</gi> (analytic level) contains items relating to an article
+                        published within a journal volume.</p>
+                     <list>
+                        <head>Items Contained By <gi>analytic</gi></head>
+                        <item><gi>title</gi> with <att>level</att>="a" contains the title of the
+                           article.</item>
+                        <item><gi>author</gi> contains information identifying the author of the
+                           book. If the book has more than one author, use one <gi>author</gi> for
+                           each author.</item>
+                        <item><gi>forename</gi> contains the first and middle names (middle name
+                           optional), or initials, of an author in cases where that information is
+                           known.</item>
+                        <item><gi>surname</gi> contains the last name of an author, in cases where
+                           that information is known.</item>
+                     </list>
+                     <p><gi>monogr</gi> (monographic level) groups bibliographic elements describing
+                        the journal.</p>
+                     <list>
+                        <head>Items Contained by <gi>mongr</gi></head>
+                        <item><gi>title</gi> with <att>level</att>="j" contains the title of the
+                           journal.</item>
+                        <item><gi>imprint</gi> groups several <gi>biblScope</gi> elements defining
+                           publication information. All numbers should be Arabic numerals.</item>
+                        <item><gi>biblScope</gi> (scope of bibliographic reference) is used with
+                              <att>unit</att> to indicate details of publication: <list>
+                              <item><att>unit</att>="volume" contains the volume number of the
+                                 journal in which the article has been published</item>
+                              <item><att>unit</att>="issue" contains the number of the issue within
+                                 the volume</item>
+                              <item><att>unit</att>="page" contains the inclusive pages where the
+                                 article may be found</item>
+                           </list>
+                        </item>
+                        <item><gi>date</gi> contains the year of publication</item>
+                        <item><gi>note</gi> with <att>type</att>="url" contains the URL where the
+                           article may be read online, if available.</item>
+                     </list>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <biblStruct type="journalArticle" xml:id="Postgate" n="Postgate"
+                           corresp="http://zotero.org/groups/542622/items/T9VQVNDS">
+                           <analytic>
+                              <title level="a">Some Suggestions on Calpurnius Siculus</title>
+                              <author>
+                                 <forename>John Percival</forename>
+                                 <surname>Postgate</surname>
+                              </author>
+                           </analytic>
+                           <monogr>
+                              <title level="j">The Classical Review</title>
+                              <imprint>
+                                 <biblScope unit="volume">15</biblScope>
+                                 <biblScope unit="issue">4</biblScope>
+                                 <biblScope unit="page">213-214</biblScope>
+                                 <date>1901</date>
+                                 <note type="accessed">2016-05-26T16:32:29Z</note>
+                                 <note type="url">http://www.jstor.org/stable/694806</note>
+                              </imprint>
+                           </monogr>
+                        </biblStruct>
+                     </egXML>
+                     <p>Note that a review of an edition or other work should be handled in the same
+                        way as a journal article, with the exception of the <gi>title</gi> in
+                           <gi>analytic</gi>, which should begin with the words "Review of" followed
+                        by the title of the work being reviewed.</p>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <biblStruct type="journalArticle" xml:id="Mueller" n="L. Mueller"
+                           corresp="http://zotero.org/groups/542622/items/WJIX5IQM">
+                           <analytic>
+                              <title level="a">Review of "Calpurnii et Nemesiani Bucolica recensuit
+                                 Henricus Schenkl, Lipsiae, G. Freytag, Pragae, F. Tempsky,
+                                 1885"</title>
+                              <author>
+                                 <forename>Lucian</forename>
+                                 <surname>Müller</surname>
+                              </author>
+                           </analytic>
+                           <monogr>
+                              <title level="j">Berliner philologische Wochenschrift</title>
+                              <imprint>
+                                 <biblScope unit="volume">5</biblScope>
+                                 <biblScope unit="page">1065-1073</biblScope>
+                                 <date>1885</date>
+                                 <note type="url"
+                                    >http://hdl.handle.net/2027/uiug.30112023962282</note>
+                              </imprint>
+                           </monogr>
+                        </biblStruct>
+                     </egXML>
+                  </div4>
+                  <div4 xml:id="bibliography-list-of-scholars">
+                     <head>List of Scholars</head>
+                     <p>Occasionally it is necessary to refer to a scholar whose unpublished work
+                        has been quoted or paraphrased elsewhere. For example, editors often cite
+                        Nicolaas Heinsius' unpublished conjectures, found in books in his own
+                        library. But "Heins." does not help a reader find more information. That is
+                        why the bibliography of an LDLT edition includes a list of scholars
+                        mentioned by name in the edition, with information about where to find their
+                        remarks, if they are available.</p>
+                     <p>
+                        <specList>
+                           <specDesc key="list"/>
+                           <specDesc key="item"/>
+                           <specDesc key="persName"/>
+                           <specDesc key="forename"/>
+                           <specDesc key="surname"/>
+                           <specDesc key="ref"/>
+                           <specDesc key="note"/>
+                        </specList>
+                     </p>
+                     <p><gi>list</gi> with <att>xml:id</att>="bibliography-scholars" groups the
+                        information identifying the scholars.</p>
+                     <p><gi>item</gi> with <att>xml:id</att> and <att>n</att> as <ref
+                           target="#bibliography-sigla">described above</ref>.</p>
+                     <p><gi>persName</gi> (personal name) groups the information about the scholar's
+                        name. Note that it is helpful, but not required, to use <att>ref</att> with
+                        the <ref target="https://viaf.org">Virtual International Authorify File
+                           (VIAF)</ref> permalink for that person.</p>
+                     <p><gi>forename</gi> contains the scholar's first and middle names (middle name
+                        optional), or initials, of the scholar.</p>
+                     <p><gi>surname</gi> contains the scholar's last name. If the scholars is known
+                        by a nickname or shortened name (e.g., Wilamowitz), that information is
+                        enclosed in parentheses and quotation marks.</p>
+                     <p><gi>ref</gi> (reference) contains a reference to the entry in the
+                        bibliography that has citations of the scholar. <att>target</att> with the
+                        xml:id of the entry will cause the reference to point to that entry.</p>
+                     <p><gi>note</gi> contains further information about the nature of the citation
+                        (e.g., "personal correspondence with editor").</p>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <item xml:id="CSchenkl" n="C. Schenkl">
+                           <persName>
+                              <forename>Karl</forename>
+                              <surname>Schenkl</surname>
+                           </persName>
+                           <ref target="#Schenkl">H. Schenkl</ref>
+                           <note>Unpublished opinions cited in Schenkl's editions.</note>
+                        </item>
+                        <item xml:id="Scriverius" n="Scriver.">
+                           <persName ref="https://viaf.org/viaf/121894458/">
+                              <forename>Pieter</forename>
+                              <surname>Schrijver ("Scriverius")</surname>
+                           </persName>
+                           <ref target="#Burm.">Burman 1731</ref>
+                        </item>
+                     </egXML>
+                  </div4>
+               </div3>
             </div2>
-            <div2 xml:id="crux" corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
-               <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
-               <head>Crux</head>
-               <p>Text deemed by the editor to be irredeemably corrupt.</p>
-               <p>
-                  <specList>
-                     <specDesc key="unclear"/>
-                  </specList>
-               </p>
-               <p><gi>unclear</gi> indicates that the text is readable but not understandable.</p>
-               <p>
-                  <quote>†lorem ipsum†</quote>
-               </p>
+         </div1>
+         <div1 xml:id="edition-text">
+            <head>Edition Text</head>
+            <p>The edition text corresponds to the text printed "above the line" of the critical
+               apparatus in a traditional edition. It is composed of "accepted readings," that is,
+               text judged by the editor to be authoritative.</p>
+            <p>There may be more than one authoritative version of a text, depending on the text and
+               depending on the approach adopted by the editor. Authors sometimes edit and revise
+               their work over time. Scribes often record the version of the text that makes sense
+               in their context. Scholars and other readers offer conjectures for problematic
+               passages. But an editor must make decisions about the text and edition presents to
+               readers. The results of those decisions are on display in the official edition
+               text.</p>
+            <p>Since the online version of an LDLT allows readers to swap readings from the critical
+               apparatus into the main text, it is possible to encounter many versions of the text
+               in one viewing of it, but the official edition text is the starting point for those
+               interactions.</p>
+            <p>This section establishes guidelines for encoding the information typically found in
+               the main text of a critical edition.</p>
+            <div2 xml:id="edition-text-prose">
+               <head>Prose</head>
+                  <p><!-- Need help here with reference scheme for prose texts.-->
+                  </p>
+            </div2>
+            <div2 xml:id="edition-text-poetry">
+               <head>Poetry</head>
+            </div2>
+            <div2 xml:id="edition-text-reference-scheme">
+               <head>Reference Scheme</head>
+               
+            </div2>
+            <div2 xml:id="main-text-symbols">
+               <head>Symbols Commonly Used in the Text of a Critical Edition</head>
+               <p>The symbols in this section have been gleaned from <bibl><author>Martin
+                        West</author>, <title>Textual Criticism and Editorial Technique</title>
+                        (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
+                        >80–81</biblScope></bibl>.</p>
+               <div3 xml:id="abbreviation-expansion"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
+                  <head>Abbreviation Fully Expanded</head>
+                  <!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
+                  <p>
+                     <specList>
+                        <specDesc key="expan"/>
+                        <specDesc key="abbr"/>
+                        <specDesc key="ex"/>
+                        <specDesc key="supplied"/>
+                     </specList>
+                  </p>
+                  <p><gi>expan</gi> (expansion) contains the full expansion of an abbreviation.</p>
+                  <p><gi>abbr</gi> (abbreviation) contains the abbreviated part, i.e. the letters
+                     actually on the page.</p>
+                  <p><gi>ex</gi> (editorial expansion) contains a sequence of letters added by an
+                     editor or transcriber when expanding an abbreviation.</p>
+                  <p><gi>supplied</gi> signifies text supplied by the transcriber or editor.</p>
+                  <p>
+                     <quote>a(bc)</quote>
+                  </p>
 
-               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <app>
-                     <lem>
-                        <unclear>lorem ipsum</unclear><!-- How to indicate the this is an editor's determination? -->
-                     </lem>
-                  </app>
-               </egXML>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <expan>
+                        <abbr>a</abbr>
+                        <ex>bc</ex>
+                     </expan>
+                  </egXML>
+
+                  <p>Multiple &lt;abbr&gt; elements within a single &lt;expan&gt; compose a single
+                     abbreviation between them. For example, e.g. is one abbreviation for the phrase
+                     "exempli gratia."</p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <expan>
+                        <abbr>e</abbr>
+                        <ex>xempli</ex>
+                        <abbr>g</abbr>
+                        <ex>ratia</ex>
+                     </expan>
+                  </egXML>
+                  <!-- Need discussion of values for @cert on <expan>. Note that different sections in Epidoc guidelines for abbreviations are based on value of @cert  -->
+               </div3>
+               <div3 xml:id="add-conjecture"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
+                  <head>Text added by emendation</head>
+                  <p>An editor supplies text believed to be missing from the original source.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="supplied"/>
+                     </specList>
+                  </p>
+                  <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
+                     missing.</p>
+                  <p><att>reason</att> indicates that text has been lost, but supplied by
+                     emendation.</p>
+                  <p>
+                     <quote>&lt;abc&gt;</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem source="#Vettel">
+                           <supplied reason="lost">abc</supplied>
+                        </lem>
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="undetermined-loss"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
+                  <head>Undetermined Amount Of Text Lost Through Damage</head>
+                  <p>Text has been lost from one or more witnesses because of damage.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>gap</gi> signifies text missing because of damage.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+                  <p><att>extent</att> with value "unknown" indicates that an undetermined amount of
+                     text has been lost.</p>
+                  <p><att>unit</att> with value "characters" indicates that an unspecified number of
+                     characters (whether single characters or words or larger groups of text) have
+                     been lost.</p>
+                  <p>
+                     <quote>[ ]</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <gap reason="lost" extent="unknown" unit="characters"/>
+                  </egXML>
+               </div3>
+               <div3 xml:id="known-loss"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
+                  <head>Known Amount Of Text Lost Through Damage</head>
+                  <p>The editor or transcriber knows from context and/or observation how much text
+                     has been lost.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>gap</gi> signifies text missing because of damage.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+                  <p><att>quantity</att> indicates the amount of text has been lost.</p>
+                  <p><att>unit</att> indicates the unit measured in <att>quantity</att>.</p>
+                  <p>
+                     <quote>[ ... ]</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <gap reason="lost" quantity="3" unit="characters"/>
+                  </egXML>
+                  <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
+               </div3>
+               <div3 xml:id="editorial-deletion"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
+                  <head>Editorial Deletion</head>
+                  <p>Text suspected by the editor to be an interpolation.</p>
+                  <!-- Expand on this -->
+                  <p>
+                     <specList>
+                        <specDesc key="surplus"/>
+                     </specList>
+                  </p>
+                  <p><gi>surplus</gi> signifies text identified by the editor as added by someone
+                     other than the original author.</p>
+                  <p><att>reason</att> with value "interpolation" indicates why the text has been
+                     marked as surplus.</p>
+                  <p>
+                     <quote>{lorem ipsum}</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem source="#Alonso">
+                           <surplus reason="interpolation">lorem ipsum</surplus>
+                        </lem>
+                     </app>
+                  </egXML>
+               </div3>
+               <div3 xml:id="deleted-legible"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
+                  <head>Deleted But Legible Text</head>
+                  <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
+                  <p>
+                     <specList>
+                        <specDesc key="del"/>
+                     </specList>
+                  </p>
+                  <p><gi>del</gi> indicates the text that has been deleted but is still legible.</p>
+                  <p><att>rend</att> with value "erasure" indicates that the text has been erased.
+                     Other values: "strikethrough" and "expunction".</p>
+                  <!-- Separate sections for these other values? Or are they really values? Should they be explained in a note? -->
+                  <p>
+                     <quote>[[co]]gaudete</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">co</del>gaudete </egXML>
+               </div3>
+               <div3 xml:id="deleted-illegible"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
+                  <head>Deleted and Lost</head>
+                  <p>Text deleted in an ancient source to the point of illegibility.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="del"/>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
+                  <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
+                     strikethrough).</p>
+                  <p><gi>gap</gi> indicates that the deletion has left a gap of irrecoverable
+                     text.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text is
+                     irrecoverable.</p>
+                  <p><att>quantity</att> indicates the extent of the deletion.</p>
+                  <p><att>unit</att> indicates the unit of measurement for <att>quantityt</att>.</p>
+                  <p>
+                     <quote>[[ ... ]]</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">
+                        <gap quantity="3" unit="characters"/>
+                     </del>
+                  </egXML>
+               </div3>
+               <div3 xml:id="deleted-restored"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
+                  <head>Deleted and Illegible But Restored</head>
+                  <p>Text deleted in an ancient source to the point of illegibility, but restored by
+                     the editor (e.g., by comparison with another exemplar).</p>
+                  <p>
+                     <specList>
+                        <specDesc key="del"/>
+                        <specDesc key="supplied"/>
+                        <specDesc key="orig"/>
+                        <specDesc key="unclear"/>
+                     </specList>
+                  </p>
+                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
+                  <p><att>rend</att> indicates the method of deletion (e.g., erasure,
+                     expunction).</p>
+                  <p><gi>supplied</gi> indicates the text that has been restored.</p>
+                  <p><att>reason</att> with value "lost" indicates why the text had to be
+                     supplied.</p>
+                  <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
+                  <p><gi>unclear</gi> indicates that the supplied original is unclear.</p>
+                  <p>
+                     <quote> [[ abc ]] </quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem>
+                           <del rend="erasure">
+                              <supplied reason="lost"
+                              >abc</supplied><!-- Use @resp to indicate who supplied the text? -->
+                           </del>
+                        </lem>
+                     </app>
+                  </egXML>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">
+                        <supplied reason="lost">
+                           <orig>abc</orig>
+                        </supplied>
+                     </del>
+                  </egXML>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <del rend="erasure">
+                        <supplied reason="lost">
+                           <unclear>abc</unclear>
+                        </supplied>
+                     </del>
+                  </egXML>
+               </div3>
+               <div3 xml:id="crux"
+                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
+                  <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
+                  <head>Crux</head>
+                  <p>Text deemed by the editor to be irredeemably corrupt.</p>
+                  <p>
+                     <specList>
+                        <specDesc key="unclear"/>
+                     </specList>
+                  </p>
+                  <p><gi>unclear</gi> indicates that the text is readable but not
+                     understandable.</p>
+                  <p>
+                     <quote>†lorem ipsum†</quote>
+                  </p>
+
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <app>
+                        <lem>
+                           <unclear>lorem
+                           ipsum</unclear><!-- How to indicate that this is an editor's determination? -->
+                        </lem>
+                     </app>
+                  </egXML>
+               </div3>
             </div2>
          </div1>
          <div1 xml:id="apparatus-criticus-patterns">
@@ -320,7 +1140,9 @@
                   (<gi>rdg</gi>).</p>
             <p xml:id="note"><gi>note</gi> (note) contains editorial comments, bibliographical
                references, or other information pertaining to the apparatus entry.</p>
-            <div2><p>Need discussion about the order in which information is presented.</p></div2>
+            <div2>
+               <p>Need discussion about the order in which information is presented.</p>
+            </div2>
             <div2 xml:id="basic-app-entry">
                <head>Basic reporting of a variant reading</head>
                <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> has a
@@ -664,23 +1486,34 @@
                         xml:lang="la">cogaudete</foreign> where the lemma is just <foreign
                         xml:lang="la">gaudete</foreign>. The original copyist has deleted the
                      letters "co" from the beginning of the word. In a traditional apparatus
-                     criticus, that might be printed as follows: <quote>cogaudete <hi rend="bold">N</hi> (<hi rend="italic">corr.</hi> N¹, co <hi rend="italic"
+                     criticus, that might be printed as follows: <quote>cogaudete <hi rend="bold"
+                           >N</hi> (<hi rend="italic">corr.</hi> N¹, co <hi rend="italic"
                         >exp.</hi>)</quote>.</p>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem xml:id="lem2.5gaudete">gaudete</lem>
                         <rdgGrp type="anteCorr">
                            <rdg wit="#N" varSeq="1">cogaudete</rdg>
-                           <rdg wit="#N1" varSeq="2" xml:id="rdg2.5gaudete"><del rend="expunction">co</del>gaudete</rdg>
+                           <rdg wit="#N1" varSeq="2" xml:id="rdg2.5gaudete"><del rend="expunction"
+                                 >co</del>gaudete</rdg>
                         </rdgGrp>
                      </app>
                   </egXML>
                </div3>
                <div3 xml:id="correction-with-witDetail">
                   <head>One Witness Among Many Has Been Corrected</head>
-                  <p>A variant reading has several witnesses, but only one of them has been corrected, and the editor believes it is important to make that clear.</p>
-                  <p>For example, manuscripts <hi rend="bold">P Q R S T U V</hi> have the variant reading <foreign xml:lang="la">flore</foreign> where the lemma is <foreign xml:lang="la">Flora</foreign>. Only manuscript <hi rend="bold">T</hi> has been corrected. In a traditional apparatus criticus, that might be handled as follows: <quote>flore <hi rend="bold">PQRST</hi> (<hi rend="italic">corr.</hi> <hi rend="bold">T¹</hi>) <hi rend="bold">UV</hi></quote>.</p>
-                  <p>Since only one witness has been corrected, <gi>rdgGrp</gi> with <att>type</att>="anteCorr" cannot contain the reading of all of the manuscripts, so we must use <att>copyOf</att> on both the lemma and the variant reading.</p>
+                  <p>A variant reading has several witnesses, but only one of them has been
+                     corrected, and the editor believes it is important to make that clear.</p>
+                  <p>For example, manuscripts <hi rend="bold">P Q R S T U V</hi> have the variant
+                     reading <foreign xml:lang="la">flore</foreign> where the lemma is <foreign
+                        xml:lang="la">Flora</foreign>. Only manuscript <hi rend="bold">T</hi> has
+                     been corrected. In a traditional apparatus criticus, that might be handled as
+                     follows: <quote>flore <hi rend="bold">PQRST</hi> (<hi rend="italic">corr.</hi>
+                        <hi rend="bold">T¹</hi>) <hi rend="bold">UV</hi></quote>.</p>
+                  <p>Since only one witness has been corrected, <gi>rdgGrp</gi> with
+                     <att>type</att>="anteCorr" cannot contain the reading of all of the
+                     manuscripts, so we must use <att>copyOf</att> on both the lemma and the variant
+                     reading.</p>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem xml:id="lem1.2Flora">Flora</lem>
@@ -694,10 +1527,19 @@
                </div3>
                <div3 xml:id="mutation">
                   <head>Mutation</head>
-                  <p>Sometimes the copyist or a later hand "corrects" a variant reading to another variant reading. Although the motivation may have been to correct, the action results in mutation.</p>
-                  <p>For example, manuscript <hi rend="bold">N</hi> has <foreign xml:lang="la">dipicta</foreign> for lemma <foreign xml:lang="la">descripta</foreign>, and the original copyist has "corrected" the reading to <foreign xml:lang="la">depicta</foreign>.</p>
-                  <p>A traditional apparatus criticus might handle that as follows: <quote>dipicta <hi rend="bold">N</hi> (<hi rend="italic">mut. in</hi> depicta <hi rend="bold">N¹</hi>)</quote>.</p>
-                  <p>The same pattern for the <foreign xml:lang="la">ante correctionem</foreign> scenarios can be used here, with a different value for <att>type</att> ("mutation") on <gi>rdgGrp</gi>:</p>
+                  <p>Sometimes the copyist or a later hand "corrects" a variant reading to another
+                     variant reading. Although the motivation may have been to correct, the action
+                     results in mutation.</p>
+                  <p>For example, manuscript <hi rend="bold">N</hi> has <foreign xml:lang="la"
+                        >dipicta</foreign> for lemma <foreign xml:lang="la">descripta</foreign>, and
+                     the original copyist has "corrected" the reading to <foreign xml:lang="la"
+                        >depicta</foreign>.</p>
+                  <p>A traditional apparatus criticus might handle that as follows: <quote>dipicta
+                           <hi rend="bold">N</hi> (<hi rend="italic">mut. in</hi> depicta <hi
+                           rend="bold">N¹</hi>)</quote>.</p>
+                  <p>The same pattern for the <foreign xml:lang="la">ante correctionem</foreign>
+                     scenarios can be used here, with a different value for <att>type</att>
+                     ("mutation") on <gi>rdgGrp</gi>:</p>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem wit="#P #V #N2">descripta</lem>
@@ -711,16 +1553,27 @@
             </div2>
             <div2 xml:id="conjecture">
                <head>Conjecture</head>
-               <p>A conjecture is some portion of text (or absence of text) proposed by some person (ancient or modern) and determined by an editor to be worthy of consideration in establishing the text, but not to be printed in the main text of the edition.</p>
-               <p>In a traditional critical edition, a conjecture might be noted as follows: <quote>rapidoque] rabidoque <hi rend="italic">conj.</hi> Baehrens</quote>.</p>
-               <p>Although conjectures are more common in modern editions and other scholarship, they are not unheard of in manuscripts, where a hand has written a reading (e.g., in the margin) that does not resemble any other variant readings and cannot be attributed to a recognizable error. Therefore, conjecture is not limited to those materials identified in <att>source</att>. For this reason, <att>type</att> with value "conjecture" must be used to identify a reading as a conjecture.</p>
+               <p>A conjecture is some portion of text (or absence of text) proposed by some person
+                  (ancient or modern) and determined by an editor to be worthy of consideration in
+                  establishing the text, but not to be printed in the main text of the edition.</p>
+               <p>In a traditional critical edition, a conjecture might be noted as follows:
+                     <quote>rapidoque] rabidoque <hi rend="italic">conj.</hi> Baehrens</quote>.</p>
+               <p>Although conjectures are more common in modern editions and other scholarship,
+                  they are not unheard of in manuscripts, where a hand has written a reading (e.g.,
+                  in the margin) that does not resemble any other variant readings and cannot be
+                  attributed to a recognizable error. Therefore, conjecture is not limited to those
+                  materials identified in <att>source</att>. For this reason, <att>type</att> with
+                  value "conjecture" must be used to identify a reading as a conjecture.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app type="conjecture">
                      <lem>rapidoque</lem>
                      <rdg source="#Baehrens">rabidoque</rdg>
                   </app>
                </egXML>
-               <p>In this example, <att>type</att> is attached to <gi>app</gi> because the entire entry concerns a conjecture. If the conjecture is just one among many readings, <att>type</att> must be used on the individual <gi>rdg</gi> that contains the conjecture.</p>
+               <p>In this example, <att>type</att> is attached to <gi>app</gi> because the entire
+                  entry concerns a conjecture. If the conjecture is just one among many readings,
+                     <att>type</att> must be used on the individual <gi>rdg</gi> that contains the
+                  conjecture.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem>bullantes</lem>
@@ -729,7 +1582,9 @@
                      <rdg source="#Heins." type="#conjecture">palantes</rdg>
                   </app>
                </egXML>
-               <p>If a single scholar has proposed multiple conjectures for a single lemma, <gi>rdgGrp</gi> with <att>type</att> contains all of the conjectures as individual readings:</p>
+               <p>If a single scholar has proposed multiple conjectures for a single lemma,
+                     <gi>rdgGrp</gi> with <att>type</att> contains all of the conjectures as
+                  individual readings:</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem>nullos ducet</lem>
@@ -740,20 +1595,32 @@
                      </rdgGrp>
                   </app>
                </egXML>
-               <p>That should be displayed as: <quote>nullosque sui <hi rend="italic">vel</hi> nullosque duics <hi rend="italic">vel</hi> nullosque ducum <hi rend="italic">conj.</hi> Heins.</quote></p>
+               <p>That should be displayed as: <quote>nullosque sui <hi rend="italic">vel</hi>
+                     nullosque duics <hi rend="italic">vel</hi> nullosque ducum <hi rend="italic"
+                        >conj.</hi> Heins.</quote></p>
             </div2>
             <div2 xml:id="emendation">
                <head>Emendation</head>
-               <p>An emendation is a "successful" <ref target="#conjecture">conjecture</ref>. That is, an emendation is some portion of text (or absence of text) expressly proposed by some person through the application of critical judgment, accepted by the editor in place of the transmitted readings, and printed in the main text of an edition. For this reason, only a <ref target="#lem">lemma</ref> can be classified as an emendation.</p>
-               <p>The following example illustrates the difference between an emendation and a conjecture by virtue of the fact that the <gi>lem</gi> has <att>type</att>="emendation" and <gi>rdg</gi> has <att>type</att>="conjecture":</p>
+               <p>An emendation is a "successful" <ref target="#conjecture">conjecture</ref>. That
+                  is, an emendation is some portion of text (or absence of text) expressly proposed
+                  by some person through the application of critical judgment, accepted by the
+                  editor in place of the transmitted readings, and printed in the main text of an
+                  edition. For this reason, only a <ref target="#lem">lemma</ref> can be classified
+                  as an emendation.</p>
+               <p>The following example illustrates the difference between an emendation and a
+                  conjecture by virtue of the fact that the <gi>lem</gi> has
+                  <att>type</att>="emendation" and <gi>rdg</gi> has
+                  <att>type</att>="conjecture":</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem source="#Ulit." type="emendation">niteat</lem>
                      <rdg wit="#N #G #β #κ #π #ρ1 #λ1">mutat</rdg>
                      <rdg wit="#P #δ" source="#p #t #h #Kempfer #Burm.">mittat</rdg>
                      <rdg wit="#μ" ana="#lexical">micat</rdg>
-                     <rdg wit="#θ #ν #α #η #r #s" source="#o #n #l2 #i2 #Guid. #Wernsd. #Beck #Glaeser #Keene">nutet</rdg>
-                     <rdg wit="#ε #χ #γ #ρ2 #λ2 #d #e #u #b" source="#i1 #l1 #Tig. #Vienn.">nutat</rdg>
+                     <rdg wit="#θ #ν #α #η #r #s"
+                        source="#o #n #l2 #i2 #Guid. #Wernsd. #Beck #Glaeser #Keene">nutet</rdg>
+                     <rdg wit="#ε #χ #γ #ρ2 #λ2 #d #e #u #b" source="#i1 #l1 #Tig. #Vienn."
+                        >nutat</rdg>
                      <rdg wit="#φ">mutet</rdg>
                      <rdg source="#Leo" type="conjecture">micet ac</rdg>
                      <rdg source="#Barth" type="conjecture">nictat</rdg>
@@ -762,15 +1629,24 @@
             </div2>
             <div2 xml:id="notes">
                <head>Notes</head>
-               <p>An editor wishes to comment on a reading, include bibliographical information, or note something else about the passage in question.</p>
-               <p>For example, the editor has recorded a variant reading that another scholar has supported in a textual note. That would be handled in a traditional edition as follows: molle sub] molliter Glaeser, def. Jacoby (Wochenschrift für klassische Philologie III, 1886, p. 1290).</p>
-               <p>We handle this with <gi>note</gi> with <att>target</att> pointing at the value of <att>xml:id</att> on the <gi>lem</gi> or <gi>rdg</gi> in question.</p>
+               <p>An editor wishes to comment on a reading, include bibliographical information, or
+                  note something else about the passage in question.</p>
+               <p>For example, the editor has recorded a variant reading that another scholar has
+                  supported in a textual note. That would be handled in a traditional edition as
+                  follows: molle sub] molliter Glaeser, def. Jacoby (Wochenschrift für klassische
+                  Philologie III, 1886, p. 1290).</p>
+               <p>We handle this with <gi>note</gi> with <att>target</att> pointing at the value of
+                     <att>xml:id</att> on the <gi>lem</gi> or <gi>rdg</gi> in question.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
                   <app>
                      <lem wit="#P #V" source="#edd.">molle sub</lem>
-                     <rdg wit="#N #G #A #H" source="#Glaeser #Keene" xml:id="rdg1.5molliter">molliter</rdg>
+                     <rdg wit="#N #G #A #H" source="#Glaeser #Keene" xml:id="rdg1.5molliter"
+                        >molliter</rdg>
                      <rdg source="#Schenkl2">molle per</rdg>
-                     <note target="#rdg1.5molliter"><ref target="#Jacoby">Jacoby</ref> defendit (<ref target="https://books.google.de/books?id=q5blAAAAMAAJ&amp;hl=de&amp;pg=PA128#v=onepage&amp;q&amp;f=false">Wochenschrift für klassische Philologie</ref> III, 1886, p. 1290)</note>
+                     <note target="#rdg1.5molliter"><ref target="#Jacoby">Jacoby</ref> defendit
+                           (<ref
+                           target="https://books.google.de/books?id=q5blAAAAMAAJ&amp;hl=de&amp;pg=PA128#v=onepage&amp;q&amp;f=false"
+                           >Wochenschrift für klassische Philologie</ref> III, 1886, p. 1290)</note>
                   </app>
                </egXML>
             </div2>
