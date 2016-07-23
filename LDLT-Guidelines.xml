@@ -819,15 +819,96 @@
                the main text of a critical edition.</p>
             <div2 xml:id="edition-text-prose">
                <head>Prose</head>
-                  <p><!-- Need help here with reference scheme for prose texts.-->
-                  </p>
+               <p><!-- Need help here with reference scheme for prose texts.-->
+               </p>
             </div2>
             <div2 xml:id="edition-text-poetry">
-               <head>Poetry</head>
+               <head>Verse</head>
+               <p>The <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/VE.html"
+                     >verse module</ref> of the TEI Guidelines offers many possibilities for marking
+                  up various aspects of prosody, but the LDLT is primarily concerned with the <ref
+                     target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COVE">core
+                     tags</ref> for encoding the structure of verse texts. This does not mean that
+                  editors and others should avoid using the verse module. It means only that the
+                  LDLT does not provide functionality for that level of detail.</p>
+               <p>
+                  <specList>
+                     <specDesc key="div1"/>
+                     <specDesc key="div2"/>
+                     <specDesc key="lg"/>
+                     <specDesc key="l"/>
+                  </specList>
+               </p>
+               <p><gi>div1</gi> (level-1 text division) groups the parts of a book of verse, with
+                     <att>type</att>="book" and <att>n</att> with the number of the book.</p>
+               <p><gi>div2</gi> (level-2 text division) groups the parts of a single poem (e.g.,
+                  stanzas or lines), with <att>type</att>="poem", <att>n</att> with the number of
+                  the poem in the book, and <att>met</att> with the name of the meter.</p>
+               <!-- Should we require usage of terms from a standard reference work? -->
+               <p><gi>lg</gi> (line group) groups one or more verse lines that form a stanza or a
+                  couplet, with <att>type</att> and "stanza" or "couplet".</p>
+               <!-- Other values?-->
+               <p><gi>l</gi> (line) contains the text of a single line of verse, with <att>n</att>
+                  and the number of the line.</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <div1 type="book" n="2">
+                     <div2 type="poem" n="1" met="Alcaic Strophe">
+                        <lg type="stanza">
+                           <l n="1">Motum ex Metello consule civicum</l>
+                           <l n="2">bellique causas et vitia et modos</l>
+                           <l n="3">ludumque Fortunae gravisque</l>
+                           <l n="4">principum amicitias et arma</l>
+                        </lg>
+                     </div2>
+                  </div1>
+               </egXML>
+            </div2>
+            <div2 xml:id="dialogue">
+               <head>Dialogue</head>
+               <p>Texts that feature interlocutors (e.g., drama, dialogue) should be encoded using
+                     <gi>sp</gi> and <gi>speaker</gi>.</p>
+               <p>
+                  <specList>
+                     <specDesc key="sp"/>
+                     <specDesc key="speaker"/>
+                  </specList>
+               </p>
+               <p><gi>sp</gi> (speech) groups elements related to a person or character's
+                  speech.</p>
+               <p><att>who</att> is used with <gi>sp</gi> to identify the speaker.</p>
+               <p><gi>speaker</gi> contains a human-readable label identifying the person or
+                  character speaking the text.</p>
+               <p>These features can be used in verse and prose texts:</p>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <sp who="Corydon">
+                     <speaker>C.</speaker>
+                     <l n="1">Nondum Solis equos declinis mitigat aestas,</l>
+                     <l n="2">quamvis et madidis incumbant prela racemis</l>
+                     <l n="3">et spument rauco ferventia musta susurro.</l>
+                     <l n="4">cernis ut ecce pater quas tradidit, Ornyte, vaccae</l>
+                     <l n="5">molle sub hirsuta latus explicuere genista?</l>
+                     <l n="6">nos quoque vicinis cur non succedimus umbris?</l>
+                     <l n="7">torrida cur solo defendimus ora galero?</l>
+                  </sp>
+               </egXML>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <sp who="Laelius">
+                     <speaker>Laelius</speaker>
+                     <p>Atqui, Cato, gratissimum nobis, ut etiam pro Scipione pollicear, feceris,
+                        si, quoniam speramus, volumus quidem certe, senes fieri, multo ante a te
+                        didicerimus quibus facillime rationibus ingravescentem aetatem ferre
+                        possimus.</p>
+                  </sp>
+                  <sp who="Cato">
+                     <speaker>Cato</speaker>
+                     <p>Faciam vero, Laeli, praesertim si utrique vestrum, ut dicis, gratum futurum
+                        est.</p>
+                  </sp>
+               </egXML>
             </div2>
             <div2 xml:id="edition-text-reference-scheme">
                <head>Reference Scheme</head>
-               
+
             </div2>
             <div2 xml:id="main-text-symbols">
                <head>Symbols Commonly Used in the Text of a Critical Edition</head>
