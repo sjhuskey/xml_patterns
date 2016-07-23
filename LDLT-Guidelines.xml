@@ -453,6 +453,7 @@
                      <head>Common Elements for All Entries</head>
                      <p>All entries, regardless of the type, will have certain common elements.</p>
                      <div5 xml:id="bibliography-biblStruct">
+                        <head><gi>biblStruct</gi></head>
                         <p>Entries for items other than manuscripts should be contained in
                               <gi>biblStruct</gi> with <att>xml:id</att> and <att>n</att> as <ref
                               target="#bibliography-sigla">described above</ref>. Entries should
@@ -460,6 +461,7 @@
                            guidelines and examples below.</p>
                      </div5>
                      <div5 xml:id="bibliography-pub">
+                        <head>Publication Information</head>
                         <p>Publication information for all types of entries should be handled with
                            these elements:</p>
                         <p><specList>
