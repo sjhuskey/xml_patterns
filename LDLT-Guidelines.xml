@@ -912,22 +912,32 @@
                <head>Reference Scheme</head>
 
             </div2>
-            <div2 xml:id="main-text-symbols">
+            <div2 xml:id="edition-text-symbols">
                <head>Symbols Commonly Used in the Text of a Critical Edition</head>
                <p>The symbols in this section have been gleaned from <bibl><author>Martin
                         West</author>, <title>Textual Criticism and Editorial Technique</title>
                         (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
                         >80–81</biblScope></bibl>.</p>
+               <p>For the sake of uniformity, this section follows closely <bibl><author>Tom
+                        Elliott</author>, <author>Gabriel Bodard</author>, <author>Elli
+                        Mylonas</author>, <author>Simona Stoyanova</author>, <author>Charlotte
+                        Tupman</author>, <author>Scott Vanderbilt</author>, et al.
+                        <date>(2007-2014)</date>, <title>EpiDoc Guidelines: Ancient documents in TEI
+                        XML (Version 8)</title>. Available: <ref
+                        target="http://www.stoa.org/epidoc/gl/latest"
+                        >http://www.stoa.org/epidoc/gl/latest</ref></bibl>.</p>
+               <!-- How should I cite individual sections? By author in the "Responsibility" section of the Epidoc guidelines? -->
                <div3 xml:id="abbreviation-expansion"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
                   <head>Abbreviation Fully Expanded</head>
-                  <!-- This is pretty much verbatim from Epidoc. Probably not necessary to include? -->
+                  <p>The LDLT follows the Epidoc guidelines for encoding fully expanded
+                     abbreviations <ptr
+                        target="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html"/>:</p>
                   <p>
                      <specList>
                         <specDesc key="expan"/>
                         <specDesc key="abbr"/>
                         <specDesc key="ex"/>
-                        <specDesc key="supplied"/>
                      </specList>
                   </p>
                   <p><gi>expan</gi> (expansion) contains the full expansion of an abbreviation.</p>
@@ -935,7 +945,6 @@
                      actually on the page.</p>
                   <p><gi>ex</gi> (editorial expansion) contains a sequence of letters added by an
                      editor or transcriber when expanding an abbreviation.</p>
-                  <p><gi>supplied</gi> signifies text supplied by the transcriber or editor.</p>
                   <p>
                      <quote>a(bc)</quote>
                   </p>
@@ -964,7 +973,10 @@
                <div3 xml:id="add-conjecture"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
                   <head>Text added by emendation</head>
-                  <p>An editor supplies text believed to be missing from the original source.</p>
+                  <p>An editor supplies text believed to be missing from the original source. (Cf.
+                     Epidoc guidelines "Editorial Restoration: Characters Lost But Restored By
+                     Modern Editor" <ptr
+                        target="http://www.stoa.org/epidoc/gl/latest/trans-restored.html"/>) </p>
                   <p>
                      <specList>
                         <specDesc key="supplied"/>
@@ -989,7 +1001,10 @@
                <div3 xml:id="undetermined-loss"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
                   <head>Undetermined Amount Of Text Lost Through Damage</head>
-                  <p>Text has been lost from one or more witnesses because of damage.</p>
+                  <p>Text has been lost from one or more witnesses because of damage. (Cf. Epidoc
+                     guidelines, "Lost Characters, Quantity Unknown" <ptr
+                        target="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html"
+                     />)</p>
                   <p>
                      <specList>
                         <specDesc key="gap"/>
@@ -1007,14 +1022,16 @@
                   </p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <gap reason="lost" extent="unknown" unit="characters"/>
+                     <gap reason="lost" extent="unknown" unit="character"/>
                   </egXML>
                </div3>
                <div3 xml:id="known-loss"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
                   <head>Known Amount Of Text Lost Through Damage</head>
                   <p>The editor or transcriber knows from context and/or observation how much text
-                     has been lost.</p>
+                     has been lost. (Cf. Epidoc guidelines, "Lost Characters, Quantity Known" <ptr
+                        target="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html"
+                     />)</p>
                   <p>
                      <specList>
                         <specDesc key="gap"/>
@@ -1027,17 +1044,68 @@
                   <p>
                      <quote>[ ... ]</quote>
                   </p>
+                  <p>Note that each dot represents a missing character.</p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <gap reason="lost" quantity="3" unit="characters"/>
                   </egXML>
-                  <!-- Need something for lost lines, too? http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html-->
+               </div3>
+               <div3 xml:id="lost-lines-known" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html">
+                  <head>Known Number of Lines Lost</head>
+                  <p>A known quantity of lines has been lost, or is conjectured to have been lost
+                     from the text of all witnesses. (Cf. Epidoc guidelines, "Lost Lines, Quantity
+                     Known" <ptr
+                        target="http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html"
+                     />)</p>
+                  <p>
+                     <specList>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>gap</gi> signifies that text is missing.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+                  <p><att>quantity</att> indicates the number of lines missing.</p>
+                  <p><att>unit</att> with value "line" indicates the unit measured in
+                        <att>quantity</att>.</p>
+                  <p>
+                     <quote>[------]</quote>
+                  </p>
+                  <p>Note that the brackets and the dashes represent one missing line. The number in
+                        <att>quantity</att> will determine the number of instances of that group of
+                     characters, one per line.</p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <gap reason="lost" quantity="3" unit="line"/>
+                  </egXML>
+                  <!-- How is this handled differently in prose and verse texts? -->
+               </div3>
+               <div3 xml:id="lost-lines-unknown" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostlineunknown.html">
+                  <head>Unknown Number of Lines Lost</head>
+                  <p>An unknown quantity of lines has been lost, or is conjectured to have been lost
+                     from the text of all witnesses. (Cf. Epidoc guidelines, "Lost Lines, Quantity
+                     Unknown" <ptr
+                        target="http://www.stoa.org/epidoc/gl/latest/trans-lostlineunknown.html"
+                     />)</p>
+                  <p>
+                     <specList>
+                        <specDesc key="gap"/>
+                     </specList>
+                  </p>
+                  <p><gi>gap</gi> signifies that text is missing.</p>
+                  <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
+                  <p><att>extent</att> with value "unknown" indicates that nothing more is known about the amount of text that has been lost.</p>
+                  <p><att>unit</att> with value "line" indicates the unit measured in
+                     <att>extent</att>.</p>
+                  <p>
+                     <quote>- - - - - -</quote>
+                  </p>
+                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <gap reason="lost" extent="unknown" unit="line"/>
+                  </egXML>
                </div3>
                <div3 xml:id="editorial-deletion"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
                   <head>Editorial Deletion</head>
-                  <p>Text suspected by the editor to be an interpolation.</p>
-                  <!-- Expand on this -->
+                  <p>Text suspected by the editor to be an interpolation, but retained in the main text to indicate its traditional attribution to the author. (Cf. Epidoc guidelines, "Superfluous Text" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html"/>)</p>
                   <p>
                      <specList>
                         <specDesc key="surplus"/>
@@ -1062,7 +1130,7 @@
                <div3 xml:id="deleted-legible"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
                   <head>Deleted But Legible Text</head>
-                  <p>Text deleted in an ancient source but still legible (more or less clearly).</p>
+                  <p>Text deleted in an ancient source but still legible (more or less clearly). (Cf. Epidoc guidelines, "Erased But Legible Text" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erased.html"/>)</p>
                   <p>
                      <specList>
                         <specDesc key="del"/>
@@ -1082,7 +1150,7 @@
                <div3 xml:id="deleted-illegible"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
                   <head>Deleted and Lost</head>
-                  <p>Text deleted in an ancient source to the point of illegibility.</p>
+                  <p>Text deleted in an ancient source to the point of illegibility. (Cf. Epidoc guidelines, "Erased and Lost" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html"/>)</p>
                   <p>
                      <specList>
                         <specDesc key="del"/>
@@ -1112,7 +1180,7 @@
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
                   <head>Deleted and Illegible But Restored</head>
                   <p>Text deleted in an ancient source to the point of illegibility, but restored by
-                     the editor (e.g., by comparison with another exemplar).</p>
+                     the editor (e.g., by comparison with another exemplar). (Cf. Epidoc guidelins, "Erased And Illegible / Restored" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html"/>)</p>
                   <p>
                      <specList>
                         <specDesc key="del"/>
@@ -1164,7 +1232,7 @@
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
                   <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
                   <head>Crux</head>
-                  <p>Text deemed by the editor to be irredeemably corrupt.</p>
+                  <p>Text deemed by the editor to be irredeemably corrupt. (Cf. Epidoc guidelines, "Ambiguous Characters" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html"/>)</p>
                   <p>
                      <specList>
                         <specDesc key="unclear"/>
