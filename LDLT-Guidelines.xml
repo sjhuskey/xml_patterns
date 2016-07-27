@@ -763,7 +763,7 @@
                         </specList>
                      </p>
                      <p><gi>list</gi> with <att>xml:id</att>="bibliography-scholars" groups the
-                        information identifying the scholars.</p>
+                        information identifying the scholars.</p><!-- Use listPerson instead of just list? -->
                      <p><gi>item</gi> with <att>xml:id</att> and <att>n</att> as <ref
                            target="#bibliography-sigla">described above</ref>.</p>
                      <p><gi>persName</gi> (personal name) groups the information about the scholar's
@@ -782,7 +782,7 @@
                         (e.g., "personal correspondence with editor").</p>
                      <egXML xmlns="http://www.tei-c.org/ns/Examples">
                         <item xml:id="CSchenkl" n="C. Schenkl">
-                           <persName>
+                           <persName ref="http://viaf.org/viaf/12523146">
                               <forename>Karl</forename>
                               <surname>Schenkl</surname>
                            </persName>
@@ -907,6 +907,12 @@
                         est.</p>
                   </sp>
                </egXML>
+            </div2>
+            <div2 xml:id="people">
+               <head>People</head>
+            </div2>
+            <div2 xml:id="places">
+               <head>Places</head>
             </div2>
             <div2 xml:id="edition-text-reference-scheme">
                <head>Reference Scheme</head>
