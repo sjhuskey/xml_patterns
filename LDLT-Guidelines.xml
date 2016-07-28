@@ -1029,7 +1029,7 @@
                </div>
                <div xml:id="known-loss"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
-                  <head>Known Amount Of Text Lost Through Damage</head>
+                  <head>Known Amount Of Text Lost</head>
                   <p>The editor or transcriber knows from context and/or observation how much text
                      has been lost. (Cf. Epidoc guidelines, "Lost Characters, Quantity Known" <ptr
                         target="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html"
@@ -1039,7 +1039,7 @@
                         <specDesc key="gap"/>
                      </specList>
                   </p>
-                  <p><gi>gap</gi> signifies text missing because of damage.</p>
+                  <p><gi>gap</gi> signifies text missing.</p>
                   <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
                   <p><att>quantity</att> indicates the amount of text has been lost.</p>
                   <p><att>unit</att> indicates the unit measured in <att>quantity</att>.</p>
