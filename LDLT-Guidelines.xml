@@ -1120,11 +1120,7 @@
                   </p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem source="#Alonso">
-                           <surplus reason="interpolation">lorem ipsum</surplus>
-                        </lem>
-                     </app>
+                     <surplus reason="interpolation">lorem ipsum</surplus>
                   </egXML>
                </div>
                <div xml:id="deleted-legible"
