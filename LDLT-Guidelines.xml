@@ -990,7 +990,7 @@
                   </p>
                   <p><gi>supplied</gi> signifies text believed by the transcriber or editor to be
                      missing.</p>
-                  <p><att>reason</att> indicates that text has been lost, but supplied by
+                  <p><att>reason</att> indicates that text has been omitted, but supplied by
                      emendation.</p>
                   <p>
                      <quote>&lt;abc&gt;</quote>
@@ -999,13 +999,14 @@
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem source="#Vettel">
-                           <supplied reason="lost">abc</supplied>
+                           <supplied reason="omitted">abc</supplied>
                         </lem>
                      </app>
                   </egXML>
                </div3>
                <div3 xml:id="undetermined-loss"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
+                  <!-- NEED TO EXPLAIN THAT THIS IS WEST'S SUGGESTION -->
                   <head>Undetermined Amount Of Text Lost Through Damage</head>
                   <p>Text has been lost from one or more witnesses because of damage. (Cf. Epidoc
                      guidelines, "Lost Characters, Quantity Unknown" <ptr
@@ -1110,6 +1111,7 @@
                </div3>
                <div3 xml:id="editorial-deletion"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
+                  <!-- NEED TO EXPLAIN THAT THIS IS WEST'S SUGGESTION AND WE'RE FOLLOWING IT -->
                   <head>Editorial Deletion</head>
                   <p>Text suspected by the editor to be an interpolation, but retained in the main text to indicate its traditional attribution to the author. (Cf. Epidoc guidelines, "Superfluous Text" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html"/>)</p>
                   <p>
@@ -1128,7 +1130,7 @@
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <app>
                         <lem source="#Alonso">
-                           <surplus reason="interpolation">lorem ipsum</surplus>
+                           <surplus>lorem ipsum</surplus>
                         </lem>
                      </app>
                   </egXML>
