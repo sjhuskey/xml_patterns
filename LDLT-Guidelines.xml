@@ -1002,8 +1002,8 @@
                </div>
                <div xml:id="undetermined-loss"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
-                  <head>Undetermined Amount Of Text Lost Through Damage</head>
-                  <p>Text has been lost from one or more witnesses because of damage. (Cf. Epidoc
+                  <head>Undetermined Amount Of Text Lost</head>
+                  <p>Text has been lost from one or more witnesses. (Cf. Epidoc
                      guidelines, "Lost Characters, Quantity Unknown" <ptr
                         target="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html"
                      />)</p>
