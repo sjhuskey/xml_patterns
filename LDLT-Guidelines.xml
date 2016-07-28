@@ -1049,7 +1049,7 @@
                   <p>Note that each dot represents a missing character.</p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <gap reason="lost" quantity="3" unit="characters"/>
+                     <gap reason="lost" quantity="3" unit="character"/>
                   </egXML>
                </div>
                <div xml:id="lost-lines-known" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html">
