@@ -1123,55 +1123,6 @@
                      <surplus reason="interpolation">lorem ipsum</surplus>
                   </egXML>
                </div>
-               <div xml:id="deleted-legible"
-                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
-                  <head>Deleted But Legible Text</head>
-                  <p>Text deleted in an ancient source but still legible (more or less clearly). (Cf. Epidoc guidelines, "Erased But Legible Text" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erased.html"/>)</p>
-                  <p>
-                     <specList>
-                        <specDesc key="del"/>
-                     </specList>
-                  </p>
-                  <p><gi>del</gi> indicates the text that has been deleted but is still legible.</p>
-                  <p><att>rend</att> with value "erasure" indicates that the text has been erased.
-                     Other values: "strikethrough" and "expunction".</p>
-                  <!-- Separate sections for these other values? Or are they really values? Should they be explained in a note? -->
-                  <p>
-                     <quote>[[co]]gaudete</quote>
-                  </p>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">co</del>gaudete </egXML>
-               </div>
-               <div xml:id="deleted-illegible"
-                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
-                  <head>Deleted and Lost</head>
-                  <p>Text deleted in an ancient source to the point of illegibility. (Cf. Epidoc guidelines, "Erased and Lost" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html"/>)</p>
-                  <p>
-                     <specList>
-                        <specDesc key="del"/>
-                        <specDesc key="gap"/>
-                     </specList>
-                  </p>
-                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
-                  <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
-                     strikethrough).</p>
-                  <p><gi>gap</gi> indicates that the deletion has left a gap of irrecoverable
-                     text.</p>
-                  <p><att>reason</att> with value "lost" indicates that the text is
-                     irrecoverable.</p>
-                  <p><att>quantity</att> indicates the extent of the deletion.</p>
-                  <p><att>unit</att> indicates the unit of measurement for <att>quantityt</att>.</p>
-                  <p>
-                     <quote>[[ ... ]]</quote>
-                  </p>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">
-                        <gap quantity="3" unit="characters"/>
-                     </del>
-                  </egXML>
-               </div>
                <div xml:id="deleted-restored"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
                   <head>Deleted and Illegible But Restored</head>
