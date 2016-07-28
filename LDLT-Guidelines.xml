@@ -23,7 +23,7 @@
    </teiHeader>
    <text>
       <body>
-         <div1 xml:id="LDLT-edition-structure">
+         <div xml:id="LDLT-edition-structure">
             <head>Structure of an LDLT Edition</head>
             <p>This section describes the basic structure of the file that contains an edition for
                the Digital Latin Library's <bibl><title>Library of Digital Latin
@@ -43,7 +43,7 @@
             <p>These guidelines are based on the standard set by the Text Encoding Initiative (TEI),
                with modification and customization to accommodate the special characteristics of
                Latin texts.</p>
-            <div2 xml:id="general-structure">
+            <div xml:id="general-structure">
                <p>The following is an example of the general overall structure of an XML file for an
                   LDLT edition:</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -78,61 +78,61 @@
                   </teiHeader>
                   <text>
                      <front xml:id="front">
-                        <div1 xml:id="preface">
+                        <div xml:id="preface">
                            <head>Preface</head>
                            <p>General introductory remarks about the edition.</p>
-                           <div2 xml:id="preface-section-1">
+                           <div xml:id="preface-section-1">
                               <!--This is a subsection within the preface. Editors should use
                               subsections to organize the content of the edition's preface.-->
-                           </div2>
-                        </div1>
-                        <div1 xml:id="bibliography">
+                           </div>
+                        </div>
+                        <div xml:id="bibliography">
                            <head>Bibliography</head>
                            <!--This is where the bibliography for the edition is listed.-->
-                           <div2 xml:id="bibliography-manuscripts">
+                           <div xml:id="bibliography-manuscripts">
                               <head>Manuscripts</head>
                               <!--Descriptions of manuscripts, using <gi>listWit</gi>.-->
-                           </div2>
-                           <div2 xml:id="bibliography-early-editions">
+                           </div>
+                           <div xml:id="bibliography-early-editions">
                               <head>Early Editions</head>
                               <!--Bibliographical details for early editions or editiones vetustiores, using
                                  <gi>listBibl</gi> with <att>type</att>="editions-witnesses".-->
-                           </div2>
-                           <div2 xml:id="bibliography-modern-editions">
+                           </div>
+                           <div xml:id="bibliography-modern-editions">
                               <head>Modern Editions</head>
                               <!--Bibliographical details for modern editions and commentaries, using
                                  <gi>listBibl</gi> with <att>type</att>="editions-sources".-->
-                           </div2>
-                           <div2 xml:id="bibliography-secondary-sources">
+                           </div>
+                           <div xml:id="bibliography-secondary-sources">
                               <head>Secondary Sources</head>
                               <!--Bibliographical details for articles, notes, books, and other sources,
                               using <gi>listBibl</gi> with <att>type</att>="secondary-sources".-->
-                           </div2>
-                           <div2 xml:id="bibliography-scholars">
+                           </div>
+                           <div xml:id="bibliography-scholars">
                               <head>List of Scholars Referred to By Name</head>
                               <!-- A list of the names of individual scholars referred to by name in the 
                                  apparatus, if they are not listed elsewhere in the bibliography (e.g., 
                                  as the editor of an edition or author of an article). -->
-                           </div2>
-                        </div1>
-                        <div1 xml:id="conspectus">
+                           </div>
+                        </div>
+                        <div xml:id="conspectus">
                            <head>Conspectus</head>
                            <!--A key to the special sigla and abbreviations used in the edition (drawn
                            from the <att>xml:id</att>'s assigned to the various items in the
                            bibliography).-->
-                        </div1>
+                        </div>
                      </front>
                      <body>
-                        <div1 type="edition" xml:id="edition-text" xml:space="preserve">
-                        <div2 type="textpart" n="1" xml:id="part1">
+                        <div type="edition" xml:id="edition-text" xml:space="preserve">
+                        <div type="textpart" n="1" xml:id="part1">
                            <head>Title of First Part</head>
                            <!--Text goes here, according to the conventions laid out elsewhere in these guidelines.-->
-                        </div2>
-                        <div2 type="textpart" n="2" xml:id="part2">
+                        </div>
+                        <div type="textpart" n="2" xml:id="part2">
                            <head>Title of Second Part</head>
                            <!--Each new major section (e.g., book, volume) goes in a new <gi>div</gi>.-->
-                        </div2>
-                     </div1>
+                        </div>
+                     </div>
                      </body>
                      <back>
                         <!--The content of the back matter will be determined in consultation between
@@ -144,8 +144,8 @@
                      </back>
                   </text>
                </egXML>
-            </div2>
-            <div2 xml:id="publication-details">
+            </div>
+            <div xml:id="publication-details">
                <head>Publication Details</head>
                <p>A traditional critical edition in print has a title page announcing the title of
                   the work, its author, the editor(s), and details of publication. In an LDLT
@@ -190,8 +190,8 @@
                <p>Just as an editor is not expected to create the title page and document the
                   publication information, this section of an LDLT is the responsibility of the DLL
                   staff.</p>
-            </div2>
-            <div2 xml:id="front-matter">
+            </div>
+            <div xml:id="front-matter">
                <head>Front Matter</head>
                <p>The <gi>front</gi> contains numbered divisions and subdivisions (e.g.,
                      <gi>div1</gi>, <gi>div2</gi>) corresponding to the preface, bibliography, and
@@ -209,8 +209,8 @@
                   For example, an editor might want to make a table comparing the readings of
                   manuscript families. In that case, the editor would use <gi>table</gi> and its
                   related elements.</p>
-            </div2>
-            <div2 xml:id="bibliography">
+            </div>
+            <div xml:id="bibliography">
                <head>Bibliography</head>
                <!-- Issue: Should a consensus siglum be an xml:id on a <listBibl> containing the items, or a separate siglum listed elsewhere? -->
                <!-- Issue: One <forename> for first and middle names? Or separate <forename> for each? -->
@@ -232,7 +232,7 @@
                   cataloging manuscripts, so that information must be entered manually. For that
                   reason, and for the sake of completeness, the following sections provide
                   information for encoding items in the bibliography, with examples.</p>
-               <div3 xml:id="bibliography-structure">
+               <div xml:id="bibliography-structure">
                   <head>Structure of the Bibliography</head>
                   <p>The bibliography should be organized according to the following structure:</p>
                   <list>
@@ -255,8 +255,8 @@
                      refer to a scholar whose unpublished notes appear in a commentary or who has
                      corresponded with the editor. For ease of reference, these sources should be
                      listed with information about where the information can be verified.</p>
-               </div3>
-               <div3 xml:id="bibliography-sigla">
+               </div>
+               <div xml:id="bibliography-sigla">
                   <head>Human- and Machine-Readable Sigla, Symbols, and Abbreviations</head>
                   <p>Printed editions have long used a system of shorthand references for
                      manuscripts and other materials in the bibliography. Single letters, or <emph
@@ -296,8 +296,8 @@
                      Otherwise, the edition will not be able to make full use of the digital format.
                      Morever, if an entry lacks <att>n</att>, it will not be available for the print
                      version of the edition.</p>
-               </div3>
-               <div3 xml:id="bibliography-ms-description">
+               </div>
+               <div xml:id="bibliography-ms-description">
                   <head>Manuscripts</head>
                   <p>Manuscript description is a discipline unto itself, with an entire module in
                      the TEI guidelines devoted to it (<ref
@@ -446,21 +446,21 @@
                      be used. In cases of multiple <gi>listWit</gi> containers, each
                         <gi>listWit</gi> should have a unique <att>xml:id</att> to use when
                      referring to the family itself or a consensus of readings in that family.</p>
-               </div3>
-               <div3 xml:id="bibliography-sources">
+               </div>
+               <div xml:id="bibliography-sources">
                   <head>Other Sources</head>
-                  <div4 xml:id="bibliography-common-elements">
+                  <div xml:id="bibliography-common-elements">
                      <head>Common Elements for All Entries</head>
                      <p>All entries, regardless of the type, will have certain common elements.</p>
-                     <div5 xml:id="bibliography-biblStruct">
+                     <div xml:id="bibliography-biblStruct">
                         <head><gi>biblStruct</gi></head>
                         <p>Entries for items other than manuscripts should be contained in
                               <gi>biblStruct</gi> with <att>xml:id</att> and <att>n</att> as <ref
                               target="#bibliography-sigla">described above</ref>. Entries should
                            also be classified with <att>type</att> and encoded according to the
                            guidelines and examples below.</p>
-                     </div5>
-                     <div5 xml:id="bibliography-pub">
+                     </div>
+                     <div xml:id="bibliography-pub">
                         <head>Publication Information</head>
                         <p>Publication information for all types of entries should be handled with
                            these elements:</p>
@@ -487,9 +487,9 @@
                         <!-- Value if self-closing: "s.d." (sine die). -->
                         <p><gi>note</gi> with <att>type</att>="url" contains the URL for an online
                            copy of the edition, if available.</p>
-                     </div5>
-                  </div4>
-                  <div4 xml:id="bibliography-editions">
+                     </div>
+                  </div>
+                  <div xml:id="bibliography-editions">
                      <head>Editions</head>
                      <p>Previous editions must be classified in one of two categories: early
                         editions based on a single manuscript and modern critical editions based on
@@ -570,8 +570,8 @@
                            </monogr>
                         </biblStruct>
                      </egXML>
-                  </div4>
-                  <div4 xml:id="books">
+                  </div>
+                  <div xml:id="books">
                      <head>Books Other than Editions</head>
                      <p>The bibliographical information for monographs, commentaries, and other
                         books that are not editions should be handled using these elements and
@@ -628,8 +628,8 @@
                            </monogr>
                         </biblStruct>
                      </egXML>
-                  </div4>
-                  <div4 xml:id="bibliography-articles">
+                  </div>
+                  <div xml:id="bibliography-articles">
                      <head>Articles</head>
                      <p>Bibliographic details for articles published in journals should be encoded
                         using the following elements and attributes:</p>
@@ -741,8 +741,8 @@
                            </monogr>
                         </biblStruct>
                      </egXML>
-                  </div4>
-                  <div4 xml:id="bibliography-list-of-scholars">
+                  </div>
+                  <div xml:id="bibliography-list-of-scholars">
                      <head>List of Scholars</head>
                      <p>Occasionally it is necessary to refer to a scholar whose unpublished work
                         has been quoted or paraphrased elsewhere. For example, editors often cite
@@ -797,11 +797,11 @@
                            <ref target="#Burm.">Burman 1731</ref>
                         </item>
                      </egXML>
-                  </div4>
-               </div3>
-            </div2>
-         </div1>
-         <div1 xml:id="edition-text">
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div xml:id="edition-text">
             <head>Edition Text</head>
             <p>The edition text corresponds to the text printed "above the line" of the critical
                apparatus in a traditional edition. It is composed of "accepted readings," that is,
@@ -819,12 +819,12 @@
                interactions.</p>
             <p>This section establishes guidelines for encoding the information typically found in
                the main text of a critical edition.</p>
-            <div2 xml:id="edition-text-prose">
+            <div xml:id="edition-text-prose">
                <head>Prose</head>
                <p><!-- Need help here with reference scheme for prose texts.-->
                </p>
-            </div2>
-            <div2 xml:id="edition-text-poetry">
+            </div>
+            <div xml:id="edition-text-poetry">
                <head>Verse</head>
                <p>The <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/VE.html"
                      >verse module</ref> of the TEI Guidelines offers many possibilities for marking
@@ -853,19 +853,19 @@
                <p><gi>l</gi> (line) contains the text of a single line of verse, with <att>n</att>
                   and the number of the line.</p>
                <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                  <div1 type="book" n="2">
-                     <div2 type="poem" n="1" met="Alcaic Strophe">
+                  <div type="book" n="2">
+                     <div type="poem" n="1" met="Alcaic Strophe">
                         <lg type="stanza">
                            <l n="1">Motum ex Metello consule civicum</l>
                            <l n="2">bellique causas et vitia et modos</l>
                            <l n="3">ludumque Fortunae gravisque</l>
                            <l n="4">principum amicitias et arma</l>
                         </lg>
-                     </div2>
-                  </div1>
+                     </div>
+                  </div>
                </egXML>
-            </div2>
-            <div2 xml:id="dialogue">
+            </div>
+            <div xml:id="dialogue">
                <head>Dialogue</head>
                <p>Texts that feature interlocutors (e.g., drama, dialogue) should be encoded using
                      <gi>sp</gi> and <gi>speaker</gi>.</p>
@@ -907,19 +907,20 @@
                         est.</p>
                   </sp>
                </egXML>
-            </div2>
-            <div2 xml:id="people">
+            </div>
+            <div xml:id="people">
                <head>People</head>
-            </div2>
-            <div2 xml:id="places">
+            </div>
+            <div xml:id="places">
                <head>Places</head>
-            </div2>
-            <div2 xml:id="edition-text-reference-scheme">
+            </div>
+            <div xml:id="edition-text-reference-scheme">
                <head>Reference Scheme</head>
 
-            </div2>
-            <div2 xml:id="edition-text-symbols">
+            </div>
+            <div xml:id="edition-text-symbols">
                <head>Symbols Commonly Used in the Text of a Critical Edition</head>
+               <!-- Sam: do something about telling people who want to do diplomatic stuff to go look at EpiDoc -->
                <p>The symbols in this section have been gleaned from <bibl><author>Martin
                         West</author>, <title>Textual Criticism and Editorial Technique</title>
                         (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
@@ -933,7 +934,7 @@
                         target="http://www.stoa.org/epidoc/gl/latest"
                         >http://www.stoa.org/epidoc/gl/latest</ref></bibl>.</p>
                <!-- How should I cite individual sections? By author in the "Responsibility" section of the Epidoc guidelines? -->
-               <div3 xml:id="abbreviation-expansion"
+               <div xml:id="abbreviation-expansion"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-abbrevfully.html">
                   <head>Abbreviation Fully Expanded</head>
                   <p>The LDLT follows the Epidoc guidelines for encoding fully expanded
@@ -975,8 +976,8 @@
                      </expan>
                   </egXML>
                   <!-- Need discussion of values for @cert on <expan>. Note that different sections in Epidoc guidelines for abbreviations are based on value of @cert  -->
-               </div3>
-               <div3 xml:id="add-conjecture"
+               </div>
+               <div xml:id="add-conjecture"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-restored.html">
                   <head>Text added by emendation</head>
                   <p>An editor supplies text believed to be missing from the original source. (Cf.
@@ -997,18 +998,13 @@
                   </p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem source="#Vettel">
-                           <supplied reason="omitted">abc</supplied>
-                        </lem>
-                     </app>
+                        <supplied reason="omitted">abc</supplied>
                   </egXML>
-               </div3>
-               <div3 xml:id="undetermined-loss"
+               </div>
+               <div xml:id="undetermined-loss"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html">
-                  <!-- NEED TO EXPLAIN THAT THIS IS WEST'S SUGGESTION -->
-                  <head>Undetermined Amount Of Text Lost Through Damage</head>
-                  <p>Text has been lost from one or more witnesses because of damage. (Cf. Epidoc
+                  <head>Undetermined Amount Of Text Lost</head>
+                  <p>Text has been lost from one or more witnesses. (Cf. Epidoc
                      guidelines, "Lost Characters, Quantity Unknown" <ptr
                         target="http://www.stoa.org/epidoc/gl/latest/trans-lostcharunknown.html"
                      />)</p>
@@ -1031,10 +1027,10 @@
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <gap reason="lost" extent="unknown" unit="character"/>
                   </egXML>
-               </div3>
-               <div3 xml:id="known-loss"
+               </div>
+               <div xml:id="known-loss"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html">
-                  <head>Known Amount Of Text Lost Through Damage</head>
+                  <head>Known Amount Of Text Lost</head>
                   <p>The editor or transcriber knows from context and/or observation how much text
                      has been lost. (Cf. Epidoc guidelines, "Lost Characters, Quantity Known" <ptr
                         target="http://www.stoa.org/epidoc/gl/latest/trans-lostcharknown.html"
@@ -1044,7 +1040,7 @@
                         <specDesc key="gap"/>
                      </specList>
                   </p>
-                  <p><gi>gap</gi> signifies text missing because of damage.</p>
+                  <p><gi>gap</gi> signifies text missing.</p>
                   <p><att>reason</att> with value "lost" indicates that the text has been lost.</p>
                   <p><att>quantity</att> indicates the amount of text has been lost.</p>
                   <p><att>unit</att> indicates the unit measured in <att>quantity</att>.</p>
@@ -1054,10 +1050,10 @@
                   <p>Note that each dot represents a missing character.</p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <gap reason="lost" quantity="3" unit="characters"/>
+                     <gap reason="lost" quantity="3" unit="character"/>
                   </egXML>
-               </div3>
-               <div3 xml:id="lost-lines-known" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html">
+               </div>
+               <div xml:id="lost-lines-known" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostlineknown.html">
                   <head>Known Number of Lines Lost</head>
                   <p>A known quantity of lines has been lost, or is conjectured to have been lost
                      from the text of all witnesses. (Cf. Epidoc guidelines, "Lost Lines, Quantity
@@ -1084,8 +1080,8 @@
                      <gap reason="lost" quantity="3" unit="line"/>
                   </egXML>
                   <!-- How is this handled differently in prose and verse texts? -->
-               </div3>
-               <div3 xml:id="lost-lines-unknown" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostlineunknown.html">
+               </div>
+               <div xml:id="lost-lines-unknown" corresp="http://www.stoa.org/epidoc/gl/latest/trans-lostlineunknown.html">
                   <head>Unknown Number of Lines Lost</head>
                   <p>An unknown quantity of lines has been lost, or is conjectured to have been lost
                      from the text of all witnesses. (Cf. Epidoc guidelines, "Lost Lines, Quantity
@@ -1108,12 +1104,12 @@
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <gap reason="lost" extent="unknown" unit="line"/>
                   </egXML>
-               </div3>
-               <div3 xml:id="editorial-deletion"
+               </div>
+               <div xml:id="editorial-deletion"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html">
                   <!-- NEED TO EXPLAIN THAT THIS IS WEST'S SUGGESTION AND WE'RE FOLLOWING IT -->
                   <head>Editorial Deletion</head>
-                  <p>Text suspected by the editor to be an interpolation, but retained in the main text to indicate its traditional attribution to the author. (Cf. Epidoc guidelines, "Superfluous Text" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html"/>)</p>
+                  <p>Text suspected by the editor to be superfluous, but retained in the main text to indicate its traditional attribution to the author. (Cf. Epidoc guidelines, "Superfluous Text" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-superfluous.html"/>)</p>
                   <p>
                      <specList>
                         <specDesc key="surplus"/>
@@ -1121,122 +1117,15 @@
                   </p>
                   <p><gi>surplus</gi> signifies text identified by the editor as added by someone
                      other than the original author.</p>
-                  <p><att>reason</att> with value "interpolation" indicates why the text has been
-                     marked as surplus.</p>
                   <p>
                      <quote>{lorem ipsum}</quote>
                   </p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem source="#Alonso">
-                           <surplus>lorem ipsum</surplus>
-                        </lem>
-                     </app>
+                     <surplus reason="interpolation">lorem ipsum</surplus>
                   </egXML>
-               </div3>
-               <div3 xml:id="deleted-legible"
-                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erased.html">
-                  <head>Deleted But Legible Text</head>
-                  <p>Text deleted in an ancient source but still legible (more or less clearly). (Cf. Epidoc guidelines, "Erased But Legible Text" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erased.html"/>)</p>
-                  <p>
-                     <specList>
-                        <specDesc key="del"/>
-                     </specList>
-                  </p>
-                  <p><gi>del</gi> indicates the text that has been deleted but is still legible.</p>
-                  <p><att>rend</att> with value "erasure" indicates that the text has been erased.
-                     Other values: "strikethrough" and "expunction".</p>
-                  <!-- Separate sections for these other values? Or are they really values? Should they be explained in a note? -->
-                  <p>
-                     <quote>[[co]]gaudete</quote>
-                  </p>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">co</del>gaudete </egXML>
-               </div3>
-               <div3 xml:id="deleted-illegible"
-                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html">
-                  <head>Deleted and Lost</head>
-                  <p>Text deleted in an ancient source to the point of illegibility. (Cf. Epidoc guidelines, "Erased and Lost" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erasedlost.html"/>)</p>
-                  <p>
-                     <specList>
-                        <specDesc key="del"/>
-                        <specDesc key="gap"/>
-                     </specList>
-                  </p>
-                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
-                  <p><att>rend</att> indicates the method of deletion (e.g., erasure, expunction,
-                     strikethrough).</p>
-                  <p><gi>gap</gi> indicates that the deletion has left a gap of irrecoverable
-                     text.</p>
-                  <p><att>reason</att> with value "lost" indicates that the text is
-                     irrecoverable.</p>
-                  <p><att>quantity</att> indicates the extent of the deletion.</p>
-                  <p><att>unit</att> indicates the unit of measurement for <att>quantityt</att>.</p>
-                  <p>
-                     <quote>[[ ... ]]</quote>
-                  </p>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">
-                        <gap quantity="3" unit="characters"/>
-                     </del>
-                  </egXML>
-               </div3>
-               <div3 xml:id="deleted-restored"
-                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
-                  <head>Deleted and Illegible But Restored</head>
-                  <p>Text deleted in an ancient source to the point of illegibility, but restored by
-                     the editor (e.g., by comparison with another exemplar). (Cf. Epidoc guidelins, "Erased And Illegible / Restored" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html"/>)</p>
-                  <p>
-                     <specList>
-                        <specDesc key="del"/>
-                        <specDesc key="supplied"/>
-                        <specDesc key="orig"/>
-                        <specDesc key="unclear"/>
-                     </specList>
-                  </p>
-                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
-                  <p><att>rend</att> indicates the method of deletion (e.g., erasure,
-                     expunction).</p>
-                  <p><gi>supplied</gi> indicates the text that has been restored.</p>
-                  <p><att>reason</att> with value "lost" indicates why the text had to be
-                     supplied.</p>
-                  <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
-                  <p><gi>unclear</gi> indicates that the supplied original is unclear.</p>
-                  <p>
-                     <quote> [[ abc ]] </quote>
-                  </p>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem>
-                           <del rend="erasure">
-                              <supplied reason="lost"
-                              >abc</supplied><!-- Use @resp to indicate who supplied the text? -->
-                           </del>
-                        </lem>
-                     </app>
-                  </egXML>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">
-                        <supplied reason="lost">
-                           <orig>abc</orig>
-                        </supplied>
-                     </del>
-                  </egXML>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">
-                        <supplied reason="lost">
-                           <unclear>abc</unclear>
-                        </supplied>
-                     </del>
-                  </egXML>
-               </div3>
-               <div3 xml:id="crux"
+               </div>
+               <div xml:id="crux"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
                   <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
                   <head>Crux</head>
@@ -1253,17 +1142,12 @@
                   </p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem>
-                           <unclear>lorem
-                           ipsum</unclear><!-- How to indicate that this is an editor's determination? -->
-                        </lem>
-                     </app>
+                           <sic>lorem ipsum</sic><!-- How to indicate that this is an editor's determination? -->
                   </egXML>
-               </div3>
-            </div2>
-         </div1>
-         <div1 xml:id="apparatus-criticus-patterns">
+               </div>
+            </div>
+         </div>
+         <div xml:id="apparatus-criticus-patterns">
             <head>Apparatus Criticus</head>
             <p>This section provides models for handling the different kinds of data that occur in
                the apparatus criticus.</p>
@@ -1299,10 +1183,10 @@
                   (<gi>rdg</gi>).</p>
             <p xml:id="note"><gi>note</gi> (note) contains editorial comments, bibliographical
                references, or other information pertaining to the apparatus entry.</p>
-            <div2>
+            <div>
                <p>Need discussion about the order in which information is presented.</p>
-            </div2>
-            <div2 xml:id="basic-app-entry">
+            </div>
+            <div xml:id="basic-app-entry">
                <head>Basic reporting of a variant reading</head>
                <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> has a
                   reading that varies from the lemma in some way. For example, if the editor has
@@ -1350,8 +1234,8 @@
                         <rdg wit="#B">lurum</rdg>
                      </app> ipsum dolor sit amet </p>
                </egXML>
-            </div2>
-            <div2 xml:id="additions">
+            </div>
+            <div xml:id="additions">
                <head>Additions</head>
                <p>A <ref target="#witness">witness</ref> or <ref target="#source">source</ref> adds
                   text (e.g., in the margin) that an editor deems worthy of notice.</p>
@@ -1397,8 +1281,8 @@
                            >certate</add></rdg>
                   </app>
                </egXML>
-            </div2>
-            <div2 xml:id="deletions">
+            </div>
+            <div xml:id="deletions">
                <head>Deletions</head>
                <p>A <ref target="#witness">witness</ref> or <ref target="#source">source</ref> has
                   deleted some text, and an editor deems it worthy of notice.</p>
@@ -1435,8 +1319,8 @@
                   the lemma. If there are several <gi>rdg</gi> elements and not all of them are
                   subtractive in nature, <att>ana</att> would be applied to the relevant
                      <gi>rdg</gi>.</p>
-            </div2>
-            <div2 xml:id="omissions">
+            </div>
+            <div xml:id="omissions">
                <head>Omissions</head>
                <p>A <ref target="#wit">witness</ref> or <ref target="#source">source</ref> omits
                   some text and the editor deems it important to report the omission.</p>
@@ -1482,8 +1366,8 @@
                <p>This is displayed in the apparatus criticus as <quote><hi rend="italic">vers.
                         om.</hi>
                      <hi rend="italic">κχ</hi></quote></p>
-            </div2>
-            <div2 xml:id="lacuna"
+            </div>
+            <div xml:id="lacuna"
                corresp="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/TC.html#TCAPMI">
                <head>Lacuna</head>
                <p>A <ref target="#wit">witness</ref> is missing a portion of the text.</p>
@@ -1520,8 +1404,8 @@
                         <rdg wit="#N"><lacunaEnd/></rdg>
                      </app> arcu. Quisque eget.</p>
                </egXML>
-            </div2>
-            <div2 xml:id="corrections">
+            </div>
+            <div xml:id="corrections">
                <head>Corrections</head>
                <p>A variant <ref target="#rdg">reading</ref> has been corrected to the value of the
                      <ref target="#lem">lemma</ref>, but the editor deems the reading prior to
@@ -1561,7 +1445,7 @@
                      <att>copyOf</att></p>
                <p>This pattern is the basis for a number of other representations of reading
                   sequences.</p>
-               <div3 xml:id="correction-margin">
+               <div xml:id="correction-margin">
                   <head>Correction in the Margin</head>
                   <p>A manuscript hand has corrected a variant reading to the lemma by writing it in
                      the margin.</p>
@@ -1583,8 +1467,8 @@
                   <p>A self-closing <gi>add</gi> is used here with <att>place</att> and
                         <att>copyOf</att> to indicate that the marginal reading is identical to the
                      accepted reading.</p>
-               </div3>
-               <div3 xml:id="correction-omission">
+               </div>
+               <div xml:id="correction-omission">
                   <head>Correction of an Omission</head>
                   <p>The original copyist has omitted a reading from the text, but another hand (or
                      the original copyist) has supplied the missing text.</p>
@@ -1614,8 +1498,8 @@
                         </rdgGrp>
                      </app>
                   </egXML>
-               </div3>
-               <div3 xml:id="correction-addition">
+               </div>
+               <div xml:id="correction-addition">
                   <head>Correction by Addition</head>
                   <p>A variant reading differs from the <ref target="lem">lemma</ref> by one or more
                      characters, which have been supplied by the original copyist or another hand at
@@ -1635,8 +1519,8 @@
                         </rdgGrp>
                      </app>
                   </egXML>
-               </div3>
-               <div3 xml:id="correction-deletion">
+               </div>
+               <div xml:id="correction-deletion">
                   <head>Correction by Deletion</head>
                   <p>A variant reading differs from the <ref target="lem">lemma</ref> by one or more
                      characters, which have been deleted by the original copyist or another hand at
@@ -1658,8 +1542,8 @@
                         </rdgGrp>
                      </app>
                   </egXML>
-               </div3>
-               <div3 xml:id="correction-with-witDetail">
+               </div>
+               <div xml:id="correction-with-witDetail">
                   <head>One Witness Among Many Has Been Corrected</head>
                   <p>A variant reading has several witnesses, but only one of them has been
                      corrected, and the editor believes it is important to make that clear.</p>
@@ -1683,8 +1567,8 @@
                         </rdgGrp><!-- Need to consider whether this should be done with <witDetail> instead or in addition to it. -->
                      </app>
                   </egXML>
-               </div3>
-               <div3 xml:id="mutation">
+               </div>
+               <div xml:id="mutation">
                   <head>Mutation</head>
                   <p>Sometimes the copyist or a later hand "corrects" a variant reading to another
                      variant reading. Although the motivation may have been to correct, the action
@@ -1708,9 +1592,9 @@
                         </rdgGrp>
                      </app>
                   </egXML>
-               </div3>
-            </div2>
-            <div2 xml:id="conjecture">
+               </div>
+            </div>
+            <div xml:id="conjecture">
                <head>Conjecture</head>
                <p>A conjecture is some portion of text (or absence of text) proposed by some person
                   (ancient or modern) and determined by an editor to be worthy of consideration in
@@ -1757,8 +1641,8 @@
                <p>That should be displayed as: <quote>nullosque sui <hi rend="italic">vel</hi>
                      nullosque duics <hi rend="italic">vel</hi> nullosque ducum <hi rend="italic"
                         >conj.</hi> Heins.</quote></p>
-            </div2>
-            <div2 xml:id="emendation">
+            </div>
+            <div xml:id="emendation">
                <head>Emendation</head>
                <p>An emendation is a "successful" <ref target="#conjecture">conjecture</ref>. That
                   is, an emendation is some portion of text (or absence of text) expressly proposed
@@ -1785,8 +1669,8 @@
                      <rdg source="#Barth" type="conjecture">nictat</rdg>
                   </app>
                </egXML>
-            </div2>
-            <div2 xml:id="notes">
+            </div>
+            <div xml:id="notes">
                <head>Notes</head>
                <p>An editor wishes to comment on a reading, include bibliographical information, or
                   note something else about the passage in question.</p>
@@ -1808,8 +1692,8 @@
                            >Wochenschrift für klassische Philologie</ref> III, 1886, p. 1290)</note>
                   </app>
                </egXML>
-            </div2>
-         </div1>
+            </div>
+         </div>
       </body>
    </text>
 </TEI>
