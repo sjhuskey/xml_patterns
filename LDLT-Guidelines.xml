@@ -1123,58 +1123,6 @@
                      <surplus reason="interpolation">lorem ipsum</surplus>
                   </egXML>
                </div>
-               <div xml:id="deleted-restored"
-                  corresp="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html">
-                  <head>Deleted and Illegible But Restored</head>
-                  <p>Text deleted in an ancient source to the point of illegibility, but restored by
-                     the editor (e.g., by comparison with another exemplar). (Cf. Epidoc guidelins, "Erased And Illegible / Restored" <ptr target="http://www.stoa.org/epidoc/gl/latest/trans-erasedillegible.html"/>)</p>
-                  <p>
-                     <specList>
-                        <specDesc key="del"/>
-                        <specDesc key="supplied"/>
-                        <specDesc key="orig"/>
-                        <specDesc key="unclear"/>
-                     </specList>
-                  </p>
-                  <p><gi>del</gi> indicates that a deletion has occurred.</p>
-                  <p><att>rend</att> indicates the method of deletion (e.g., erasure,
-                     expunction).</p>
-                  <p><gi>supplied</gi> indicates the text that has been restored.</p>
-                  <p><att>reason</att> with value "lost" indicates why the text had to be
-                     supplied.</p>
-                  <p><gi>orig</gi> indicates that the supplied original cannot be understood.</p>
-                  <p><gi>unclear</gi> indicates that the supplied original is unclear.</p>
-                  <p>
-                     <quote> [[ abc ]] </quote>
-                  </p>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem>
-                           <del rend="erasure">
-                              <supplied reason="lost"
-                              >abc</supplied><!-- Use @resp to indicate who supplied the text? -->
-                           </del>
-                        </lem>
-                     </app>
-                  </egXML>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">
-                        <supplied reason="lost">
-                           <orig>abc</orig>
-                        </supplied>
-                     </del>
-                  </egXML>
-
-                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <del rend="erasure">
-                        <supplied reason="lost">
-                           <unclear>abc</unclear>
-                        </supplied>
-                     </del>
-                  </egXML>
-               </div>
                <div xml:id="crux"
                   corresp="http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html">
                   <!-- Doesn't really correspond to http://www.stoa.org/epidoc/gl/latest/trans-ambiguous.html, but it's close. -->
@@ -1192,12 +1140,7 @@
                   </p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem>
-                           <unclear>lorem
-                           ipsum</unclear><!-- How to indicate that this is an editor's determination? -->
-                        </lem>
-                     </app>
+                           <sic>lorem ipsum</sic><!-- How to indicate that this is an editor's determination? -->
                   </egXML>
                </div>
             </div>
