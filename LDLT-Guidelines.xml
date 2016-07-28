@@ -997,11 +997,7 @@
                   </p>
 
                   <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                     <app>
-                        <lem source="#Vettel">
-                           <supplied reason="lost">abc</supplied>
-                        </lem>
-                     </app>
+                        <supplied reason="omitted">abc</supplied>
                   </egXML>
                </div>
                <div xml:id="undetermined-loss"
