@@ -920,6 +920,7 @@
             </div>
             <div xml:id="edition-text-symbols">
                <head>Symbols Commonly Used in the Text of a Critical Edition</head>
+               <!-- Sam: do something about telling people who want to do diplomatic stuff to go look at EpiDoc -->
                <p>The symbols in this section have been gleaned from <bibl><author>Martin
                         West</author>, <title>Textual Criticism and Editorial Technique</title>
                         (<pubPlace>Stuttgart</pubPlace>, 1973), <biblScope unit="page"
